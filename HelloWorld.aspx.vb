@@ -6,6 +6,6 @@
     End Sub
 
     Protected Sub btnClick_Click(sender As Object, e As EventArgs) Handles btnClick.Click
-        lblMessage.Text = "Hello World! :D ITS AMY WHOOO"
+        lblMessage.Text = "Hello World! :D"
     End Sub
 End Class

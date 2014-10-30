@@ -1,12 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="HelloWorld.aspx.vb" Inherits="Project_WorkingFile_Nicole.HelloWorld" %>
 
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Hello World</title>
-    <link href="bootstrap.css" rel="stylesheet" type="text/css" />
-    <nav class="navbar navbar-inverse" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -59,7 +54,12 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Hello World</title>
+    <link href="bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
+    
 <body>
     <form id="form1" runat="server">
     <p>
