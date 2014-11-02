@@ -19,7 +19,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><img src ="Logo.jpg" /></a>
+      <a class="navbar-brand" href="#"><img src ="Petunia2.jpg" /></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,6 +91,8 @@
         </asp:ContentPlaceHolder>
     </div>
     <div id ="footer">
+        <br />
+        <br />
         Website Created by One or None, Ltd.
         <br /> Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
     </div>
