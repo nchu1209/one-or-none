@@ -1,0 +1,43 @@
+﻿body {
+    position: relative;
+}
+
+#title {
+    text-align: center;
+    color: #000000;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#subtitle {
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+}
+
+#lefthalf {
+    float: left;
+    width:49%;
+}
+
+#righthalf {
+    float: left;
+    width: 49%;
+    text-align: center;
+}
+
+
+#label 
+{
+    float: left;
+    width: 49%;
+    text-align:right;
+    line-height: 26px;
+}
+
+#textbox 
+{
+    float: left;
+    width: 49%;
+    text-align: left;
+}
