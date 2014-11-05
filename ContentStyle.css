@@ -9,6 +9,25 @@
     font-weight: bold;
 }
 
+#title80 {
+    width: 69%;
+   float: left;
+    text-align: center;
+    color: #000000;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#icon {
+    width: 19%;
+}
+
+#leftcolumncolor {
+    width: 20%;
+    background-color: #77BBFF;
+}
+
+
 #subtitle {
     text-align: center;
     font-size: medium;
@@ -20,24 +39,86 @@
     width:49%;
 }
 
+#lefttopcorner {
+    float: left;
+    width:20%;
+}
+
+#rightcornertitle {
+    float: left;
+    width:79%;
+}
+
+#rightcornercontent {
+    float: left;
+    width:75%;
+}
+
 #righthalf {
     float: left;
     width: 49%;
     text-align: center;
 }
 
+#a {
+    float: left;
+    width: 24.5%;
+    text-align: center;
+}
+
+#b {
+    float: left;
+    width: 24.5%;
+    text-align: center;
+}
+
+#c {
+    float: left;
+    width: 24.5%;
+    text-align: center;
+}
+
+#d {
+    float: left;
+    width: 24.5%;
+    text-align: center;
+}
+
+#center {
+    width: 99%;
+    text-align: center;
+
+}
+
+#content {
+     width: 99%;
+   text-align:center;
+   font-weight:400;
+   font-size:small;
+}
 
 #label 
 {
     float: left;
     width: 49%;
     text-align:right;
-    line-height: 26px;
+    height: 29px;
 }
 
-#textbox 
-{
+#textbox {
     float: left;
     width: 49%;
     text-align: left;
+  
+}
+
+#footer {
+    text-align: center;
+}
+
+#employeeloginright {
+     width: 70%;
+   text-align:center;
+   font-weight:400;
+   font-size:small;
 }
