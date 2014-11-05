@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MasterWithNav
+Partial Public Class CustomerMaster
 
     '''<summary>
     '''head control.

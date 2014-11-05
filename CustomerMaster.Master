@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="CustomerMaster.Master.vb" Inherits="Project_WorkingFile_Nicole.MasterWithNav" %>
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="CustomerMaster.Master.vb" Inherits="KProject.CustomerMaster" %>
 
 <!DOCTYPE html>
 <link href="bootstrap.css" rel="stylesheet" type="text/css" />
