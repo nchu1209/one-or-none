@@ -10,8 +10,9 @@ Public Class ClassDBCustomer
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
-    Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False;initial catalog=mis333k_msbck614;user id=msbck614;password=AmyEnrione1"
+    Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False; initial catalog=mis333k_msbck614; user id=msbck614; password=AmyEnrione1"
     Dim mMyView As New DataView
+
 
     'Define a public read-only property so "outsiders" can access the dataset filled by this class
     Public ReadOnly Property CustDataset() As DataSet
@@ -26,6 +27,7 @@ Public Class ClassDBCustomer
         End Get
     End Property
 
+  
     Public Sub RunProcedureNoParam(ByVal strProcedureName As String)
         'Purpose: run any stored procedure with no parameters and fill dataset
         'Arguments: 1 string that contains procedure name
@@ -129,6 +131,17 @@ Public Class ClassDBCustomer
 
     End Function
 
+
+    Public Function CheckEmailSP(strEmail As String) As Boolean
+        RunProcedureOneParameter("usp_customers_get_email", "@Email", strEmail)
+
+        If mDatasetCustomer.Tables("tblCustomers").Rows.Count <> 0 Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
     Public Function CheckPassword(ByVal strUsername As String, strPassword As String) As Boolean
         'Purpose: checks if password is valid for given username
         'Arguments: 1 string
@@ -226,26 +239,34 @@ Public Class ClassDBCustomer
 
     End Sub
 
-    Public Sub ModifyCustomer(ByVal strRecordID As String, ByVal strUsername As String, ByVal strPassword As String, ByVal strLastName As String, ByVal strFirstName As String, ByVal strInitial As String, ByVal strAddress As String, ByVal strCity As String, ByVal strState As String, ByVal strZip As String, ByVal strPhone As String, ByVal strEmail As String)
-        'Purpose: modifies a customer in database
-        'Arguments: 12 strings
-        'Returns: nothing
-        'Author: Nicole Chu (nc7997)
-        'Date: 10/7/14
+    'need to change this to SP later
+
+    Public Sub ModifyCustomer(strEmail As String, strLast As String, strFirst As String, strMiddle As String, strAddress As String, strZip As String, strPhone As String, ByVal intCustomerNumber As Integer)
+
+
 
         mstrQuery = "UPDATE tblCustomers SET " & _
-            "UserName = '" & strUsername & "', " & _
-            "Password = '" & strPassword & "', " & _
-            "LastName = '" & strLastName & "', " & _
-            "FirstName = '" & strFirstName & "', " & _
-            "MI = '" & strInitial & "', " & _
+            "EmailAddr = '" & strEmail & "', " & _
+            "LastName = '" & strLast & "', " & _
+            "FirstName = '" & strFirst & "', " & _
+            "MI = '" & strMiddle & "', " & _
             "Address = '" & strAddress & "', " & _
-            "City = '" & strCity & "', " & _
-            "State = '" & strState & "', " & _
             "ZipCode = '" & strZip & "', " & _
-            "Phone = '" & strPhone & "', " & _
-            "EmailAddr = '" & strEmail & "' " & _
-            "WHERE RecordID = " & strRecordID
+            "Phone = '" & strPhone & "' " & _
+            "WHERE CustomerNumber = " & intCustomerNumber
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
+    Public Sub ModifyPassword(strPassword As String, ByVal intCustomerNumber As Integer)
+
+
+
+        mstrQuery = "UPDATE tblCustomers SET " & _
+            "Password = '" & strPassword & "' " & _
+            "WHERE CustomerNumber = " & intCustomerNumber
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)

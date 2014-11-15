@@ -51,7 +51,7 @@
 
 #rightcornercontent {
     float: left;
-    width:75%;
+    width:79%;
 }
 
 #righthalf {
@@ -62,19 +62,19 @@
 
 #a {
     float: left;
-    width: 24.5%;
+    width: 25%;
     text-align: center;
 }
 
 #b {
     float: left;
-    width: 24.5%;
+    width: 25%;
     text-align: center;
 }
 
 #c {
     float: left;
-    width: 24.5%;
+    width: 25%;
     text-align: center;
 }
 
@@ -97,23 +97,27 @@
    font-size:small;
 }
 
-#label 
-{
+#label {
     float: left;
-    width: 49%;
-    text-align:right;
-    height: 29px;
+    width: 39%;
+    text-align: right;
+    height: 305px;
+
+}
+
+#div {    height: 349px;
 }
 
 #textbox {
     float: left;
     width: 49%;
     text-align: left;
-  
+    height: auto;
 }
 
 #footer {
     text-align: center;
+    clip: rect(auto, auto, auto, auto);
 }
 
 #employeeloginright {

@@ -3,11 +3,18 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
+    
+       
+
+    
     <div id ="title">
         Manage Account
         <br />
         <br />
     </div>
+
+     <asp:Panel ID="ModifyProfile" runat="server" Visible ="true">
+
     <div id ="lefthalf">
     <div id ="subtitle">
         Modify Profile
@@ -38,6 +45,8 @@
         <br />
             <br />
     </div>
+
+          
     <div id ="textbox">
         <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtLastName" ErrorMessage="ERROR: Last Name Required" ClientIDMode="Static">*</asp:RequiredFieldValidator>
@@ -52,9 +61,9 @@
             <br />
             <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
             <br />
-            <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtCity" runat="server" ReadOnly="True"></asp:TextBox>
             <br />
-            <asp:TextBox ID="txtState" runat="server" MaxLength="2"></asp:TextBox>
+            <asp:TextBox ID="txtState" runat="server" MaxLength="2" ReadOnly="True"></asp:TextBox>
             <br />
             <asp:TextBox ID="txtZip" runat="server" MaxLength="9"></asp:TextBox>
             <br />
@@ -72,9 +81,15 @@
         <br />
         <br />
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+            <asp:Label ID="lblError" runat="server"></asp:Label>
             <br />
     </div>
     </div>
+
+    </asp:Panel>
+
+    <asp:Panel ID="AccountNames" runat="server" Visible ="true">
+
     <div id ="righthalf">
         <div id ="subtitle">
         Change Account Names<br />
@@ -97,6 +112,17 @@
         <asp:Button ID="btnCancelAccountName" runat="server" Text="Cancel" />
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
     </div>
                    
@@ -105,4 +131,50 @@
         <br />
         <br />
     </div>
+        </asp:Panel>
+    <asp:Panel ID="Password" runat="server" Visible ="false">
+        <div id ="subtitle">
+        Confirm Password
+        <br />
+        <br />
+    </div>
+        <div id ="label">
+        
+        <asp:Label ID="Label1" runat="server" Text="Old Password:"></asp:Label>
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="New Password:"></asp:Label>
+        
+    </div>
+    <div id ="textbox">
+       
+        <asp:TextBox ID="txtOld" runat="server"></asp:TextBox>
+        <br />
+               
+        <asp:TextBox ID="txtNew" runat="server"></asp:TextBox>
+        
+        <br />
+        
+        <br />
+        <asp:Button ID="btnConfirmPassword" runat="server" Text="Confirm" />
+        <asp:Button ID="btnCancelPassword" runat="server" Text="Cancel" />
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="Button" />
+        <asp:Button ID="Button2" runat="server" Text="Button" />
+        <br />
+        <asp:Label ID="lblErrorPassword" runat="server"></asp:Label>
+        <br />
+        <br />
+        <br />
+        <br />
+       </div>
+        <br />
+    </asp:Panel>
+     <br />
+     <br />
+     <br />
+     <br />
+    <br />
+     <br />
+     <br />
+     <br />
 </asp:Content>

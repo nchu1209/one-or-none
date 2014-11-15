@@ -38,7 +38,7 @@
             <br />
             <br />
             <br />
-            <asp:LinkButton ID="LinkButton1" runat="server">Apply for an Account!</asp:LinkButton>
+            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" PostBackUrl="~/CustomerApplyForAccount.aspx">Apply for an Account!</asp:LinkButton>
             <br />
             <br />
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
@@ -140,9 +140,12 @@
                  <br />
             <br />
         </div>
+
+
         </div>
     
-
+        <br />
+        <br />
 
          <div id="footer">
         <br />
@@ -150,7 +153,8 @@
         Website Created by One or None, Ltd.
         <br />
         Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
-    </div>
+             </div>
+    
 
     </form>
   
