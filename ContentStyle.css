@@ -126,3 +126,8 @@
    font-weight:400;
    font-size:small;
 }
+
+#masterright {
+    width: 98%;
+    text-align:right;
+}
