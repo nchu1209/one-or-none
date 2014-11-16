@@ -17,7 +17,7 @@
         <div id="rightcornertitle">
             <div id="title">
                 <br />
-                Apply for an Account!<br />
+                Set up your new account!<br />
                 <br />
             </div>
         </div>
@@ -36,16 +36,13 @@
             <br />
             <asp:Label ID="Label8" runat="server" Text="Address:"></asp:Label>
             <br />
-            <asp:Label ID="Label9" runat="server" Text="City:"></asp:Label>
-            <br />
-            <asp:Label ID="Label10" runat="server" Text="State:"></asp:Label>
-            <br />
             <asp:Label ID="Label11" runat="server" Text="Zip Code:"></asp:Label>
             <br />
             <asp:Label ID="Label12" runat="server" Text="Email:"></asp:Label>
             <br />
             <asp:Label ID="Label13" runat="server" Text="Phone Number:"></asp:Label>
             <br />
+            Birth Year:<br />
            
            
 
@@ -64,18 +61,21 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ClientIDMode="Static" ControlToValidate="txtPassword" ErrorMessage="ERROR: Password Required">*</asp:RequiredFieldValidator>
             <br />
             <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
-            <br />
-            <asp:TextBox ID="txtCity" runat="server" ReadOnly="True"></asp:TextBox>
-            <br />
-            <asp:TextBox ID="txtState" runat="server" MaxLength="2" ReadOnly="True"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ClientIDMode="Static" ControlToValidate="txtAddress" ErrorMessage="ERROR: Address Required">*</asp:RequiredFieldValidator>
             <br />
             <asp:TextBox ID="txtZip" runat="server" MaxLength="9"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="ERROR: Zip Required">*</asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtZip" ErrorMessage="ERROR: Incorrect Zip Code Format" ValidationExpression="\d{5}(-\d{4})?">*</asp:RegularExpressionValidator>
             <br />
             <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="ERROR: Email Required">*</asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="ERROR: Invalid Email." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">*</asp:RegularExpressionValidator>
             <br />
             <asp:TextBox ID="txtPhone" runat="server" MaxLength="10"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ClientIDMode="Static" ControlToValidate="txtPhone" ErrorMessage="ERROR: Phone Number Required">*</asp:RequiredFieldValidator>
+                    <br />
+            <asp:TextBox ID="txtDOB" runat="server" MaxLength="10"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ClientIDMode="Static" ControlToValidate="txtDOB" ErrorMessage="ERROR: Birth Year Required">*</asp:RequiredFieldValidator>
             <br />
             <br />
             <br />

@@ -214,25 +214,24 @@ Public Class ClassDBCustomer
 
     End Sub
 
-    Public Sub AddCustomer(ByVal strUsername As String, ByVal strPassword As String, ByVal strLastName As String, ByVal strFirstName As String, ByVal strInitial As String, ByVal strAddress As String, ByVal strCity As String, ByVal strState As String, ByVal strZip As String, ByVal strPhone As String, ByVal strEmail As String)
+    Public Sub AddCustomer(intCustomerNumber As Integer, ByVal strLastName As String, ByVal strFirstName As String, ByVal strInitial As String, strPassword As String, ByVal strAddress As String, ByVal strZip As String, ByVal strEmail As String, ByVal strPhone As String, strDOB As String)
         'Purpose: adds a customer to database
         'Arguments: 11 strings
         'Returns: nothing
         'Author: Nicole Chu (nc7997)
         'Date: 9/24/2014
 
-        mstrQuery = "INSERT INTO tblCustomers (Username, Password, LastName, FirstName, MI, Address, City, State, ZipCode, Phone, EmailAddr) VALUES (" & _
-            "'" & strUsername & "', " & _
+        mstrQuery = "INSERT INTO tblCustomers (CustomerNumber, EmailAddr, Password, LastName, FirstName, MI, Address, ZipCode, Phone, DOB) VALUES (" & _
+            "'" & intCustomerNumber & "', " & _
+            "'" & strEmail & "', " & _
             "'" & strPassword & "', " & _
             "'" & strLastName & "', " & _
             "'" & strFirstName & "', " & _
             "'" & strInitial & "', " & _
             "'" & strAddress & "', " & _
-            "'" & strCity & "', " & _
-            "'" & strState & "', " & _
             "'" & strZip & "', " & _
             "'" & strPhone & "', " & _
-            "'" & strEmail & "')"
+            "'" & strDOB & "')"
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)
