@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="EmployeeMaster.master.vb" Inherits="Group3_LonghornBank.EmployeeMaster" %>
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="EmployeeMaster.master.vb" Inherits="KProject.EmployeeMaster" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="EmployeeLogin.aspx.vb" Inherits="Group3_LonghornBank.EmployeeLogin" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="EmployeeLogin.aspx.vb" Inherits="KProject.EmployeeLogin" %>
 
 <!DOCTYPE html>
 
