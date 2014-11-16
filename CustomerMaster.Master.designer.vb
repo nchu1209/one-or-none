@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class CustomerMaster
 
     '''<summary>
+    '''lblName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDate As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''head control.
     '''</summary>
     '''<remarks>

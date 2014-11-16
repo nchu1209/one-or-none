@@ -23,12 +23,12 @@
     <div class="navbar-default collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="navbar-default nav navbar-nav">
           <%-- things that need to go on customer navbar: login, create profile, apply for account, customer portal, modify account  --%>
-        <li class="active"><a href="#">Customer Home</a></li>
+        <li class="active"><a href="/CustomerHome.aspx">Customer Home</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Accounts<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Apply for Account</a></li>
-            <li><a href="#">Manage Accounts</a></li>
+            <li><a href="/CustomerManageAccount.aspx">Manage Accounts</a></li>
             <%--<li class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li class="divider"></li>
@@ -36,11 +36,11 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transfer Money<span class="caret"></span></a>
+          <a href="/CustomerPerformTransaction.aspx" class="dropdown-toggle" data-toggle="dropdown">Transfer Money<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Deposits</a></li>
-            <li><a href="#">Withdrawals</a></li>
-            <li><a href="#">Transfers</a></li>
+            <li><a href="/CustomerPerformTransaction.aspx">Deposits</a></li>
+            <li><a href="/CustomerPerformTransaction.aspx">Withdrawals</a></li>
+            <li><a href="/CustomerPerformTransaction.aspx">Transfers</a></li>
           </ul>
         </li>
          <li class="dropdown">
@@ -67,11 +67,18 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li><a href="#">View Cart</a></li>
-          <li><a href="#">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div id="masterright">
+    <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
+    Hello  <asp:Label ID="lblName" runat="server" Text="[]"></asp:Label>! Not
+&nbsp;<br>
+    <br>
+    Today's date is: <asp:label ID ="lblDate" runat="server" text="[]"></asp:label>
+    </div>
 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head runat="server">
