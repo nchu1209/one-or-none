@@ -27,6 +27,7 @@
 
 
         Session("CustomerNumber") = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("CustomerNumber")
+        Session("CustomerFirstName") = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("FirstName")
         Response.Redirect("CustomerManageAccount.aspx")
 
     End Sub
