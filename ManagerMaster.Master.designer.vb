@@ -11,10 +11,9 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class EmployeeMaster
+Partial Public Class ManagerMaster
 
     '''<summary>
-<<<<<<< HEAD
     '''Head1 control.
     '''</summary>
     '''<remarks>
@@ -24,8 +23,24 @@ Partial Public Class EmployeeMaster
     Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
 
     '''<summary>
-=======
->>>>>>> e5e299f9d7d398fcf10cd7c05265b82d37df2925
+    '''lblName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDate As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''head control.
     '''</summary>
     '''<remarks>
