@@ -38,12 +38,12 @@
             Employee ID
             <br />
             <asp:TextBox ID="txtEmployeeID" runat="server"></asp:TextBox>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="Invalid email address" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">*</asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtEmployeeID" ErrorMessage="Invalid EmpID">*</asp:RegularExpressionValidator>
             <br />
             Password
             <br />
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="Password is Required">*</asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtPassword" ErrorMessage="Password is Required">*</asp:RequiredFieldValidator>
             <br />
             <br />
             <asp:Button ID="btnLogin" runat="server" Text="Login" />
