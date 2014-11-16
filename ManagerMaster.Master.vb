@@ -1,4 +1,4 @@
-﻿Public Class CustomerMaster
+﻿Public Class ManagerMaster
     Inherits System.Web.UI.MasterPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
