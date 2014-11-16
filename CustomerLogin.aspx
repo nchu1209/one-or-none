@@ -38,7 +38,7 @@
             <br />
             <br />
             <br />
-            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" PostBackUrl="~/CustomerApplyForAccount.aspx">Apply for an Account!</asp:LinkButton>
+            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" PostBackUrl="~/CustomerCreateAccount.aspx">Apply for an Account!</asp:LinkButton>
             <br />
             <br />
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" />

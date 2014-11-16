@@ -7,12 +7,13 @@ Public Class ClassDBCustomer
 
     'Declare module-level variables
     Dim mDatasetCustomer As New DataSet
+    Dim mDatasetCustomer2 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
     Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False; initial catalog=mis333k_msbck614; user id=msbck614; password=AmyEnrione1"
     Dim mMyView As New DataView
-
+    Dim mMyView2 As New DataView
 
     'Define a public read-only property so "outsiders" can access the dataset filled by this class
     Public ReadOnly Property CustDataset() As DataSet
@@ -24,6 +25,19 @@ Public Class ClassDBCustomer
     Public ReadOnly Property MyView() As DataView
         Get
             Return mMyView
+        End Get
+    End Property
+
+
+    Public ReadOnly Property CustDataset2() As DataSet
+        Get
+            'Return dataset to user
+            Return mDatasetCustomer2
+        End Get
+    End Property
+    Public ReadOnly Property MyView2() As DataView
+        Get
+            Return mMyView2
         End Get
     End Property
 
@@ -51,6 +65,33 @@ Public Class ClassDBCustomer
             Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
         End Try
     End Sub
+
+
+    Public Sub RunProcedureCustomerNumber(ByVal strProcedureName As String)
+        'Purpose: run any stored procedure with no parameters and fill dataset
+        'Arguments: 1 string that contains procedure name
+        'Returns: none (query results via property)
+        'Author: Nicole Chu (nc7997)
+        'Date: 10/21/14
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'clear dataset
+            mDatasetCustomer2.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetCustomer2, "tblCustomers")
+            'copy dataset to dataview
+            mMyView2.Table = mDatasetCustomer2.Tables("tblCustomers")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
+
 
     Public Sub RunProcedureOneParameter(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
         'Purpose: run any stored procedure with one parameter and fill dataset
@@ -80,6 +121,10 @@ Public Class ClassDBCustomer
 
     Public Sub LinkZip(ByVal strCustomerID As String)
         RunProcedureOneParameter("usp_innerjoin_customer_city_by_zip", "@CustomerID", strCustomerID)
+    End Sub
+
+    Public Sub CustomerNumber()
+        RunProcedureCustomerNumber("usp_customer_number")
     End Sub
 
     Public Sub SelectQuery(ByVal strQuery As String)
