@@ -210,4 +210,16 @@ Public Class ClassDBEmployee
         End Try
     End Sub
 
+
+
+    Public Sub ModifyPassword(strPassword As String, ByVal intEmployeeID As Integer)
+
+        mstrQuery = "UPDATE tblEmployees SET " & _
+            "Password = '" & strPassword & "' " & _
+            "WHERE EmpID = " & intEmployeeID
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
 End Class

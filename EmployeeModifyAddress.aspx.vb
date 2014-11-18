@@ -13,7 +13,6 @@
             Try
                 'get record id from session
                 Dim strEmpID As String
-                Session("EmpID") = 2002
                 strEmpID = Session("EmpID")
 
 

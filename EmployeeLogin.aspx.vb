@@ -41,13 +41,13 @@
         'once we get through that they are allowed to access other pages
         Session("Count") = 1
 
+        'get that custoemrs record
+        EmpDB.GetByEmpID(strEmployeeID)
+
         'IF THEY GET A CORRECT LOGIN
         'create session EMpType and store this employees emptype there for next form
-        Session("empType") = EmpDB.EmpDataset.Tables("tblEmployees").Rows(0).Item("empType").ToString 'will get from row zero in emp dataset
-
-
-        'create session for recordID for next webpage
         Session("EmpID") = EmpDB.EmpDataset.Tables("tblEmployees").Rows(0).Item("empID").ToString
+        Session("EmployeeFirstName") = EmpDB.EmpDataset.Tables("tblEmployees").Rows(0).Item("FirstName")
 
         'call next page(view customers)
         Response.Redirect("EmployeeHome.aspx")
