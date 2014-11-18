@@ -22,13 +22,10 @@
          <div id ="label">
              <asp:Label ID="Label3" runat="server" Text="Account type: "></asp:Label>
              <br />
-            <br />
               <asp:Label ID="Label1" runat="server" Text="Account Name: "></asp:Label>
-             <br />
              <br />
 
              <asp:Label ID="Label2" runat="server" Text="Account Number: "></asp:Label>
-             <br />
              <br />
 
              <asp:Label ID="Label7" runat="server" Text="Initial Deposit:"></asp:Label>
@@ -51,19 +48,22 @@
             <asp:ListItem>Individual Retirement Account</asp:ListItem>
             <asp:ListItem>Stock Portfolio</asp:ListItem>
         </asp:DropDownList>
-                 <br />
                 <br />
                  <asp:TextBox ID="txtAccountName" runat="server"></asp:TextBox>
-                 <br />
                    <br />
                  <asp:TextBox ID="txtAccountNumber" runat="server" ReadOnly="True"></asp:TextBox>
               
-                 <br />
                  <br />
                  <asp:TextBox ID="txtInitialDeposit" runat="server"></asp:TextBox>
               
                  <br />
                  <br />
+             
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <asp:Label ID="Label8" runat="server"></asp:Label>
              
                  <br />
                  <br />

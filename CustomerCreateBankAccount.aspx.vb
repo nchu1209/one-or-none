@@ -12,11 +12,13 @@
         DB.GetAllAccounts()
         DB.GetMaxAccountNumber()
 
-        If DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("MaxAccountNumber") Is Nothing Then
+        If IsDBNull(DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("AccountNumber")) = True Then
             Session("AccountNumber") = 1000000000
         Else
             Session("AccountNumber") = DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("MaxAccountNumber")
         End If
+
+        Label8.Text = Session("AccountNumber")
 
         If ddlBankAccounts.SelectedIndex = 1 Then
             txtAccountName.Text = "Longhorn Checking"
