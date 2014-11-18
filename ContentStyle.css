@@ -101,11 +101,13 @@
     float: left;
     width: 39%;
     text-align: right;
+    line-height: 26px;
     height: 305px;
 
 }
 
-#div {    height: 349px;
+#div {    
+    height: 349px;
 }
 
 #textbox {
@@ -125,4 +127,9 @@
    text-align:center;
    font-weight:400;
    font-size:small;
+}
+
+#masterright {
+    width: 98%;
+    text-align:right;
 }
