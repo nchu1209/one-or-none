@@ -63,7 +63,7 @@ Public Class CustomerManageAccount
     Protected Sub btnSaveProfile_Click(sender As Object, e As EventArgs) Handles btnSaveProfile.Click
         mstrNewPassword = txtPassword.Text
         Session("NewPassword") = txtPassword.Text
-
+        lblError.Text = ""
         DB.GetByCustomerNumber(Session("CustomerNumber").ToString)
 
         'validations
