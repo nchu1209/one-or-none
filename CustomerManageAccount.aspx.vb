@@ -29,6 +29,9 @@ Public Class CustomerManageAccount
 
 
 
+
+
+
     End Sub
 
     Private Sub FillTextboxes()
@@ -72,10 +75,47 @@ Public Class CustomerManageAccount
         mstrNewPassword = txtPassword.Text
         Session("NewPassword") = txtPassword.Text
 
+        DB.GetByCustomerNumber(Session("CustomerNumber").ToString)
+
+
+
+        'validations
+        If txtPhone.Text <> "" Then
+            If Valid.CheckPhone(txtPhone.Text) = False Then
+                lblError.Text = "Please put in a valid 10-digit phone number."
+                Exit Sub
+            End If
+        End If
+
+       
+
+
+        'MI must be 1 letter
+        If txtInitial.Text <> "" Then
+            If Valid.CheckInitial(txtInitial.Text) = False Then
+                lblError.Text = "Please put in a single letter for middle initial."
+                Exit Sub
+            End If
+        End If
+
+   
+
+
+        If txtEmail.Text <> DB.CustDataset.Tables("tblCustomers").Rows(0).Item("EmailAddr").ToString Then
+            If DB.CheckEmailSP(txtEmail.Text) = True Then
+                lblError.Text = "Email already used"
+                Exit Sub
+            End If
+        End If
+
+
+        If Not IsValid Then
+            Exit Sub
+        End If
+
         DB.ModifyCustomer(txtEmail.Text, txtLastName.Text, txtFirstName.Text, txtInitial.Text, txtAddress.Text, txtZip.Text, txtPhone.Text, CInt(Session("CustomerNumber")))
         DB.LinkZip(mCustomerID.ToString)
         FillTextboxes()
-
 
 
         mstrOldPassword = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("Password").ToString
@@ -87,7 +127,6 @@ Public Class CustomerManageAccount
             ModifyProfile.Visible = False
             AccountNames.Visible = False
         End If
-
 
     End Sub
 

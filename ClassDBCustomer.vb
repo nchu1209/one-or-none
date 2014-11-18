@@ -127,6 +127,10 @@ Public Class ClassDBCustomer
         RunProcedureCustomerNumber("usp_customer_number")
     End Sub
 
+    Public Sub GetByCustomerNumber(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_customers_get_by_customer_number", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
     Public Sub SelectQuery(ByVal strQuery As String)
         'Purpose: run any select query and fill dataset
         'Arguments: 1 string that contains query

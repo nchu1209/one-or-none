@@ -6,7 +6,7 @@
 
 Public Class ClassValidate
     'create constant so as not to use literals
-    Const PASSWORD As String = "donut"
+
 
     Public Function CheckDecimal(ByVal strInput As String) As Decimal
         'Purpose: validating the string input to make sure it is a positive decimal value
@@ -72,20 +72,7 @@ Public Class ClassValidate
     End Function
 
 
-    Public Function CheckPassword(strIn As String) As Boolean
-        'Purpose: validating the string input to make sure it matches the 'donut' password
-        'Arguments: any string
-        'Returns: either the true (if donut) or false (if not donut)
-        'Author: Catherine King
-        'Date: 8/2/2014
-
-        If strIn = PASSWORD Then
-            Return True
-        Else
-            Return False
-        End If
-
-    End Function
+   
 
     'code on page 8 of course packet***
     Public Function CheckDigits(ByVal strInput As String) As Boolean
@@ -115,27 +102,7 @@ Public Class ClassValidate
         Return True
     End Function
 
-    Public Function CheckPhone(strInput As String) As Boolean
-        'Purpose: check that there are 10 digits in the phone number box
-        'Arguments:  the string of characters
-        'Returns: true if length of phone number is 10 and is all numbers, false otherwise
-        'Author: Catherine King
-        'Date: 9/23/2014
-
-        'check length
-        If strInput.Length <> 10 Then
-            Return False
-        End If
-
-        'check to make sure its all digits
-        If CheckDigits(strInput) = False Then
-            Return False
-
-        End If
-
-        'If code gets to this point the number is 10 digits and all char are numbers.
-        Return True
-    End Function
+    
 
     Public Function CheckZip(strInput As String) As Boolean
         'Purpose: checks to make sure input is 5 or 9 digit numbers
@@ -208,6 +175,29 @@ Public Class ClassValidate
         'input must be 1 letter, return true
         Return True
 
+    End Function
+
+
+    Public Function CheckPhone(strInput As String) As Boolean
+        'Purpose: check that there are 10 digits in the phone number box
+        'Arguments:  the string of characters
+        'Returns: true if length of phone number is 10 and is all numbers, false otherwise
+        'Author: Catherine King
+        'Date: 9/23/2014
+
+        'check length
+        If strInput.Length <> 10 Then
+            Return False
+        End If
+
+        'check to make sure its all digits
+        If CheckDigits(strInput) = False Then
+            Return False
+
+        End If
+
+        'If code gets to this point the number is 10 digits and all char are numbers.
+        Return True
     End Function
 
     Public Function CheckState(ByVal strInput As String) As Boolean

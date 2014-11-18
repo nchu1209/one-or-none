@@ -72,15 +72,13 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<form id="form1" runat="server">
-    <div id="masterright">
+<div id="masterright">
     <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
-    Hello  <asp:Label ID="lblName" runat="server" Text="[]" Font-Bold="True"></asp:Label>! Not <asp:label ID="lblName2" runat="server" text="[]"></asp:label>?
-    <asp:linkbutton ID="lnkLogout" runat="server">Logout</asp:linkbutton>
+    Hello  <asp:Label ID="lblName" runat="server" Text="[]"></asp:Label>! Not
+&nbsp;<br>
     <br>
     Today's date is: <asp:label ID ="lblDate" runat="server" text="[]"></asp:label>
     </div>
-
 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head runat="server">
@@ -90,7 +88,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-
+    <form id="form1" runat="server">
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
@@ -103,8 +101,6 @@
         <br /> Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
     </div>
 
+    </form>
 </body>
-
 </html>
-        </form>
-
