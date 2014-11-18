@@ -6,7 +6,7 @@ Public Class CustomerManageAccount
     Dim DB As New ClassDBCustomer
     Dim Format As New ClassFormat
     Dim mCustomerID As Integer
-    Dim Valid As ClassValidate
+    Dim Valid As New ClassValidate
     Dim mstrNewPassword As String
     Dim mstrOldPassword As String
 
@@ -15,9 +15,6 @@ Public Class CustomerManageAccount
             Response.Redirect("CustomerLogin.aspx")
 
         End If
-
-
-
         ''get the record id from the select
         mCustomerID = CInt(Session("CustomerNumber"))
 
@@ -26,9 +23,6 @@ Public Class CustomerManageAccount
 
         End If
         'mCustomerID = 10046
-
-
-
     End Sub
 
     Private Sub FillTextboxes()
@@ -62,8 +56,6 @@ Public Class CustomerManageAccount
         FillTextboxes()
     End Sub
 
-    
-
     Protected Sub btnSaveAccountName_Click(sender As Object, e As EventArgs) Handles btnSaveAccountName.Click
 
     End Sub
@@ -72,10 +64,42 @@ Public Class CustomerManageAccount
         mstrNewPassword = txtPassword.Text
         Session("NewPassword") = txtPassword.Text
 
+        DB.GetByCustomerNumber(Session("CustomerNumber").ToString)
+
+        'validations
+        If txtPhone.Text <> "" Then
+            If Valid.CheckPhone(txtPhone.Text) = False Then
+                lblError.Text = "Please put in a valid 10-digit phone number."
+                Exit Sub
+            End If
+        End If
+
+        'MI must be 1 letter
+        If txtInitial.Text <> "" Then
+            If Valid.CheckInitial(txtInitial.Text) = False Then
+                lblError.Text = "Please put in a single letter for middle initial."
+                Exit Sub
+            End If
+        End If
+
+   
+
+
+        If txtEmail.Text <> DB.CustDataset.Tables("tblCustomers").Rows(0).Item("EmailAddr").ToString Then
+            If DB.CheckEmailSP(txtEmail.Text) = True Then
+                lblError.Text = "Email already used"
+                Exit Sub
+            End If
+        End If
+
+
+        If Not IsValid Then
+            Exit Sub
+        End If
+
         DB.ModifyCustomer(txtEmail.Text, txtLastName.Text, txtFirstName.Text, txtInitial.Text, txtAddress.Text, txtZip.Text, txtPhone.Text, CInt(Session("CustomerNumber")))
         DB.LinkZip(mCustomerID.ToString)
         FillTextboxes()
-
 
 
         mstrOldPassword = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("Password").ToString
@@ -87,7 +111,6 @@ Public Class CustomerManageAccount
             ModifyProfile.Visible = False
             AccountNames.Visible = False
         End If
-
 
     End Sub
 
