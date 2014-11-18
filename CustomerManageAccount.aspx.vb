@@ -26,7 +26,7 @@ Public Class CustomerManageAccount
     End Sub
 
     Private Sub FillTextboxes()
-        
+
         'declare variables
         'Dim strPhone As String
 
@@ -82,7 +82,7 @@ Public Class CustomerManageAccount
             End If
         End If
 
-   
+
 
 
         If txtEmail.Text <> DB.CustDataset.Tables("tblCustomers").Rows(0).Item("EmailAddr").ToString Then

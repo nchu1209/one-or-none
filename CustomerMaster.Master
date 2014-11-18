@@ -86,6 +86,7 @@
 <head runat="server">
     <%-- Add Petunia as icon if time permits --%>
     <title>Longhorn Bank</title>
+     
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

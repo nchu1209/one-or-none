@@ -1,18 +1,18 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/CustomerMaster.Master" CodeBehind="CustomerManageAccount.aspx.vb" Inherits="KProject.CustomerManageAccount" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/EmployeeMaster.Master" CodeBehind="EmployeeManageCustomers.aspx.vb" Inherits="KProject.EmployeeManageCustomers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <link rel="shortcut icon" href="/favicon-4.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="http://localhost:51539/CustomerManageAccount.aspx" />
+    <link rel="shortcut icon" href="http://localhost:51539/EmployeeManageCustomers.aspx" />
     <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
     
        
 
     
     <div id ="title">
-        Manage Account
+        Manage Customer Accounts
         <br />
-        <br />
+        wait for catherine to do account name change to finish<br />
     </div>
 
      <asp:Panel ID="ModifyProfile" runat="server" Visible ="true">
@@ -62,22 +62,18 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ClientIDMode="Static" ControlToValidate="txtPassword" ErrorMessage="ERROR: Password Required">*</asp:RequiredFieldValidator>
             <br />
             <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ClientIDMode="Static" ControlToValidate="txtAddress" ErrorMessage="ERROR: Address Required">*</asp:RequiredFieldValidator>
             <br />
             <asp:TextBox ID="txtCity" runat="server" ReadOnly="True"></asp:TextBox>
             <br />
             <asp:TextBox ID="txtState" runat="server" MaxLength="2" ReadOnly="True"></asp:TextBox>
             <br />
             <asp:TextBox ID="txtZip" runat="server" MaxLength="9"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ClientIDMode="Static" ControlToValidate="txtZip" ErrorMessage="RequiredFieldValidator">*</asp:RequiredFieldValidator>
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ClientIDMode="Static" ControlToValidate="txtZip" ErrorMessage="ERROR: Incorrect Zip Code Format" ValidationExpression="\d{5}">*</asp:RegularExpressionValidator>
             <br />
             <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="ERROR: Email Required">*</asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtEmail" ErrorMessage="ERROR: Invalid Email." ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">*</asp:RegularExpressionValidator>
             <br />
             <asp:TextBox ID="txtPhone" runat="server" MaxLength="10"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ClientIDMode="Static" ControlToValidate="txtPhone" ErrorMessage="ERROR: Phone Number">*</asp:RequiredFieldValidator>
             <br />
         <br />
         <br />
@@ -85,6 +81,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnCancelProfile" runat="server" Text="Cancel" />
         <br />
+        <asp:Button ID="btnEnable" runat="server" Text="Enable Customer" />
+        <br />
+        <asp:Button ID="btnDisable" runat="server" Text="Disable Customer" />
         <br />
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
             <asp:Label ID="lblError" runat="server"></asp:Label>
@@ -97,18 +96,18 @@
     <asp:Panel ID="AccountNames" runat="server" Visible ="true">
 
     <div id ="righthalf">
-        <div id ="subtitle">
+        <div id ="Div1">
         Change Account Names<br />
         <br />
     </div>
-    <div id ="label">
+    <div id ="Div2">
         
         <asp:Label ID="Label14" runat="server" Text="Choose Account:"></asp:Label>
         <br />
         <asp:Label ID="Label15" runat="server" Text="Change Name To:"></asp:Label>
         
     </div>
-    <div id ="textbox">
+    <div id ="Div3">
         <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
         <br />
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
@@ -139,38 +138,17 @@
     </div>
         </asp:Panel>
     <asp:Panel ID="Password" runat="server" Visible ="false">
-        <div id ="subtitle">
-        Confirm Password
+        <div id ="Div4">
         <br />
         <br />
     </div>
-        <div id ="label">
+        <div id ="Div5">
         
-        <asp:Label ID="Label1" runat="server" Text="Old Password:"></asp:Label>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="New Password:"></asp:Label>
+            <br />
+            <br />
         
     </div>
-    <div id ="textbox">
-       
-        <asp:TextBox ID="txtOld" runat="server"></asp:TextBox>
-        <br />
-               
-        <asp:TextBox ID="txtNew" runat="server"></asp:TextBox>
-        
-        <br />
-        
-        <br />
-        <asp:Button ID="btnConfirmPassword" runat="server" Text="Confirm" />
-        <asp:Button ID="btnCancelPassword" runat="server" Text="Cancel" />
-        <br />
-        <br />
-        <asp:Label ID="lblErrorPassword" runat="server"></asp:Label>
-        <br />
-        <br />
-        <br />
-        <br />
-       </div>
         <br />
     </asp:Panel>
      <br />
