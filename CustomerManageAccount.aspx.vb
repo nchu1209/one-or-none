@@ -82,7 +82,13 @@ Public Class CustomerManageAccount
             End If
         End If
 
-
+        'zip code must be numeric and 5 digits
+        If txtZip.Text <> "" Then
+            If Valid.CheckZip(txtZip.Text) = False Then
+                lblError.Text = "Please enter a five digit zip code"
+                Exit Sub
+            End If
+        End If
 
 
         If txtEmail.Text <> DB.CustDataset.Tables("tblCustomers").Rows(0).Item("EmailAddr").ToString Then

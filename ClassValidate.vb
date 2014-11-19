@@ -112,7 +112,7 @@ Public Class ClassValidate
         'Date: 9/23/2014
 
         'check length to make sure it is 5 or 9 chara
-        If strInput.Length <> 5 And strInput.Length <> 9 Then
+        If strInput.Length <> 5 Then
             Return False
         End If
 

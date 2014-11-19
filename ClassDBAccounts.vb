@@ -155,6 +155,14 @@ Public Class ClassDBAccounts
         RunProcedureOneParameter("usp_customers_get_by_customer_number", "@CustomerNumber", strCustomerNumber)
     End Sub
 
+    Public Sub GetByCustomerNumberIRA(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_accounts_get_by_customernumber_IRA", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
+    Public Sub GetByCustomerNumberStock(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_accounts_get_by_customer_number_stock", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
     Public Sub GetAllAccounts()
         RunProcedureNoParam("usp_accounts_get_all")
     End Sub

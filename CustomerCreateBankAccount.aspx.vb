@@ -5,7 +5,10 @@
     Dim Valid As New ClassValidate
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        txtAccountName.Visible = True
+        txtAccountNumber.Visible = True
+        txtInitialDeposit.Visible = True
+        btnApply.Visible = True
     End Sub
 
     Protected Sub ddlBankAccounts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlBankAccounts.SelectedIndexChanged
@@ -36,14 +39,32 @@
         End If
 
         If ddlBankAccounts.SelectedIndex = 3 Then
-            DB.GetByCustomerNumberIRA(Session("CustomerNumber")
-            txtAccountName.Text = ""
-            Session("AccountType") = "IRA"
+            DB.GetByCustomerNumberIRA(Session("CustomerNumber"))
+            If IsDBNull(DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("IRA")) = True Then
+                txtAccountName.Text = ""
+                Session("AccountType") = "IRA"
+            Else
+                lblError.Text = "You cannot have more than one IRA. Please select another account type"
+                txtAccountName.Visible = False
+                txtAccountNumber.Visible = False
+                txtInitialDeposit.Visible = False
+                btnApply.Visible = False
+            End If
         End If
 
+
         If ddlBankAccounts.SelectedIndex = 4 Then
-            txtAccountName.Text = ""
-            Session("AccountType") = "Stock"
+            DB.GetByCustomerNumberStock(Session("CustomerNumber"))
+            If IsDBNull(DB.AccountsDataset.Tables("tblAccounts").Rows(0).IsNull("Stock")) = True Then
+                txtAccountName.Text = ""
+                Session("AccountType") = "Stock"
+            Else
+                lblError.Text = "You cannot have more than one Stock Account. Please select another account type"
+                txtAccountName.Visible = False
+                txtAccountNumber.Visible = False
+                txtInitialDeposit.Visible = False
+                btnApply.Visible = False
+            End If
         End If
     End Sub
 
