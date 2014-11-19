@@ -16,6 +16,6 @@
     End Sub
 
     Protected Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
-        db.SetDate(mstrDate)
+        db.SetDate(txtDate.Text)
     End Sub
 End Class

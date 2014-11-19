@@ -14,7 +14,7 @@ Public Class ClassDBDate
     Dim mMyView As New DataView
 
     'Define a public read-only property so "outsiders" can access the dataset filled by this class
-    Public ReadOnly Property CustDataset() As DataSet
+    Public ReadOnly Property DateDataset() As DataSet
         Get
             'Return dataset to user
             Return mDatasetDate
@@ -44,9 +44,9 @@ Public Class ClassDBDate
             'clear dataset
             mDatasetDate.Clear()
             'open connection and fill dataset
-            mdbDataAdapter.Fill(mDatasetDate, "tblCustomers")
+            mdbDataAdapter.Fill(mDatasetDate, "tblSystemDate")
             'copy dataset to dataview
-            mMyView.Table = mDatasetDate.Tables("tblCustomers")
+            mMyView.Table = mDatasetDate.Tables("tblSystemDate")
         Catch ex As Exception
             Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
         End Try
@@ -81,7 +81,7 @@ Public Class ClassDBDate
     Public Sub SetDate(ByVal strDate As String)
 
         mstrQuery = "UPDATE tblSystemDate SET " & _
-            "Date = '" & strDate & "' "
+            "Date = '" & strDate & "';"
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)
