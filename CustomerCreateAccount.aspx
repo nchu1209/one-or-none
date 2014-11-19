@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div id="div">
+       
         <div id="label">
            
 
@@ -45,6 +45,16 @@
             <asp:Label ID="Label13" runat="server" Text="Phone Number:"></asp:Label>
             <br />
             Birth Year:<br />
+           
+           
+
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
            
            
 
@@ -91,19 +101,25 @@
             <br />
         </div>
         
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        </div>
-         <br />
-        <br />
-        <br />
-        <br />
-
+       
+          </form>
+     
          <div id="footer">
         <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
              <br />
              <br />
              <br />
@@ -114,8 +130,9 @@
         <br />
         Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
         </div>
+        
 
  
-    </form>
+  
 </body>
 </html>

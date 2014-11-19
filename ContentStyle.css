@@ -134,6 +134,18 @@
     text-align:right;
 }
 
+#createbankaccountfiller {
+    width: 6%;
+    float: left;
+
+}
+
+#createbankaccountfiller2 {
+    width: 4%;
+    float: left;
+
+}
+
 #accountsubtitle {
     text-align: center;
     font-size: medium;

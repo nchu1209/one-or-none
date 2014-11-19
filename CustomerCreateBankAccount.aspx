@@ -10,15 +10,27 @@
     
     </div>
 
-     <div id="center">
+  
     
-        <br />
-        <br />
         <br />
        
         <%-- Make sure to not have the 2 accounts the same --%>
         <%-- because the money comes from an outside source, any amount is allowed --%>
-        
+        <div id ="createbankaccountfiller">
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+           
+
+        </div>
          <div id ="label">
              <asp:Label ID="Label3" runat="server" Text="Account type: "></asp:Label>
              <br />
@@ -32,11 +44,6 @@
              <br />
              <br />
              <%-- Default to Current Date --%>
-             <br />
-             <br />
-             
-             <br />
-             <br />
              <br />
           </div>
         
@@ -71,27 +78,31 @@
                   <asp:Label ID="lblError" runat="server"></asp:Label>
              
                  <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
+                  <br />
                  <br />
                   <br />
         
              </div>
-             
-             
-
-        
-             
-
-        
-        </asp:Panel>
-
 
         <br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
         <br />
 
-    </div>
+
+
+     <br />
+     <br />
+
+     <br />
+     <br />
+     <br />
 
 </asp:Content>
