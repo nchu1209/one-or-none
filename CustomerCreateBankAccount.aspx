@@ -50,20 +50,25 @@
         </asp:DropDownList>
                 <br />
                  <asp:TextBox ID="txtAccountName" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtAccountName" ErrorMessage="ERROR: Account Name Required">*</asp:RequiredFieldValidator>
                    <br />
                  <asp:TextBox ID="txtAccountNumber" runat="server" ReadOnly="True"></asp:TextBox>
               
                  <br />
                  <asp:TextBox ID="txtInitialDeposit" runat="server"></asp:TextBox>
               
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ClientIDMode="Static" ControlToValidate="txtInitialDeposit" ErrorMessage="ERROR: Initial Deposit Required (may be 0)">*</asp:RequiredFieldValidator>
+              
                  <br />
                  <br />
              
                   <br />
+                  <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+            <asp:Button ID="btnApply" runat="server" Text="Apply" />
+            <asp:Button ID="btnCancelProfile" runat="server" Text="Cancel" CausesValidation="False" />
                   <br />
                   <br />
-                  <br />
-                  <asp:Label ID="Label8" runat="server"></asp:Label>
+                  <asp:Label ID="lblError" runat="server"></asp:Label>
              
                  <br />
                  <br />

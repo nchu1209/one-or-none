@@ -68,6 +68,15 @@ Partial Public Class CustomerCreateBankAccount
     Protected WithEvents txtAccountName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''RequiredFieldValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''txtAccountNumber control.
     '''</summary>
     '''<remarks>
@@ -86,11 +95,47 @@ Partial Public Class CustomerCreateBankAccount
     Protected WithEvents txtInitialDeposit As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Label8 control.
+    '''RequiredFieldValidator3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label8 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''ValidationSummary1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ValidationSummary1 As Global.System.Web.UI.WebControls.ValidationSummary
+
+    '''<summary>
+    '''btnApply control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnApply As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnCancelProfile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelProfile As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblError control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
 End Class
