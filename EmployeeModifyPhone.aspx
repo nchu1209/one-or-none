@@ -11,12 +11,9 @@
 
 
 
-      <div id="employeeModifyAddress" style="text-align: center">
+      <div id="employeeModify" style="text-align: center">
 
-            <br />
-            <br />
-            New Phone Number:<br />
-            <asp:TextBox ID="txtPhone" runat="server" Width="168px"></asp:TextBox>
+            <br />Phone Number:<asp:TextBox ID="txtPhone" runat="server" Width="122px"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtPhone" ErrorMessage="Need New Phone Number">*</asp:RequiredFieldValidator>
             <br />
             <br />

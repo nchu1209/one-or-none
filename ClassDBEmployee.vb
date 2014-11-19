@@ -210,4 +210,54 @@ Public Class ClassDBEmployee
         End Try
     End Sub
 
+
+
+    Public Sub ModifyPassword(strPassword As String, ByVal intEmployeeID As Integer)
+
+        mstrQuery = "UPDATE tblEmployees SET " & _
+            "Password = '" & strPassword & "' " & _
+            "WHERE EmpID = " & intEmployeeID
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
+
+
+
+    Public Sub RunProcedureOneParameter(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
+        'Purpose: run any stored procedure with one parameter and fill dataset
+        'Arguments: 3 strings
+        'Returns: none (query results via property)
+        'Author: Nicole Chu (nc7997)
+        'Date: 10/21/14
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'add parameter to SPROC
+            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
+            'clear dataset
+            mDatasetEmployee.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetEmployee, "tblEmployees")
+            'copy dataset to dataview
+            mMyView.Table = mDatasetEmployee.Tables("tblEmployees")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
+
+
+
+
+
+    Public Sub LinkZip(ByVal strEmployeeID As String)
+        RunProcedureOneParameter("usp_innerjoin_employee_city_by_zip", "@EmpID", strEmployeeID)
+    End Sub
 End Class

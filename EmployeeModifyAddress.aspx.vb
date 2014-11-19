@@ -4,42 +4,36 @@
     'declare classes
     Dim valid As New ClassEmployeeValidation
     Dim DB As New ClassDBEmployee
-
+    Dim mEmployeeID As Integer
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Session("EmpID") Is Nothing Then
+            Response.Redirect("EmployeeLogin.aspx")
 
-        'when form loads
-        If IsPostBack = False Then
-            Try
-                'get record id from session
-                Dim strEmpID As String
-                Session("EmpID") = 2002
-                strEmpID = Session("EmpID")
-
-
-                'get that custoemrs record
-                DB.GetByEmpID(strEmpID)
-                'fill textboxes
-                FillTextboxes()
-            Catch ex As Exception
-                'redirects if information is not provided
-                Response.Redirect("EmployeeLogin.aspx")
-                Throw New Exception("emp id from session is " & Session("EmpID").ToString)
-            End Try
         End If
+
+
+        mEmployeeID = CInt(Session("EmpID"))
+
+        If IsPostBack = False Then
+        
+            FillTextboxes()
+
+        End If
+    
+               
+
 
     End Sub
 
 
     Protected Sub btnModifyAddress_Click(sender As Object, e As EventArgs) Handles btnModifyAddress.Click
-
+        'get that custoemrs reord
+        DB.GetByEmpID(mEmployeeID)
 
         'reset the label
         lblError.Text = ""
 
-        'need this to be the index. not the  ID
-        Dim intRow As Integer
-        intRow = Session("EmpID").ToString
 
 
         'check zip code
@@ -72,6 +66,8 @@
 
         'modify the DB
         DB.ModifyEmployeeAddress(txtAddress.Text, txtZipcode.Text, strRow)
+        DB.LinkZip(Session("EmpID").ToString)
+        FillTextboxes()
 
         'call next page(EmployeeHome)
         Response.AddHeader("Refresh", "2; URL=EmployeeHome.aspx")
@@ -87,13 +83,13 @@
     'Date: 10-6- 2014
     Public Sub FillTextboxes()
         'put info from selected customer into text boxes on form
-        Dim intRow As Integer
-        intRow = 0
 
+        DB.LinkZip(mEmployeeID.ToString)
 
-        txtZipcode.Text = DB.EmpDataset.Tables("tblEmployees").Rows(intRow).Item("Zipcode")
-        txtAddress.Text = DB.EmpDataset.Tables("tblEmployees").Rows(intRow).Item("Address")
-
+        txtZipcode.Text = DB.EmpDataset.Tables("tblEmployees").Rows(0).Item("Zipcode").ToString
+        txtAddress.Text = DB.EmpDataset.Tables("tblEmployees").Rows(0).Item("Address").ToString
+        txtCity.Text = DB.EmpDataset.Tables("tblEmployees").Rows(0).Item("city").ToString
+        txtState.Text = DB.EmpDataset.Tables("tblEmployees").Rows(0).Item("state").ToString
        
     End Sub
 

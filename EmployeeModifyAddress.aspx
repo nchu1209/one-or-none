@@ -9,29 +9,52 @@
         <br />
     </div>
 
+    <div id="center">
 
+      <div id="employeeModifyAddress" class="text-justify">
 
-      <div id="employeeModifyAddress" style="text-align: center">
+            <div class="text-left">
 
             <br />
             <br />
-            Address<br />
-            <asp:TextBox ID="txtAddress" runat="server" Width="168px"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAddress" ErrorMessage="Need Address">*</asp:RequiredFieldValidator>
-            <br />
-            Zip Code<br />
-            <asp:TextBox ID="txtZipcode" runat="server" Width="89px"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtZipcode" ErrorMessage="Zipcode is Required">*</asp:RequiredFieldValidator>
-            <br />
-            <br />
-            <asp:Button ID="btnModifyAddress" runat="server" Text="Modify Address" />
-            <br />
-            <br />
-            <br />
-            <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
-            <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+                <div id ="label">
+                     <asp:Label ID="Label3" runat="server" Text="Address:"></asp:Label>
+                     <br />
+                    <asp:Label ID="Label4" runat="server" Text="City:"></asp:Label>
+                     <br />
+                    <asp:Label ID="Label5" runat="server" Text="State:"></asp:Label>
+                     <br />
+                    <asp:Label ID="Label7" runat="server" Text="Zip Code:"></asp:Label>
+                    </div>
 
+                <div id ="textbox2">
+                <asp:TextBox ID="txtAddress" runat="server" Width="168px"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtAddress" ErrorMessage="You must enter an address.">*</asp:RequiredFieldValidator>
+                <br />
+               <asp:TextBox ID="txtCity" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                <asp:TextBox ID="txtState" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                <asp:TextBox ID="txtZipcode" runat="server" Width="89px"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtZipcode" Enabled="False" ErrorMessage="You must have a zip code.">*</asp:RequiredFieldValidator>
+                <br />
+                <br />
+                <asp:Button ID="btnModifyAddress" runat="server" Text="Modify Address" />
+                  <br />
+                 <br />
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+                <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+                </div>
+                  
+            <br />
+            <br />
+            
+            </div>
+         
+            <br />
+          
+            <br />
         </div>
 
-
+</div>
 </asp:Content>
