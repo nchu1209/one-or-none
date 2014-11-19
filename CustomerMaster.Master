@@ -27,7 +27,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Accounts<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Apply for Account</a></li>
+            <li><a href="/CustomerCreateBankAccount.aspx">Apply for Account</a></li>
             <li><a href="/CustomerManageAccount.aspx">Manage Accounts</a></li>
             <%--<li class="divider"></li>
             <li><a href="#">Separated link</a></li>
