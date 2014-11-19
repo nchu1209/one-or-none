@@ -26,9 +26,9 @@ Public Class ClassDBDate
         End Get
     End Property
 
-    Public Sub RunProcedureOneParameter(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
-        'Purpose: run any stored procedure with one parameter and fill dataset
-        'Arguments: 3 strings
+    Public Sub RunProcedureNoParam(ByVal strProcedureName As String)
+        'Purpose: run any stored procedure with no parameters and fill dataset
+        'Arguments: 1 string that contains procedure name
         'Returns: none (query results via property)
         'Author: Nicole Chu (nc7997)
         'Date: 10/21/14
@@ -39,8 +39,6 @@ Public Class ClassDBDate
         Try
             'sets command type to "stored procedure"
             mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
-            'add parameter to SPROC
-            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
             'clear dataset
             mDatasetDate.Clear()
             'open connection and fill dataset
@@ -48,7 +46,7 @@ Public Class ClassDBDate
             'copy dataset to dataview
             mMyView.Table = mDatasetDate.Tables("tblSystemDate")
         Catch ex As Exception
-            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
         End Try
     End Sub
 
@@ -85,6 +83,12 @@ Public Class ClassDBDate
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)
+
+    End Sub
+
+    Public Sub GetDate()
+
+        RunProcedureNoParam("usp_systemdate_getdate")
 
     End Sub
 

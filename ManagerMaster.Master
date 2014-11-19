@@ -39,7 +39,7 @@
     Hello  <asp:Label ID="lblName" runat="server" Text="[]" Font-Bold="True"></asp:Label>! Not <asp:label ID="lblName2" runat="server" text="[]"></asp:label>?
     <asp:linkbutton ID="lnkLogout" runat="server">Logout</asp:linkbutton>
     <br>
-    Today's date is: <asp:label ID ="lblDate" runat="server" text="[]"></asp:label>
+    Today's date is: <asp:label ID ="lblDate" runat="server" text="[]"></asp:label> &nbsp; <a href ="ManagerSetDate.aspx">Change Date</a>
     </div>
 
 
