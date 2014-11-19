@@ -17,7 +17,7 @@
 
         'find the maximum existing account number in the database, and add one to create the new account's number
         DB.GetMaxAccountNumber()
-        If IsDBNull(DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("MaxAccountNumber")) = True Then
+        If DB.AccountsDataset.Tables("tblAccounts").Rows.Count = 0 Then
             Session("AccountNumber") = 999999999
         Else
             Session("AccountNumber") = DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("MaxAccountNumber")

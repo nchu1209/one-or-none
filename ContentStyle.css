@@ -133,3 +133,22 @@
     width: 98%;
     text-align:right;
 }
+
+#accountsubtitle {
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    float: left;
+    width: 60%;
+    background-color: #3366CC;
+}
+
+#accountsubtitleleft {
+    text-align: center;
+    font-size: medium;
+    float:left;
+    font-weight: bold;
+    width: 20%;
+
+}
+
