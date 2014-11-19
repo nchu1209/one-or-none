@@ -40,6 +40,32 @@ Public Class ClassDBAccounts
     End Property
 
 
+    Public Sub UpdateDB(ByVal mstrQuery As String)
+        'Purpose: run given query to update database
+        'Arguments: 1 string (any SQL statement)
+        'Returns: nothing
+        'Author: Nicole Chu (nc7997)
+        'Date: 9/24/2014
+
+        Try
+            'make connection using the connection string
+            mdbConn = New SqlConnection(mstrConnection)
+            Dim dbCommand As New SqlCommand(mstrQuery, mdbConn)
+
+            'open the connection
+            mdbConn.Open()
+
+            'run query
+            dbCommand.ExecuteNonQuery()
+
+            'close the connection
+            mdbConn.Close()
+        Catch ex As Exception
+            Throw New Exception("query is " & mstrQuery.ToString & " error is " & ex.Message)
+        End Try
+
+    End Sub
+
     Public Sub RunProcedureNoParam(ByVal strProcedureName As String)
         'Purpose: run any stored procedure with no parameters and fill dataset
         'Arguments: 1 string that contains procedure name
@@ -137,6 +163,27 @@ Public Class ClassDBAccounts
         RunProcedureNoParam("usp_accounts_get_max_account_number")
     End Sub
 
+    Public Sub AddAccount(intCustomerID As Integer, ByVal intAccountNumber As Integer, ByVal strAccountName As String, ByVal strAccountType As String, ByVal strActive As String, ByVal strManagerApprovedDeposit As String, ByVal intInitial As Integer, ByVal intBalance As Integer)
+        'Purpose: adds a customer to database
+        'Arguments: 11 strings
+        'Returns: nothing
+        'Author: Nicole Chu (nc7997)
+        'Date: 9/24/2014
+
+        mstrQuery = "INSERT INTO tblAccounts (CustomerID, AccountNumber, AccountName, AccountType, Active, ManagerApprovedDeposit, Initial, Balance) VALUES (" & _
+            "'" & intCustomerID & "', " & _
+            "'" & intAccountNumber & "', " & _
+            "'" & strAccountName & "', " & _
+            "'" & strAccountType & "', " & _
+            "'" & strActive & "', " & _
+            "'" & strManagerApprovedDeposit & "', " & _
+            "'" & intInitial & "', " & _
+            "'" & intBalance & "')"
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
     Public Sub SelectQuery(ByVal strQuery As String)
         'Purpose: run any select query and fill dataset
         'Arguments: 1 string that contains query
@@ -156,7 +203,7 @@ Public Class ClassDBAccounts
             mDatasetAccounts.Clear()
 
             'fill the dataset
-            mdbDataAdapter.Fill(mDatasetAccounts, "tblChecking")
+            mdbDataAdapter.Fill(mDatasetAccounts, "tblAccounts")
 
             'close the connection
             mdbConn.Close()
