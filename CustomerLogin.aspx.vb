@@ -25,5 +25,9 @@
 
         lblError.Text = "YA"
 
+        Session("CustomerFirstName") = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("FirstName")
+        Session("CustomerNumber") = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("CustomerNumber")
+        Response.Redirect("CustomerManageAccount.aspx")
+
     End Sub
 End Class

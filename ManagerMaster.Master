@@ -23,21 +23,24 @@
     <div class="navbar-default collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="navbar-default nav navbar-nav">
           <%-- things that need to go on customer navbar: login, create profile, apply for account, customer portal, modify account  --%>
-        <li class="active"><a href="#">Employee Home</a></li>
-
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Modify Employee Account</a></li>
-          <li><a href="#">Manage Customers</a></li>
-          <li><a href="#">Transaction Search</a></li>
-          <li><a href="#">Logout</a></li>
+        <li class="active"><a href="/ManagerHome.aspx">Manager Home</a></li>
+        <li><a href="/ManagerSetDate.aspx">Set Date</a></li>
+        <li><a href="#">Modify Employee Account</a></li>
+        <li><a href="#">Manage Customers</a></li>
+        <li><a href="#">Transaction Search</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-
+<form id="form1" runat="server">
+    <div id="masterright">
+    <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
+    Hello  <asp:Label ID="lblName" runat="server" Text="[]" Font-Bold="True"></asp:Label>! Not <asp:label ID="lblName2" runat="server" text="[]"></asp:label>?
+    <asp:linkbutton ID="lnkLogout" runat="server">Logout</asp:linkbutton>
+    <br>
+    Today's date is: <asp:label ID ="lblDate" runat="server" text="[]"></asp:label> &nbsp; <a href ="ManagerSetDate.aspx">Change Date</a>
+    </div>
 
 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
@@ -48,7 +51,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
@@ -61,6 +64,7 @@
         <br /> Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
     </div>
 
-    </form>
 </body>
+
 </html>
+        </form>
