@@ -102,8 +102,7 @@
     width: 39%;
     text-align: right;
     line-height: 26px;
-    height: 305px;
-
+    position: relative;
 }
 
 #div {    
@@ -114,12 +113,19 @@
     float: left;
     width: 49%;
     text-align: left;
-    height: auto;
+     position: relative;
+}
+
+#textbox2 {
+    float: left;
+    width: 39%;
+    text-align: left;
+     position: relative;
 }
 
 #footer {
     text-align: center;
-    clip: rect(auto, auto, auto, auto);
+    clear: both;
 }
 
 #employeeloginright {
@@ -148,11 +154,10 @@
 
 #accountsubtitle {
     text-align: center;
-    font-size: medium;
+    font-size: small;
     font-weight: bold;
     float: left;
     width: 60%;
-    background-color: #3366CC;
 }
 
 #accountsubtitleleft {

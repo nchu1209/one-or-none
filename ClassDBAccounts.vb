@@ -254,6 +254,24 @@ Public Class ClassDBAccounts
         RunProcedureOneParameterDDL("usp_accounts_get_account_by_customer_number", "@CustomerNumber", strCustomerNumber)
     End Sub
 
+    Public Sub GetCheckingAccountByCustomerNumber(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_accounts_get_checking_account_by_customer_number", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
+    Public Sub GetSavingsAccountByCustomerNumber(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_accounts_get_savings_account_by_customer_number", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
+    Public Sub GetIRAAccountByCustomerNumber(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_accounts_get_IRA_account_by_customer_number", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
+    Public Sub GetStockAccountByCustomerNumber(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_accounts_get_stock_account_by_customer_number", "@CustomerNumber", strCustomerNumber)
+    End Sub
+
+   
+
     Public Sub AddAccountChecking(intCustomerID As Integer, ByVal intAccountNumber As Integer, ByVal strAccountName As String, ByVal strAccountType As String, ByVal strActive As String, ByVal strManagerApprovedDeposit As String, ByVal intInitial As Integer, ByVal intBalance As Integer)
         'Purpose: adds a customer to database
         'Arguments: 11 strings

@@ -126,6 +126,28 @@ Public Class ClassValidate
         Return True
     End Function
 
+    Public Function CheckDOB(strInput As String) As Boolean
+        'Purpose: checks to make sure input is 5 or 9 digit numbers
+        'Arguments: the string input
+        'Returns:  true if 5 or 9 character numbers, false otherwise
+        'Author: Catherine King
+        'Date: 9/23/2014
+
+        'check length to make sure it is 5 or 9 chara
+        If strInput.Length <> 4 Then
+            Return False
+        End If
+
+        'if correct length, check to make sure each character is a digit
+        If CheckDigits(strInput) = False Then
+            Return False
+
+        End If
+
+        'If code gets to this point the number is 10 digits and all char are numbers.
+        Return True
+    End Function
+
 
     Public Function CheckLetters(ByVal strInput As String) As Boolean
         'Purpose: checks to make sure every character in a string is a letter   
@@ -148,6 +170,27 @@ Public Class ClassValidate
                     'if the character is anything else, stop looking and return false
                     Return False
             End Select
+        Next
+
+        'if we made it thru the loop, return true
+        Return True
+    End Function
+
+    Public Function PrivitizeAccountNumber(ByVal strInput As String) As Boolean
+        'Purpose: checks to make sure every character in a string is a letter   
+        'Arguments: a string    
+        'Returns: true if all letters, false otherwise
+        'Author: Catherine King
+        'Date: 9/23/2014
+
+        'check to see that each char is a-z
+        Dim i As Integer
+        Dim strOne As String
+
+        For i = 0 To Len(strInput) - 5
+            'i, where to start, 1 - how many
+            strOne = strInput.Substring(i, 1)
+
         Next
 
         'if we made it thru the loop, return true
