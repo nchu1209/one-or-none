@@ -25,6 +25,23 @@
           <%-- things that need to go on customer navbar: login, create profile, apply for account, customer portal, modify account  --%>
         <li class="active"><a href="/ManagerHome.aspx">Manager Home</a></li>
         <li><a href="/ManagerSetDate.aspx">Set Date</a></li>
+
+
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modify Employee Account<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/ManagerModifyAddress.aspx">Change Address</a></li>
+            <li><a href="/ManagerModifyPhone.aspx">Change Phone Number</a></li>
+            <li><a href="/ManagerModifyPassword.aspx">Change Password</a></li>
+            <%--<li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>--%>
+          </ul>
+        </li>
+          </ul>
+
+         <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Modify Employee Account</a></li>
         <li><a href="#">Manage Customers</a></li>
         <li><a href="#">Transaction Search</a></li>

@@ -18,24 +18,24 @@
             <br />
             <br />
                 <div id ="label">
-                     <asp:Label ID="Label3" runat="server" Text="Address:"></asp:Label>
+                     <asp:Label ID="Label3" runat="server" Text="Address:" Height="26px"></asp:Label>
                      <br />
-                    <asp:Label ID="Label4" runat="server" Text="City:"></asp:Label>
+                    <asp:Label ID="Label4" runat="server" Text="City:" Height="26px"></asp:Label>
                      <br />
-                    <asp:Label ID="Label5" runat="server" Text="State:"></asp:Label>
+                    <asp:Label ID="Label5" runat="server" Text="State:" Height="26px"></asp:Label>
                      <br />
-                    <asp:Label ID="Label7" runat="server" Text="Zip Code:"></asp:Label>
+                    <asp:Label ID="Label7" runat="server" Text="Zip Code:" Height="26px"></asp:Label>
                     </div>
 
-                <div id ="textbox2">
-                <asp:TextBox ID="txtAddress" runat="server" Width="168px"></asp:TextBox>
+                <div id ="textbox">
+                <asp:TextBox ID="txtAddress" runat="server" Width="168px" Height="26px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtAddress" ErrorMessage="You must enter an address.">*</asp:RequiredFieldValidator>
                 <br />
-               <asp:TextBox ID="txtCity" runat="server" ReadOnly="True"></asp:TextBox>
+               <asp:TextBox ID="txtCity" runat="server" ReadOnly="True" Height="26px"></asp:TextBox>
                 <br />
-                <asp:TextBox ID="txtState" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="txtState" runat="server" ReadOnly="True" Height="26px"></asp:TextBox>
                 <br />
-                <asp:TextBox ID="txtZipcode" runat="server" Width="89px"></asp:TextBox>
+                <asp:TextBox ID="txtZipcode" runat="server" Width="89px" Height="26px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtZipcode" Enabled="False" ErrorMessage="You must have a zip code.">*</asp:RequiredFieldValidator>
                 <br />
                 <br />
