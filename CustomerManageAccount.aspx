@@ -109,9 +109,9 @@
         
     </div>
     <div id ="textbox">
-        <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
+        <asp:DropDownList ID="ddlAccounts" runat="server" AutoPostBack="True"></asp:DropDownList>
         <br />
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtChangeName" runat="server"></asp:TextBox>
         <br />
         <br />
         <asp:Button ID="btnSaveAccountName" runat="server" Text="Save" />

@@ -40,7 +40,7 @@
 
         If ddlBankAccounts.SelectedIndex = 3 Then
             DB.GetByCustomerNumberIRA(Session("CustomerNumber"))
-            If IsDBNull(DB.AccountsDataset.Tables("tblAccounts").Rows(0).Item("IRA")) = True Then
+            If DB.AccountsDataset3.Tables("tblAccounts").Rows.Count = 0 Then
                 txtAccountName.Text = ""
                 Session("AccountType") = "IRA"
             Else
@@ -55,7 +55,7 @@
 
         If ddlBankAccounts.SelectedIndex = 4 Then
             DB.GetByCustomerNumberStock(Session("CustomerNumber"))
-            If IsDBNull(DB.AccountsDataset.Tables("tblAccounts").Rows(0).IsNull("Stock")) = True Then
+            If DB.AccountsDataset3.Tables("tblAccounts").Rows.Count = 0 Then
                 txtAccountName.Text = ""
                 Session("AccountType") = "Stock"
             Else
@@ -107,6 +107,7 @@
         'if the account is a stock account, they automatically need manager approval
         If Session("AccountType").ToString = "Stock" Then
             Session("Active") = "False"
+            Session("ManagerApprovedStock") = "False"
         End If
 
         'to add the account, we need: 
@@ -114,14 +115,23 @@
         'account number, account name, account type, active, manager approved deposit, initial, balance
         'automatically active or should we wait for the manager approved deposit? 
         'is the manager approved deposit false until the manager approves it? if the deposit is under 5k, should it automatically be true?
-        DB.AddAccount(CInt(Session("CustomerNumber")), CInt(txtAccountNumber.Text), txtAccountName.Text, Session("AccountType").ToString, Session("Active").ToString, Session("ManagerApprovedDeposit").ToString, CInt(txtInitialDeposit.Text), CInt(txtInitialDeposit.Text))
+        If Session("AccountType") = "Checking" Or Session("AccountType") = "Savings" Then
+            DB.AddAccountChecking(CInt(Session("CustomerNumber")), CInt(txtAccountNumber.Text), txtAccountName.Text, Session("AccountType").ToString, Session("Active").ToString, Session("ManagerApprovedDeposit").ToString, CInt(txtInitialDeposit.Text), CInt(txtInitialDeposit.Text))
+        End If
+
+        If Session("AccountType") = "IRA" Then
+            DB.AddAccountIRA(CInt(Session("CustomerNumber")), CInt(txtAccountNumber.Text), txtAccountName.Text, Session("AccountType").ToString, Session("Active").ToString, Session("ManagerApprovedDeposit").ToString, CInt(txtInitialDeposit.Text), CInt(txtInitialDeposit.Text), CInt(txtInitialDeposit.Text))
+        End If
+
+        If Session("AccountType") = "Stock" Then
+            DB.AddAccountStock(CInt(Session("CustomerNumber")), CInt(txtAccountNumber.Text), txtAccountName.Text, Session("AccountType").ToString, Session("Active").ToString, Session("ManagerApprovedDeposit").ToString, CInt(txtInitialDeposit.Text), CInt(txtInitialDeposit.Text), Session("ManagerApprovedStock").ToString)
+        End If
 
         'clear form once application is submitted and show message to customer. or redirect after lag????
         lblError.Text = "Application Submitted"
-        txtAccountName.Text = ""
-        txtAccountNumber.Text = ""
-        txtInitialDeposit.Text = ""
-        ddlBankAccounts.SelectedIndex = 0
+        Response.AddHeader("Refresh", "2; URL= CustomerHome.aspx")
+
+
     End Sub
 
     Protected Sub btnCancelProfile_Click(sender As Object, e As EventArgs) Handles btnCancelProfile.Click

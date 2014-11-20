@@ -13,37 +13,6 @@
     <div id ="subtitle">
         My Accounts
     </div>
-     <div id ="accountsubtitleleft">
-         <br />
-         <br />
-         <br />
-         <br />
-         <br />
-    </div>
 
-    <div id ="accountsubtitle">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-    </div>
-
-      <br />
-        <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-        <br />
 
 </asp:Content>

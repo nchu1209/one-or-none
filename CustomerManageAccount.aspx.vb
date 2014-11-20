@@ -3,6 +3,7 @@
 Public Class CustomerManageAccount
     Inherits System.Web.UI.Page
 
+    Dim DBAccounts As New ClassDBAccounts
     Dim DB As New ClassDBCustomer
     Dim Format As New ClassFormat
     Dim mCustomerID As Integer
@@ -15,14 +16,32 @@ Public Class CustomerManageAccount
             Response.Redirect("CustomerLogin.aspx")
 
         End If
+
+        DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumber").ToString)
+
         ''get the record id from the select
         mCustomerID = CInt(Session("CustomerNumber"))
 
         If IsPostBack = False Then
+            ReloadDatasetAndDDL()
             FillTextboxes()
-
         End If
         'mCustomerID = 10046
+    End Sub
+
+    Public Sub ReloadDatasetAndDDL()
+        'Purpose: reloads the dataset and resets the ddl
+        'Arguments: n/a
+        'Returns: n/a
+        'Author: Catherine King
+        'Date: 10/4/2014
+
+        DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumber").ToString)
+        ddlAccounts.DataSource = DBAccounts.AccountsDataset4
+        ddlAccounts.DataTextField = "AccountName"
+        ddlAccounts.DataValueField = "AccountNumber"
+        ddlAccounts.DataBind()
+
     End Sub
 
     Private Sub FillTextboxes()
@@ -48,7 +67,6 @@ Public Class CustomerManageAccount
 
     End Sub
 
-
     Protected Sub btnCancelProfile_Click(sender As Object, e As EventArgs) Handles btnCancelProfile.Click
         'Do not change anything.
         lblError.Text = ""
@@ -57,7 +75,8 @@ Public Class CustomerManageAccount
     End Sub
 
     Protected Sub btnSaveAccountName_Click(sender As Object, e As EventArgs) Handles btnSaveAccountName.Click
-
+        DBAccounts.ModifyAccountName(txtChangeName.Text, CInt(ddlAccounts.SelectedValue))
+        Response.AddHeader("Refresh", "0; URL=CustomerManageAccount.aspx")
     End Sub
 
     Protected Sub btnSaveProfile_Click(sender As Object, e As EventArgs) Handles btnSaveProfile.Click
@@ -107,7 +126,6 @@ Public Class CustomerManageAccount
         DB.LinkZip(mCustomerID.ToString)
         FillTextboxes()
 
-
         mstrOldPassword = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("Password").ToString
         Session("OldPassword") = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("Password").ToString
 
@@ -119,7 +137,6 @@ Public Class CustomerManageAccount
         End If
 
     End Sub
-
 
     Protected Sub btnCancelPassword_Click(sender As Object, e As EventArgs) Handles btnCancelPassword.Click
         Password.Visible = False
@@ -163,4 +180,8 @@ Public Class CustomerManageAccount
 
 
     'End Sub
+
+    Protected Sub btnCancelAccountName_Click(sender As Object, e As EventArgs) Handles btnCancelAccountName.Click
+        txtChangeName.Text = ""
+    End Sub
 End Class
