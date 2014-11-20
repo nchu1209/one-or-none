@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div id="employeeModifyPassword" class="text-center"> 
-    <div id ="label2">
+    <div id ="label">
          <asp:Label ID="Label3" runat="server" Text="Old Password:"></asp:Label>
           <br />
           <asp:Label ID="Label4" runat="server" Text="New Password:"></asp:Label>
@@ -11,7 +11,7 @@
     </div>
 
 
-    <div id ="textbox2" >
+    <div id ="textbox" >
         <asp:TextBox ID="txtOld" runat="server" Width="135px"></asp:TextBox>
          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtOld" ErrorMessage="You must enter your old password to update.">*</asp:RequiredFieldValidator>
         <br />
@@ -21,7 +21,7 @@
         
         <br />
         <br />
-        <asp:Button ID="btnConfirmPassword" runat="server" Text="Confirm" />
+        <asp:Button ID="btnConfirmPassword" runat="server" Text="Update Password" />
          </div>
 
          <br />
