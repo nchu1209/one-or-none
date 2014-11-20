@@ -54,7 +54,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bill Pay<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Pay Bills</a></li>
-            <li><a href="#">Add Payee</a></li>
+            <li><a href="/CustomerAddPayee.aspx">Add Payee</a></li>
           </ul>
         </li>
         <li class="dropdown">
