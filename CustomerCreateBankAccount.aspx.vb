@@ -9,6 +9,10 @@
         txtAccountNumber.Visible = True
         txtInitialDeposit.Visible = True
         btnApply.Visible = True
+        Label1.Visible = False
+        Label2.Visible = False
+
+        Label7.Visible = False
     End Sub
 
     Protected Sub ddlBankAccounts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlBankAccounts.SelectedIndexChanged
@@ -49,6 +53,9 @@
                 txtAccountNumber.Visible = False
                 txtInitialDeposit.Visible = False
                 btnApply.Visible = False
+                Label1.Visible = False
+                Label2.Visible = False
+                Label7.Visible = False
             End If
         End If
 
@@ -64,6 +71,9 @@
                 txtAccountNumber.Visible = False
                 txtInitialDeposit.Visible = False
                 btnApply.Visible = False
+                Label1.Visible = False
+                Label2.Visible = False
+                Label7.Visible = False
             End If
         End If
     End Sub
@@ -80,8 +90,8 @@
         End If
 
         'make sure deposit is not negative
-        If CInt(txtInitialDeposit.Text) < 0 Then
-            lblError.Text = "Please enter an initial deposit of $0 or more"
+        If CInt(txtInitialDeposit.Text) <= 0 Then
+            lblError.Text = "Please enter an initial deposit of more than $0"
             Exit Sub
         End If
 
