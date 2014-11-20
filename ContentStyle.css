@@ -105,6 +105,15 @@
     position: relative;
 }
 
+#label2 {
+    float: left;
+    width: 49%;
+    text-align: right;
+    line-height: 26px;
+    position: relative;
+}
+
+
 #div {    
     height: 349px;
 }
