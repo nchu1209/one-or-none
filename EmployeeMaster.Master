@@ -28,10 +28,9 @@
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modify Employee Account<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/EmployeeModifyAddress.aspx">Change Address</a></li>
-            <li><a href="/EmployeeModifyPhone.aspx">Change Phone Number</a></li>
-            <li><a href="/EmployeeModifyPassword.aspx">Change Password</a></li>
-              
+            <li><a href="#">Change Address</a></li>
+            <li><a href="#">Change Phone Number</a></li>
+            <li><a href="#">Change Password</a></li>
             <%--<li class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li class="divider"></li>
@@ -44,16 +43,14 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="/EmployeeManageCustomers.aspx">Manage Customers</a></li>
-          <li><a href="/EmployeeTransactionSearch.aspx">Transaction Search</a></li>
-
+          <li><a href="#">Modify Employee Account</a></li>
+          <li><a href="#">Manage Customers</a></li>
+          <li><a href="#">Transaction Search</a></li>
           <li><a href="#">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-
 
 <form id="form2" runat="server">
     <div id="masterright">
@@ -64,6 +61,7 @@
     Today's date is: <asp:label ID ="lblDate" runat="server" text="[]"></asp:label>
     </div>
 
+
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head id="Head1" runat="server">
     <%-- Add Petunia as icon if time permits --%>
@@ -72,7 +70,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-
+    <form id="form1" runat="server">
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
@@ -85,7 +83,6 @@
         <br /> Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
     </div>
 
-  
+    </form>
 </body>
 </html>
-        </form>
