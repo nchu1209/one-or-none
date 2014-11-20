@@ -9,7 +9,7 @@ Public Class CustomerCreateAccount
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        'add comment
     End Sub
 
     Protected Sub btnCancelProfile_Click(sender As Object, e As EventArgs) Handles btnCancelProfile.Click
