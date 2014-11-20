@@ -99,7 +99,7 @@
 
 #label {
     float: left;
-    width: 39%;
+    width: 49%;
     text-align: right;
     line-height: 26px;
     height: 305px;
@@ -117,9 +117,18 @@
     height: auto;
 }
 
+
+
+
 #footer {
     text-align: center;
     clip: rect(auto, auto, auto, auto);
+    position: relative;
+    float: left;
+    width: 100%;
+    padding: 5px;
+    vertical-align: bottom;
+    height: 100px;
 }
 
 #employeeloginright {
