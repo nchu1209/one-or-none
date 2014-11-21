@@ -6,7 +6,6 @@
             Response.Redirect("CustomerLogin.aspx")
         End If
 
-
     End Sub
 
 End Class
