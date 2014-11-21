@@ -11,25 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class EmployeeLogin
+Partial Public Class ManagerModifyPhone
 
     '''<summary>
-    '''form1 control.
+    '''txtPhone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
-    '''<summary>
-    '''txtEmployeeID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmployeeID As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtPhone As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''RequiredFieldValidator2 control.
@@ -41,40 +32,13 @@ Partial Public Class EmployeeLogin
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''txtPassword control.
+    '''btnModifyPhone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''RequiredFieldValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''btnLogin control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''lbltesting control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbltesting As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnModifyPhone As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''ValidationSummary1 control.

@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/EmployeeMaster.Master" CodeBehind="EmployeeModifyAddress.aspx.vb" Inherits="KProject.EmployeeModifyAddress" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/ManagerMaster.Master" CodeBehind="ManagerModifyAddress.aspx.vb" Inherits="KProject.ManagerModifyAddress" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
     <div id ="title">
-        Modify Employee Address
+        Modify Manager Address
         <br />
         <br />
     </div>
@@ -50,6 +50,9 @@
             <br />
             
             </div>
+         
+            <br />
+            <br />
          
             <br />
           
