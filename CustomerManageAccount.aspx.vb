@@ -3,6 +3,7 @@
 Public Class CustomerManageAccount
     Inherits System.Web.UI.Page
 
+
     Dim DBAccounts As New ClassDBAccounts
     Dim DB As New ClassDBCustomer
     Dim Format As New ClassFormat
