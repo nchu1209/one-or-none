@@ -2,8 +2,8 @@
     Inherits System.Web.UI.Page
 
     Dim DB As New ClassDBEmployee
-    Dim Format As New ClassFormat
-    Dim Valid As ClassValidate
+    Dim Format As New ClassEmployeeFormat
+    Dim Valid As ClassEmployeeValidation
     Dim mEmployeeID As Integer
     Dim mstrNewPassword As String
     Dim mstrOldPassword As String

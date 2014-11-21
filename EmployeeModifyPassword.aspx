@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div id="employeeModifyPassword" class="text-center"> 
-    <div id ="label">
+    <div id ="label2">
          <asp:Label ID="Label3" runat="server" Text="Old Password:"></asp:Label>
           <br />
           <asp:Label ID="Label4" runat="server" Text="New Password:"></asp:Label>
