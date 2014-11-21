@@ -23,8 +23,7 @@
         <br />
         <br />
        
-        <%-- Make sure to not have the 2 accounts the same --%>
-        <%-- because the money comes from an outside source, any amount is allowed --%>
+        <%-- Make sure to not have the 2 accounts the same --%><%-- because the money comes from an outside source, any amount is allowed --%>
          <asp:Panel ID="TransferPanel" runat="server" Visible =" false">
          <div id ="label">
              <asp:Label ID="Label1" runat="server" Text="Transfer Amount: "></asp:Label>
@@ -95,9 +94,9 @@
           </div>
         
              <div id="textbox">
-                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                 <asp:TextBox ID="txtDepositAmount" runat="server"></asp:TextBox>
              <br />
-                 <asp:DropDownList ID="ddlAccounts" runat="server">
+                 <asp:DropDownList ID="ddlDeposit" runat="server">
              </asp:DropDownList>
                  <br />
               <%-- Default to Current Date --%>
@@ -109,7 +108,9 @@
                  <asp:Calendar ID="DepositCalendar" runat="server"></asp:Calendar>
              
                  <br />
+                 <asp:Button ID="btnDeposit" runat="server" Text="Confirm Deposit" />
                  <br />
+                 <asp:Label ID="lblErrorDeposit" runat="server"></asp:Label>
                  <br />
                  <br />
              </div>

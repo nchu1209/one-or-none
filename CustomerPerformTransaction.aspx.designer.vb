@@ -149,22 +149,22 @@ Partial Public Class CustomerPerformTransaction
     Protected WithEvents Label10 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''TextBox1 control.
+    '''txtDepositAmount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtDepositAmount As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''ddlAccounts control.
+    '''ddlDeposit control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlAccounts As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlDeposit As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''txtDepositDate control.
@@ -183,6 +183,24 @@ Partial Public Class CustomerPerformTransaction
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DepositCalendar As Global.System.Web.UI.WebControls.Calendar
+
+    '''<summary>
+    '''btnDeposit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDeposit As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblErrorDeposit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErrorDeposit As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''WithdrawalPanel control.

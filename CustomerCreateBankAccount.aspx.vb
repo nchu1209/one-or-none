@@ -11,7 +11,6 @@
         btnApply.Visible = True
         Label1.Visible = False
         Label2.Visible = False
-
         Label7.Visible = False
     End Sub
 
@@ -140,8 +139,6 @@
         'clear form once application is submitted and show message to customer. or redirect after lag????
         lblError.Text = "Application Submitted"
         Response.AddHeader("Refresh", "2; URL= CustomerHome.aspx")
-
-
     End Sub
 
     Protected Sub btnCancelProfile_Click(sender As Object, e As EventArgs) Handles btnCancelProfile.Click

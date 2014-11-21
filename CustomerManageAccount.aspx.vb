@@ -70,7 +70,6 @@ Public Class CustomerManageAccount
     Protected Sub btnCancelProfile_Click(sender As Object, e As EventArgs) Handles btnCancelProfile.Click
         'Do not change anything.
         lblError.Text = ""
-
         FillTextboxes()
     End Sub
 
@@ -183,5 +182,9 @@ Public Class CustomerManageAccount
 
     Protected Sub btnCancelAccountName_Click(sender As Object, e As EventArgs) Handles btnCancelAccountName.Click
         txtChangeName.Text = ""
+    End Sub
+
+    Protected Sub ddlAccounts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlAccounts.SelectedIndexChanged
+
     End Sub
 End Class
