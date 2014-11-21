@@ -126,6 +126,27 @@ Public Class ClassDBPayee
         End Try
     End Sub
 
+    Public Sub UpdateDB(ByVal mstrQuery As String)
+       
+        Try
+            'make connection using the connection string
+            mdbConn = New SqlConnection(mstrConnection)
+            Dim dbCommand As New SqlCommand(mstrQuery, mdbConn)
+
+            'open the connection
+            mdbConn.Open()
+
+            'run query
+            dbCommand.ExecuteNonQuery()
+
+            'close the connection
+            mdbConn.Close()
+        Catch ex As Exception
+            Throw New Exception("query is " & mstrQuery.ToString & " error is " & ex.Message)
+        End Try
+
+    End Sub
+
     Public Sub LinkZip(ByVal strPayeeID As String)
         RunProcedureOneParameter("usp_innerjoin_payee_city_by_zip", "@PayeeID", strPayeeID)
     End Sub
@@ -147,5 +168,22 @@ Public Class ClassDBPayee
 
         Return False
     End Function
+
+    Public Sub CreatePayee(strPayeeID As String, strPayeeName As String, strPayeeType As String, strAddress As String, strZip As String, strPhone As String)
+        mstrQuery = "INSERT INTO tblPayees (PayeeID, PayeeName, PayeeType, Address, ZipCode, Phone) VALUES (" & _
+            "'" & strPayeeID & "', " & _
+            "'" & strPayeeName & "', " & _
+            "'" & strPayeeType & "', " & _
+            "'" & strAddress & "', " & _
+            "'" & strZip & "', " & _
+            "'" & strPhone & "')"
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+    End Sub
+
+    Public Sub GetMaxPayeeID()
+        RunProcedurePayeeID("usp_payees_max_PayeeID")
+    End Sub
 
 End Class

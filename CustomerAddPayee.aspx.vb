@@ -12,14 +12,18 @@
 
         DB.GetAllPayees()
         If IsPostBack = False Then
-            ddlPayee.DataSource = DB.PayeeDataset.Tables("tblPayees")
-            ddlPayee.DataTextField = "PayeeName"
-            ddlPayee.DataValueField = "PayeeID"
-            ddlPayee.DataBind()
+            LoadDDL()
         End If
 
         lblMessage.Text = ""
         lblMessage2.Text = ""
+    End Sub
+
+    Private Sub LoadDDL()
+        ddlPayee.DataSource = DB.PayeeDataset.Tables("tblPayees")
+        ddlPayee.DataTextField = "PayeeName"
+        ddlPayee.DataValueField = "PayeeID"
+        ddlPayee.DataBind()
     End Sub
 
     Protected Sub btnAddPayee_Click(sender As Object, e As EventArgs) Handles btnAddPayee.Click
@@ -50,7 +54,28 @@
         End If
 
         'add to Payee table
-        'add to customer's payees
+        DB.GetMaxPayeeID()
+        Dim intPayeeID As Integer
+        intPayeeID = CInt(DB.PayeeDataset2.Tables("tblPayees").Rows(0).Item("PayeeIDMax")) + 1
 
+        DB.CreatePayee(intPayeeID.ToString, txtPayeeName.Text, ddlType.SelectedValue.ToString, txtAddress.Text, txtZip.Text, txtPhone.Text)
+
+        'add to customer's payees
+        DB.AddExistingPayee(Session("CustomerNumber").ToString, intPayeeID.ToString)
+
+        'show message
+        lblMessage2.Text = "Payee successfully added."
+
+        'reload DDL
+        DB.GetAllPayees()
+        LoadDDL()
+
+    End Sub
+
+    Protected Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtPayeeName.Text = ""
+        txtAddress.Text = ""
+        txtZip.Text = ""
+        txtPhone.Text = ""
     End Sub
 End Class

@@ -185,6 +185,15 @@ Partial Public Class CustomerAddPayee
     Protected WithEvents btnCreatePayee As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''btnClear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnClear As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''lblMessage2 control.
     '''</summary>
     '''<remarks>

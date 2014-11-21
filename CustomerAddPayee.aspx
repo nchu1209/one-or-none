@@ -28,7 +28,7 @@
             </asp:DropDownList>
             <br />
             <br />
-            <asp:Button ID="btnAddPayee" runat="server" Text="Add Payee" />
+            <asp:Button ID="btnAddPayee" runat="server" Text="Add Payee" CausesValidation="False" />
             <br />
             <br />
             <asp:Label ID="lblMessage" runat="server" Text="[]"></asp:Label>
@@ -90,6 +90,7 @@
             <br />
             <asp:Button ID="btnCreatePayee" runat="server" Text="Create New Payee" />
             <br />
+            <asp:Button ID="btnClear" runat="server" CausesValidation="False" Text="Clear" />
             <br />
             <asp:Label ID="lblMessage2" runat="server" Text="[]"></asp:Label>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
