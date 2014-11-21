@@ -178,3 +178,11 @@
 
 }
 
+#SearchForCustomer {
+    text-align: center;
+    font-size: medium;
+    float:left;
+    font-weight: bold;
+    width: 99%;
+
+}
