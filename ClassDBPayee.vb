@@ -186,4 +186,8 @@ Public Class ClassDBPayee
         RunProcedurePayeeID("usp_payees_max_PayeeID")
     End Sub
 
+    Public Sub GetCustomerPayees(ByVal strCustomerNumber As String)
+        RunProcedureOneParameter("usp_innerjoin_customerspayees_payees_by_customernumber", "@customernumber", strCustomerNumber)
+    End Sub
+
 End Class
