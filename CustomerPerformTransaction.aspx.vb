@@ -161,31 +161,30 @@
         decTransferToBalance += CDec(txtAmoutTransfer.Text)
         DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
 
- 
-        'update the balance
-        Dim decBalance As Decimal
-        DBAccounts.GetBalanceByAccountNumber(ddlWithdrawal.SelectedValue.ToString)
-        decBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
+        Dim decTransferFromBalance As Decimal
+        DBAccounts.GetBalanceByAccountNumber2(ddlFromAccount.SelectedValue.ToString)
+        decTransferFromBalance = CDec(DBAccounts.AccountsDataset5.Tables("tblAccounts").Rows(0).Item("Balance"))
 
         'make sure that you are not withdrawing more than you have in the current account ***
         '****check to make sure you can't overdraw with overdraft fees
-        If decBalance < CInt(txtWithdrawalAmount.Text) Then
-            lblErrorWithdrawal.Text = "Please enter an amount to withdraw less than or equal to the amount of money in this account."
+        If decTransferFromBalance < CInt(txtAmoutTransfer.Text) Then
+            lblErrorTransfer.Text = "Please enter an amount to transfer less than or equal to the amount of money in the account you are transferring money from."
             Exit Sub
         End If
 
-        decBalance = decBalance - CDec(txtWithdrawalAmount.Text)
-        DBAccounts.UpdateBalance(CInt(ddlWithdrawal.SelectedValue), decBalance)
-        lblErrorWithdrawal.Text = "Withdrawal Confirmed"
-        Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
+        decTransferFromBalance = decTransferFromBalance - CDec(txtAmoutTransfer.Text)
+        DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance)
 
-        Dim strWithdrawalMessage As String
-        strWithdrawalMessage = "Withdrew " & txtWithdrawalAmount.Text & " from account " & ddlWithdrawal.SelectedValue.ToString & " on " & txtWithdrawalDate.Text
+        Dim strTransferMessage As String
+        strTransferMessage = "Transfer from account " & ddlFromAccount.SelectedValue.ToString & " to account " & ddlTransferTo.SelectedValue.ToString
         GetTransactionNumber()
         'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlWithdrawal.SelectedValue), "Withdrawal", txtWithdrawalDate.Text, CDec(txtWithdrawalAmount.Text), strWithdrawalMessage, decBalance)
+        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlFromAccount.SelectedValue), "Transfer", txtTransferDate.Text, CDec(txtAmoutTransfer.Text), strTransferMessage, decTransferFromBalance)
         'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlDeposit.SelectedValue), "Deposit", txtDepositDate.Text, CDec(txtDepositAmount.Text), strDepositMessage, decBalance)
+        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer", txtTransferDate.Text, CDec(txtAmoutTransfer.Text), strTransferMessage, decTransferToBalance)
+
+        lblErrorTransfer.Text = "Withdrawal Confirmed"
+        Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
 
     End Sub
 End Class
