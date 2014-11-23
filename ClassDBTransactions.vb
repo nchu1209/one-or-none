@@ -175,7 +175,6 @@ Public Class ClassDBTransactions
             "'" & strDescription & "', " & _
             "'" & decAccountBalance & "')"
 
-
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)
     End Sub

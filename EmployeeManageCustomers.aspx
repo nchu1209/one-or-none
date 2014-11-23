@@ -83,7 +83,7 @@
             <br />
             <asp:TextBox ID="txtState" runat="server" MaxLength="2" ReadOnly="True"></asp:TextBox>
             <br />
-            <asp:TextBox ID="txtZip" runat="server" MaxLength="9"></asp:TextBox>
+            <asp:TextBox ID="txtZip" runat="server" MaxLength="5"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ClientIDMode="Static" ControlToValidate="txtZip" ErrorMessage="RequiredFieldValidator">*</asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ClientIDMode="Static" ControlToValidate="txtZip" ErrorMessage="ERROR: Incorrect Zip Code Format" ValidationExpression="\d{5}">*</asp:RegularExpressionValidator>
             <br />
@@ -98,7 +98,7 @@
         <br />
             <asp:Button ID="btnSaveProfile" runat="server" Text="Save" />
 &nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="btnCancelProfile" runat="server" Text="Cancel" />
+        <asp:Button ID="btnCancelProfile" runat="server" Text="Cancel" CausesValidation="False" />
         <br />
         <br />
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
@@ -118,33 +118,42 @@
     </div>
     <div id ="Div2">
         
-        <asp:Label ID="Label14" runat="server" Text="Choose Account:"></asp:Label>
-        <br />
-        <asp:Label ID="Label15" runat="server" Text="Change Name To:"></asp:Label>
-        
-    </div>
-    <div id ="Div3">
-        <asp:DropDownList ID="ddlAccounts" runat="server" AutoPostBack="True"></asp:DropDownList>
+        <div id ="label2">
+             <asp:Label ID="Label14" runat="server" Text="Choose Account: "></asp:Label>
+             <br />
+        <asp:Label ID="Label1" runat="server" Text="Change Name To: "></asp:Label>
+             </div>
+       
+        <div id="textbox">
+        <asp:DropDownList ID="ddlAccounts" runat="server" AutoPostBack="True" Height="25px">
+        </asp:DropDownList>
         <br />
         <asp:TextBox ID="txtChangeName" runat="server"></asp:TextBox>
         <br />
-        <br />
-        <asp:Button ID="btnSaveAccountName" runat="server" Text="Save" />
-        <asp:Button ID="btnCancelAccountName" runat="server" Text="Cancel" />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        </div>
 
+
+        <div id="center">
+        <br />
+            <br/>
+               <br/>
+        <asp:Button ID="btnSaveAccountName" runat="server" CausesValidation="False" Text="Save" />
+        <asp:Button ID="btnCancelAccountName" runat="server" CausesValidation="False" Text="Cancel" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        
     </div>
                    
         <br />
