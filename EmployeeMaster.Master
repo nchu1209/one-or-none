@@ -43,8 +43,8 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="/EmployeeManageCustomers">Manage Customers</a></li>
-          <li><a href="/EmployeeTransactionSearch">Transaction Search</a></li>
+          <li><a href="/EmployeeManageCustomers.aspx">Manage Customers</a></li>
+          <li><a href="/EmployeeTransactionSearch.aspx">Transaction Search</a></li>
 
       </ul>
     </div><!-- /.navbar-collapse -->
