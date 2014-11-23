@@ -22,7 +22,7 @@
 
         dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
         ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
-        ddlAccount.DataTextField = "Detail"
+        ddlAccount.DataTextField = "Details"
         ddlAccount.DataValueField = "AccountNumber"
         ddlAccount.DataBind()
 
