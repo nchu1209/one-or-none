@@ -89,7 +89,6 @@
              <br />
              <asp:Label ID="Label10" runat="server" Text="Date:"></asp:Label>
              <br />
-             <br />
              
           </div>
         
@@ -102,7 +101,8 @@
               <%-- Default to Current Date --%>
                   <asp:TextBox ID="txtDepositDate" runat="server"></asp:TextBox>
               
-                 <br />
+                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ClientIDMode="Static" ControlToValidate="txtDepositDate" ErrorMessage="ERROR: Deposit Date Required">*</asp:RequiredFieldValidator>
+              
                  <br />
              
                  <asp:Calendar ID="DepositCalendar" runat="server"></asp:Calendar>
@@ -112,6 +112,7 @@
                  <br />
                  <asp:Label ID="lblErrorDeposit" runat="server"></asp:Label>
                  <br />
+                 <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
                  <br />
              </div>
              
