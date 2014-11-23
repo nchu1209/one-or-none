@@ -51,6 +51,10 @@
         <br />
         <asp:Button ID="btnAbort" runat="server" Text="Abort Changes" />
         <br />
+        <br />
+        <asp:Label ID="lblMessage" runat="server" Text="[]"></asp:Label>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
+        <br />
     </div>
     </div>
 </asp:Content>

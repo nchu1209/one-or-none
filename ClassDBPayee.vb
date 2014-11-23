@@ -182,12 +182,29 @@ Public Class ClassDBPayee
         UpdateDB(mstrQuery)
     End Sub
 
+    Public Sub UpdatePayee(strPayeeID As String, strPayeeName As String, strPayeeType As String, strAddress As String, strZip As String, strPhone As String)
+        mstrQuery = "UPDATE tblPayees SET " & _
+       "PayeeName = '" & strPayeeName & "', " & _
+       "PayeeType = '" & strPayeeType & "', " & _
+       "Address = '" & strAddress & "', " & _
+       "ZipCode = '" & strZip & "', " & _
+       "Phone = '" & strPhone & "' " & _
+       "WHERE PayeeID = " & strPayeeID
+
+        UpdateDB(mstrQuery)
+
+    End Sub
+
     Public Sub GetMaxPayeeID()
         RunProcedurePayeeID("usp_payees_max_PayeeID")
     End Sub
 
     Public Sub GetCustomerPayees(ByVal strCustomerNumber As String)
         RunProcedureOneParameter("usp_innerjoin_customerspayees_payees_by_customernumber", "@customernumber", strCustomerNumber)
+    End Sub
+
+    Public Sub GetPayeeByID(ByVal strPayeeID As String)
+        RunProcedureOneParameter("usp_payees_get_by_payeeID", "@payeeID", strPayeeID)
     End Sub
 
 End Class

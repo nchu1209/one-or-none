@@ -19,10 +19,26 @@
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("PayeeName") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:hyperlink ID="lnkName" runat="server" NavigateUrl='<%# "CustomerAddPayee.aspx"%>' Text='<%# Bind("PayeeName") %>'></asp:hyperlink>
+                        <asp:hyperlink ID="lnkName" runat="server" NavigateUrl='<%# "CustomerUpdatePayee.aspx?ID=" & Eval("PayeeID")%>' Text='<%# Bind("PayeeName") %>'></asp:hyperlink>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="PayeeType" HeaderText="PayeeType" SortExpression="PayeeType" />
+                <asp:TemplateField HeaderText="Payment Amount">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Payment Date">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MIS333K_msbck614ConnectionString2 %>" SelectCommand="usp_innerjoin_customerspayees_payees_by_customernumber" SelectCommandType="StoredProcedure">
