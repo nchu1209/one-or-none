@@ -104,6 +104,15 @@ Partial Public Class CustomerPerformTransaction
     Protected WithEvents txtTransferDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''RequiredFieldValidator5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''TransferCalendar control.
     '''</summary>
     '''<remarks>
@@ -111,6 +120,33 @@ Partial Public Class CustomerPerformTransaction
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TransferCalendar As Global.System.Web.UI.WebControls.Calendar
+
+    '''<summary>
+    '''btnTransfer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTransfer As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblErrorTransfer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErrorTransfer As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''ValidationSummary3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ValidationSummary3 As Global.System.Web.UI.WebControls.ValidationSummary
 
     '''<summary>
     '''DepositPanel control.
