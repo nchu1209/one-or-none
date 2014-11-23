@@ -14,6 +14,42 @@ Option Explicit On
 Partial Public Class EmployeeManageCustomers
 
     '''<summary>
+    '''SearchForCustomers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SearchForCustomers As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''txtCustomerNumber control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCustomerNumber As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblCustomerNumberError control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCustomerNumberError As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''ModifyProfile control.
     '''</summary>
     '''<remarks>

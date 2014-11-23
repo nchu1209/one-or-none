@@ -15,9 +15,20 @@
         <br />
     </div>
 
+    <asp:Panel ID="SearchForCustomers" runat="server" Visible ="true">
     <div id="SearchForCustomer">
 
+        Search for Customer(Customer Number):<asp:TextBox ID="txtCustomerNumber" runat="server"></asp:TextBox>
+
+        <br />
+        <asp:Button ID="btnFind" runat="server" Text="Find Customer Information" />
+        <br />
+        <asp:Label ID="lblCustomerNumberError" runat="server"></asp:Label>
+
     </div>
+
+        
+    </asp:Panel>
 
      <asp:Panel ID="ModifyProfile" runat="server" Visible ="true">
 

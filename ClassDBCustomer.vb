@@ -346,13 +346,18 @@ Public Class ClassDBCustomer
     'Date: 10-20-2014
     Public Function SearchByCustomerNumber(strIN As String) As Boolean
 
-        MyView.RowFilter = "CustomerNumber='" & strIN & "'"
+        ' to Get Customer use Select
+        mstrQuery = "select * from tblCustomers where CustomerNumber='" & strIN & "'"
+        ' run the query
+        SelectQuery(mstrQuery)
 
-        If mMyView.Count = 0 Then
+        If mDatasetCustomer.Tables("tblCustomers").Rows.Count = 0 Then
+            'means there is none in there
             Return False
+        Else
+            'means nothing is one there
+            Return True
         End If
-
-        Return True
     End Function
 
     Public Sub ModifyCustomer2(strEmail As String, strPassword As String, strLast As String, strFirst As String, strMiddle As String, strAddress As String, strZip As String, strPhone As String, ByVal intCustomerNumber As Integer)
