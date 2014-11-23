@@ -334,7 +334,7 @@ Public Class ClassDBAccounts
     End Sub
 
     Public Sub GetAccountByCustomerNumberTransfer(strCustomerNumber As String)
-        RunProcedureOneParameterTransfer("usp_accounts_get_account_by_customer_number", "@CustomerNumber", strCustomerNumber)
+        RunProcedureOneParameterTransfer("usp_accounts_get_account_by_customer_number_for_ddl", "@CustomerNumber", strCustomerNumber)
     End Sub
 
     Public Sub GetCheckingAccountByCustomerNumber(strCustomerNumber As String)

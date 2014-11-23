@@ -144,12 +144,14 @@
          </div>
         
              <div id="textbox">
-                 <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                 <asp:TextBox ID="txtWithdrawalAmount" runat="server"></asp:TextBox>
              <br />
-                 <asp:DropDownList ID="DropDownList1" runat="server">
+                 <asp:DropDownList ID="ddlWithdrawal" runat="server">
              </asp:DropDownList>
                  <br />
                 <asp:TextBox ID="txtWithdrawalDate" runat="server"></asp:TextBox>
+              
+                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ClientIDMode="Static" ControlToValidate="txtWithdrawalDate" ErrorMessage="ERROR: Withdrawal Date Required">*</asp:RequiredFieldValidator>
               
                  <br />
                  <br />
@@ -157,7 +159,12 @@
                  <asp:Calendar ID="WithdrawalCalendar" runat="server"></asp:Calendar>
                  
                  <br />
+                 <asp:Button ID="btnWithdrawal" runat="server" Text="Confirm Withdrawal" />
+                 
                  <br />
+                 <asp:Label ID="lblErrorWithdrawal" runat="server"></asp:Label>
+                 <br />
+                 <asp:ValidationSummary ID="ValidationSummary2" runat="server" />
                  <br />
                  
              </div>

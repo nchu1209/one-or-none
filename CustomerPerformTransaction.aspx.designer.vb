@@ -257,22 +257,22 @@ Partial Public Class CustomerPerformTransaction
     Protected WithEvents Label15 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''TextBox2 control.
+    '''txtWithdrawalAmount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtWithdrawalAmount As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''DropDownList1 control.
+    '''ddlWithdrawal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlWithdrawal As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''txtWithdrawalDate control.
@@ -284,6 +284,15 @@ Partial Public Class CustomerPerformTransaction
     Protected WithEvents txtWithdrawalDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''RequiredFieldValidator4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''WithdrawalCalendar control.
     '''</summary>
     '''<remarks>
@@ -291,4 +300,31 @@ Partial Public Class CustomerPerformTransaction
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents WithdrawalCalendar As Global.System.Web.UI.WebControls.Calendar
+
+    '''<summary>
+    '''btnWithdrawal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnWithdrawal As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblErrorWithdrawal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErrorWithdrawal As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''ValidationSummary2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ValidationSummary2 As Global.System.Web.UI.WebControls.ValidationSummary
 End Class
