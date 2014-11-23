@@ -14,21 +14,20 @@
             Response.Redirect("CustomerLogin.aspx")
         End If
 
-        dbpay.GetCustomerPayees(Session("CustomerNumber"))
-
-        ddlPayee.DataSource = dbpay.PayeeDataset.Tables("tblPayees")
-        ddlPayee.DataTextField = "PayeeName"
-        ddlPayee.DataValueField = "PayeeID"
-        ddlPayee.DataBind()
-
-        dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
-        ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
-        ddlAccount.DataTextField = "Details"
-        ddlAccount.DataValueField = "AccountNumber"
-        ddlAccount.DataBind()
-
-
         If IsPostBack = False Then
+            dbpay.GetCustomerPayees(Session("CustomerNumber"))
+
+            ddlPayee.DataSource = dbpay.PayeeDataset.Tables("tblPayees")
+            ddlPayee.DataTextField = "PayeeName"
+            ddlPayee.DataValueField = "PayeeID"
+            ddlPayee.DataBind()
+
+            dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
+            ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
+            ddlAccount.DataTextField = "Details"
+            ddlAccount.DataValueField = "AccountNumber"
+            ddlAccount.DataBind()
+
             mdecTotalToday = 0
             mdecTotalPending = 0
         End If
@@ -37,7 +36,6 @@
         lblMessageFee.Text = ""
         lblMessageSuccess.Text = ""
 
-        btnConfirm.Visible = False
 
     End Sub
 
@@ -92,4 +90,5 @@
         lblTest.Text = dbdate.CheckSelectedDate(calTest.SelectedDate).ToString
 
     End Sub
+
 End Class

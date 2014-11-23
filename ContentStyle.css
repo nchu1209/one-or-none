@@ -186,3 +186,15 @@
     width: 99%;
 
 }
+
+#gridviewleft {
+    text-align: center;
+    float: left;
+    width: 70%;
+}
+
+#gridviewright {
+    text-align: left;
+    float: left;
+    width: 29%;
+}
