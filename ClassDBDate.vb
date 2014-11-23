@@ -92,5 +92,21 @@ Public Class ClassDBDate
 
     End Sub
 
+    Public Function CheckSelectedDate(ByVal datSelected As Date) As Integer
+        '-1 if past, 0 if today, 1 if future
+        GetDate()
+
+        Dim datSystemDate As Date
+        datSystemDate = CDate(DateDataset.Tables("tblSystemDate").Rows(0).Item("Date"))
+
+        If datSelected < datSystemDate Then
+            Return -1
+        ElseIf datSelected = datSystemDate Then
+            Return 0
+        Else : Return 1
+
+        End If
+    End Function
+
 End Class
 

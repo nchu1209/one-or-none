@@ -39,10 +39,10 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Payment Date">
                   <EditItemTemplate>
-                        <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
+                        <asp:calendar ID="calDate" runat="server"></asp:calendar>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
+                        <asp:calendar ID="calDate" runat="server"></asp:calendar>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -88,10 +88,12 @@
             <br />
             <br />
             <br />
-            <asp:Calendar ID="calDate" runat="server"></asp:Calendar>
+            <asp:Calendar ID="calTest" runat="server"></asp:Calendar>
+            <br />
+            <asp:Button ID="btnTest" runat="server" Text="Test" />
             <br />
             <br />
-            <br />
+            <asp:Label ID="lblTest" runat="server" Text="_"></asp:Label>
             <br />
             <br />
         </div>

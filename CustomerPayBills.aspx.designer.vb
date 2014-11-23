@@ -131,11 +131,29 @@ Partial Public Class CustomerPayBills
     Protected WithEvents ddlPayee As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''calDate control.
+    '''calTest control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents calDate As Global.System.Web.UI.WebControls.Calendar
+    Protected WithEvents calTest As Global.System.Web.UI.WebControls.Calendar
+
+    '''<summary>
+    '''btnTest control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTest As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblTest control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTest As Global.System.Web.UI.WebControls.Label
 End Class
