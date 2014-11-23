@@ -10,7 +10,26 @@
     <div id ="lefthalf">
         <div id ="subtitle">Your Payees</div>
         <br />
-        <asp:GridView ID="gvCustomersPayees" runat="server"></asp:GridView>
+        <br />
+        <asp:GridView ID="gvMyPayees" runat="server" AutoGenerateColumns="False" DataKeyNames="PayeeID" DataSourceID="SqlDataSource1">
+            <Columns>
+                <asp:BoundField DataField="PayeeID" HeaderText="PayeeID" ReadOnly="True" SortExpression="PayeeID" />
+                <asp:TemplateField HeaderText="PayeeName" SortExpression="PayeeName">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("PayeeName") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:hyperlink ID="lnkName" runat="server" NavigateUrl='<%# "CustomerAddPayee.aspx"%>' Text='<%# Bind("PayeeName") %>'></asp:hyperlink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="PayeeType" HeaderText="PayeeType" SortExpression="PayeeType" />
+            </Columns>
+        </asp:GridView>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MIS333K_msbck614ConnectionString2 %>" SelectCommand="usp_innerjoin_customerspayees_payees_by_customernumber" SelectCommandType="StoredProcedure">
+            <SelectParameters>
+                <asp:SessionParameter Name="customernumber" SessionField="CustomerNumber" />
+            </SelectParameters>
+        </asp:SqlDataSource>
         <br />
         <br />
         <br />
@@ -21,6 +40,7 @@
         <div id="label">
             <asp:Label ID="Label1" runat="server" Text="Payee:"></asp:Label>
             <br />
+            From Account:<br />
 
             <asp:Label ID="Label2" runat="server" Text="Amount:"></asp:Label>
             <br />
@@ -31,6 +51,9 @@
         </div>
         <div id ="textbox">
             <asp:DropDownList ID="ddlPayee" runat="server">
+            </asp:DropDownList>
+            <br />
+            <asp:DropDownList ID="ddlAccount" runat="server">
             </asp:DropDownList>
             <br />
             <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>

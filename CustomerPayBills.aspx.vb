@@ -11,9 +11,6 @@
 
         db.GetCustomerPayees(Session("CustomerNumber"))
 
-        gvCustomersPayees.DataSource = db.PayeeDataset
-        gvCustomersPayees.DataBind()
-
         ddlPayee.DataSource = db.PayeeDataset.Tables("tblPayees")
         ddlPayee.DataTextField = "PayeeName"
         ddlPayee.DataValueField = "PayeeID"
