@@ -3,6 +3,7 @@
 
     Dim DB As New ClassDBAccounts
     Dim Valid As New ClassValidate
+    Dim DBCustomer As New ClassDBCustomer
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         txtAccountName.Visible = True
@@ -41,11 +42,15 @@
             Session("AccountType") = "Savings"
         End If
 
+        DBCustomer.GetDOBByCustomerNumber(Session("CustomerNumber"))
+
         If ddlBankAccounts.SelectedIndex = 3 Then
             DB.GetByCustomerNumberIRA(Session("CustomerNumber"))
             If DB.AccountsDataset3.Tables("tblAccounts").Rows.Count = 0 Then
-                txtAccountName.Text = ""
-                Session("AccountType") = "IRA"
+                If [Year]() - DBCustomer.CustDataset.Tables("tblCustomers").Rows(0).Item("DOB") < 70 Then
+                    txtAccountName.Text = ""
+                    Session("AccountType") = "IRA"
+                End If
             Else
                 lblError.Text = "You cannot have more than one IRA. Please select another account type"
                 txtAccountName.Visible = False
