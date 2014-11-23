@@ -335,4 +335,46 @@ Public Class ClassDBCustomer
 
     End Sub
 
+
+
+
+
+    'Purpose:to search by the typed empid
+    'Arguments: the strIN
+    'Returns: True or false
+    'Author: Leah Carroll
+    'Date: 10-20-2014
+    Public Function SearchByCustomerNumber(strIN As String) As Boolean
+
+        MyView.RowFilter = "CustomerNumber='" & strIN & "'"
+
+        If mMyView.Count = 0 Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Public Sub ModifyCustomer2(strEmail As String, strPassword As String, strLast As String, strFirst As String, strMiddle As String, strAddress As String, strZip As String, strPhone As String, ByVal intCustomerNumber As Integer)
+
+
+
+        mstrQuery = "UPDATE tblCustomers SET " & _
+            "EmailAddr = '" & strEmail & "', " & _
+            "Password = '" & strPassword & "', " & _
+            "LastName = '" & strLast & "', " & _
+            "FirstName = '" & strFirst & "', " & _
+            "MI = '" & strMiddle & "', " & _
+            "Address = '" & strAddress & "', " & _
+            "ZipCode = '" & strZip & "', " & _
+            "Phone = '" & strPhone & "' " & _
+            "WHERE CustomerNumber = " & intCustomerNumber
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
+
+
 End Class
