@@ -8,12 +8,18 @@
         <br />
     </div>
     <div id ="lefthalf">
-        <div id ="subtitle">Your Payees</div>
+        <div id ="subtitle">Your Payees - Make a Payment</div>
+        <br />
+        <asp:Label ID="Label4" runat="server" Text="Select Account:"></asp:Label>
+&nbsp;
+        <asp:DropDownList ID="ddlAccount" runat="server">
+        </asp:DropDownList>
+        <br />
         <br />
         <br />
         <asp:GridView ID="gvMyPayees" runat="server" AutoGenerateColumns="False" DataKeyNames="PayeeID" DataSourceID="SqlDataSource1">
             <Columns>
-                <asp:BoundField DataField="PayeeID" HeaderText="PayeeID" ReadOnly="True" SortExpression="PayeeID" />
+                <asp:BoundField DataField="PayeeID" HeaderText="PayeeID" ReadOnly="True" SortExpression="PayeeID" Visible="False" />
                 <asp:TemplateField HeaderText="PayeeName" SortExpression="PayeeName">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("PayeeName") %>'></asp:TextBox>
@@ -32,7 +38,7 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Payment Date">
-                    <EditItemTemplate>
+                  <EditItemTemplate>
                         <asp:TextBox ID="txtDate" runat="server"></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
@@ -47,11 +53,22 @@
             </SelectParameters>
         </asp:SqlDataSource>
         <br />
+            <asp:Button ID="btnPay" runat="server" Text="Pay" />
         <br />
+        <br />
+            <asp:Label ID="lblMessageTotal" runat="server" Text="[]"></asp:Label>
+            <br />
+        <asp:Label ID="lblMessageFee" runat="server" Text="[]"></asp:Label>
+        <br />
+        <br />
+        <asp:Button ID="btnConfirm" runat="server" Text="Confirm Payment(s)" />
+        <br />
+        <br />
+        <asp:Label ID="lblMessageSuccess" runat="server" Text="[]"></asp:Label>
         <br />
     </div>
     <div id ="righthalf">
-        <div id ="subtitle">Make a Payment</div>
+        <div id ="subtitle">View eBills</div>
         <br />
         <div id="label">
             <asp:Label ID="Label1" runat="server" Text="Payee:"></asp:Label>
@@ -69,20 +86,13 @@
             <asp:DropDownList ID="ddlPayee" runat="server">
             </asp:DropDownList>
             <br />
-            <asp:DropDownList ID="ddlAccount" runat="server">
-            </asp:DropDownList>
             <br />
-            <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ControlToValidate="txtAmount" ErrorMessage="Please enter a payment amount.">*</asp:RequiredFieldValidator>
             <br />
             <asp:Calendar ID="calDate" runat="server"></asp:Calendar>
             <br />
-            <asp:Button ID="txtPay" runat="server" Text="Pay" />
             <br />
             <br />
-            <asp:Label ID="lblMessage" runat="server" Text="[]"></asp:Label>
             <br />
-            <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
             <br />
         </div>
         <br />
