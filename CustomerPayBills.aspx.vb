@@ -6,7 +6,8 @@
     Dim dbact As New ClassDBAccounts
     Dim dbdate As New ClassDBDate
 
-    Dim mdecTotalAmount As Decimal
+    Dim mdecTotalToday As Decimal
+    Dim mdecTotalPending As Decimal
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Session("CustomerFirstName") Is Nothing Then
@@ -28,7 +29,8 @@
 
 
         If IsPostBack = False Then
-            mdecTotalAmount = 0
+            mdecTotalToday = 0
+            mdecTotalPending = 0
         End If
 
         lblMessageTotal.Text = ""
@@ -42,9 +44,10 @@
     Protected Sub txtPay_Click(sender As Object, e As EventArgs) Handles btnPay.Click
         'validate selected account balance >= 0
 
+
         'validate textbox fields
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
             If t.Text <> "" Then
                 If valid.CheckDecimal(t.Text) = -1 Then
                     lblMessageTotal.Text = "Please enter valid payment amounts."
@@ -53,19 +56,36 @@
             End If
         Next
 
-        'validate date (today or later)
-        dbdate.GetDate()
+        'validate date fields
+        For i = 0 To gvMyPayees.Rows.Count - 1
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
+            If t.Text <> "" Then
+                If dbdate.CheckSelectedDate(c.SelectedDate) = -1 Then
+                    lblMessageTotal.Text = "Please do not enter a date prior to today's date."
+                    Exit Sub
+                End If
+            End If
 
-        'if today, post immediately
+        Next
+
+        'build the two totals wooooo
         For i = 0 To gvMyPayees.Rows.Count - 1
             Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+
             If t.Text <> "" Then
-                mdecTotalAmount += CDec(t.Text)
+                mdecTotalToday += CDec(t.Text)
             End If
         Next
-        lblMessageTotal.Text = "Total Amount = " & mdecTotalAmount.ToString("c2")
+        lblMessageTotal.Text = "Total Amount = " & mdecTotalToday.ToString("c2")
 
         'if in future, schedule as pending payment
+
+    End Sub
+
+    Protected Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
+
+        lblTest.Text = dbdate.CheckSelectedDate(calTest.SelectedDate).ToString
 
     End Sub
 End Class
