@@ -64,7 +64,7 @@
                  <br />
                  <asp:TextBox ID="txtInitialDeposit" runat="server"></asp:TextBox>
               
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ClientIDMode="Static" ControlToValidate="txtInitialDeposit" ErrorMessage="ERROR: Initial Deposit Required (may be 0)">*</asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ClientIDMode="Static" ControlToValidate="txtInitialDeposit" ErrorMessage="ERROR: Initial Deposit Required">*</asp:RequiredFieldValidator>
               
                  <br />
                  <br />
