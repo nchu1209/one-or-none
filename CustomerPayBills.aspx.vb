@@ -20,6 +20,13 @@
         ddlPayee.DataValueField = "PayeeID"
         ddlPayee.DataBind()
 
+        dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
+        ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
+        ddlAccount.DataTextField = "Detail"
+        ddlAccount.DataValueField = "AccountNumber"
+        ddlAccount.DataBind()
+
+
         If IsPostBack = False Then
             mdecTotalAmount = 0
         End If
