@@ -183,9 +183,8 @@
         'update the transactions table
         DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer", txtTransferDate.Text, CDec(txtAmoutTransfer.Text), strTransferMessage, decTransferToBalance)
 
-        lblErrorTransfer.Text = "Withdrawal Confirmed"
+        lblErrorTransfer.Text = "Transfer Confirmed"
         Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
-
     End Sub
 End Class
 
