@@ -57,14 +57,19 @@
                  <br />
                  <asp:TextBox ID="txtTransferDate" runat="server"></asp:TextBox>
               
+                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ClientIDMode="Static" ControlToValidate="txtTransferDate" ErrorMessage="ERROR: Transfer Date Required">*</asp:RequiredFieldValidator>
+              
                  <br />
                  <br />
              
                  <asp:Calendar ID="TransferCalendar" runat="server"></asp:Calendar>
              
                  <br />
+                 <asp:Button ID="btnTransfer" runat="server" Text="Confirm Transfer" />
                  <br />
+                 <asp:Label ID="lblErrorTransfer" runat="server"></asp:Label>
                  <br />
+                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" />
                  <br />
                  
              </div>
