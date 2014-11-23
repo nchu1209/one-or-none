@@ -105,6 +105,34 @@
             <asp:Label ID="lblError" runat="server"></asp:Label>
             <br />
     </div>
+
+        <br/>
+        <div id="content">
+        
+        
+            <asp:Label ID="lblAccountStatus" runat="server"></asp:Label>
+            <br />
+
+            <div id="content">
+                <div id="textbox">
+                    <br />
+                    <br/>
+                    </div>
+                <div id="label2">
+            <asp:RadioButtonList ID="radEnableDisable" runat="server" AutoPostBack="True">
+                <asp:ListItem>Disable</asp:ListItem>
+                <asp:ListItem>Enable</asp:ListItem>
+            </asp:RadioButtonList>
+                    </div>
+        
+                </div>
+            <br />
+            <asp:Button ID="btnSaveStatus" runat="server" Text="Save Status Change" />
+            <asp:Button ID="btnCancelStatus" runat="server" Text="Cancel" />
+        
+        
+        </div>
+        <br/>
     </div>
 
     </asp:Panel>
