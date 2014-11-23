@@ -10,6 +10,7 @@ Public Class ClassDBAccounts
     Dim mDatasetAccounts3 As New DataSet
     Dim mDatasetAccounts4 As New DataSet
     Dim mDatasetAccounts5 As New DataSet
+    Dim mDatasetAccounts6 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
@@ -19,6 +20,7 @@ Public Class ClassDBAccounts
     Dim mMyView3 As New DataView
     Dim mMyView4 As New DataView
     Dim mMyView5 As New DataView
+    Dim mMyView6 As New DataView
 
     Public ReadOnly Property AccountsDataset() As DataSet
         Get
@@ -80,6 +82,18 @@ Public Class ClassDBAccounts
             Return mMyView5
         End Get
     End Property
+    Public ReadOnly Property AccountsDataset6() As DataSet
+        Get
+            'Return dataset to user
+            Return mDatasetAccounts6
+        End Get
+    End Property
+    Public ReadOnly Property MyView6() As DataView
+        Get
+            Return mMyView6
+        End Get
+    End Property
+
 
     Public Sub UpdateDB(ByVal mstrQuery As String)
         'Purpose: run given query to update database
@@ -252,7 +266,7 @@ Public Class ClassDBAccounts
             'add parameter to SPROC
             mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
             'clear dataset
-            mDatasetAccounts4.Clear()
+            mDatasetAccounts5.Clear()
             'open connection and fill dataset
             mdbDataAdapter.Fill(mDatasetAccounts5, "tblAccounts")
             'copy dataset to dataview
@@ -262,6 +276,31 @@ Public Class ClassDBAccounts
         End Try
     End Sub
 
+    Public Sub RunProcedureOneParameterTransfer2(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
+        'Purpose: run any stored procedure with one parameter and fill dataset
+        'Arguments: 3 strings
+        'Returns: none (query results via property)
+        'Author: Nicole Chu (nc7997)
+        'Date: 10/21/14
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'add parameter to SPROC
+            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
+            'clear dataset
+            mDatasetAccounts6.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetAccounts6, "tblAccounts")
+            'copy dataset to dataview
+            mMyView6.Table = mDatasetAccounts6.Tables("tblAccounts")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
     Public Sub LinkZip(ByVal strCustomerID As String)
         RunProcedureOneParameter("usp_innerjoin_customer_city_by_zip", "@CustomerID", strCustomerID)
     End Sub
@@ -315,7 +354,7 @@ Public Class ClassDBAccounts
     End Sub
 
     Public Sub GetBalanceByAccountNumber(strAccountNumber As String)
-        RunProcedureOneParameterTransfer("usp_accounts_get_balance_by_account_number", "@AccountNumber", strAccountNumber)
+        RunProcedureOneParameterTransfer2("usp_accounts_get_balance_by_account_number", "@AccountNumber", strAccountNumber)
     End Sub
 
     Public Sub AddAccountChecking(intCustomerID As Integer, ByVal intAccountNumber As Integer, ByVal strAccountName As String, ByVal strAccountType As String, ByVal strActive As String, ByVal strManagerApprovedDeposit As String, ByVal intInitial As Integer, ByVal intBalance As Integer)
@@ -388,6 +427,7 @@ Public Class ClassDBAccounts
 
     Public Sub UpdateBalance(intAccountNumber As Integer, ByVal decBalance As Decimal)
         mstrQuery = "UPDATE tblAccounts SET Balance='" & decBalance & "' WHERE AccountNumber='" & intAccountNumber & "'"
+        UpdateDB(mstrQuery)
     End Sub
 
     Public Sub SelectQuery(ByVal strQuery As String)
@@ -420,16 +460,11 @@ Public Class ClassDBAccounts
     End Sub
 
     Public Sub ModifyAccountName(strChangeName As String, intAccountNumber As Integer)
-
         mstrQuery = "UPDATE tblAccounts SET " &
             "AccountName = '" & strChangeName & "' " & _
             "WHERE AccountNumber = " & intAccountNumber
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)
-
     End Sub
-
-
-
 End Class

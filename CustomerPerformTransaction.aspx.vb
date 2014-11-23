@@ -2,6 +2,7 @@
     Inherits System.Web.UI.Page
     Dim DBAccounts As New ClassDBAccounts
     Dim DB As New ClassDBCustomer
+    Dim DBTransactions As New ClassDBTransactions
     Dim Format As New ClassFormat
     Dim mCustomerID As Integer
     Dim Valid As New ClassValidate
@@ -9,11 +10,9 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Session("CustomerNumber") Is Nothing Then
             Response.Redirect("CustomerLogin.aspx")
-
         End If
 
         DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumber").ToString)
-
         ''get the record id from the select
         mCustomerID = CInt(Session("CustomerNumber"))
 
@@ -39,6 +38,15 @@
         End If
         Return True
     End Function
+
+    Public Sub GetTransactionNumber()
+        DBTransactions.GetMaxTransactionNumber()
+        If DBTransactions.TransactionsDataset.Tables("tblTransactions").Rows.Count = 0 Then
+            Session("TransactionNumber") = 1
+        Else
+            Session("TransactionNumber") = CInt(DBTransactions.TransactionsDataset.Tables("tblTransactions").Rows(0).Item("MaxTransactionNumber")) + 1
+        End If
+    End Sub
 
     Protected Sub ddlTransactions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlTransactions.SelectedIndexChanged
         SetFormNormal()
@@ -80,12 +88,20 @@
             Exit Sub
         End If
 
+        'add a validation here to make sure selected date is greater or equal to system date
+
         'update the balance
         Dim decBalance As Decimal
-        DBAccounts.GetBalanceByAccountNumber(ddlDeposit.DataValueField.ToString)
-        decBalance = CDec(DBAccounts.AccountsDataset5.Tables("tblAccounts").Rows(0).Item("Balance"))
+        DBAccounts.GetBalanceByAccountNumber(ddlDeposit.SelectedValue.ToString)
+        decBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
         decBalance += CDec(txtDepositAmount.Text)
-        DBAccounts.UpdateBalance(CInt(ddlDeposit.DataValueField), decBalance)
+        DBAccounts.UpdateBalance(CInt(ddlDeposit.SelectedValue), decBalance)
         lblErrorDeposit.Text = "Deposit Confirmed"
+
+        Dim strDepositMessage As String
+        strDepositMessage = "Deposited " & txtDepositAmount.Text & " to account " & ddlDeposit.SelectedValue.ToString & " on " & txtDepositDate.Text
+        GetTransactionNumber()
+        'update the transactions table
+        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlDeposit.SelectedValue), "Deposit", txtDepositDate.Text, CDec(txtDepositAmount.Text), strDepositMessage, decBalance)
     End Sub
 End Class
