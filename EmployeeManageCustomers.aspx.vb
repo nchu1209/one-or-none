@@ -7,7 +7,7 @@ Public Class EmployeeManageCustomers
     Dim CustomerDB As New ClassDBCustomer
     Dim Format As New ClassFormat
     Dim DBAccounts As New ClassDBAccounts
-    Dim Valid As ClassValidate
+    Dim Valid As New ClassValidate
     Dim mEmployeeID As Integer
     Dim mCustomerID As Integer
     Dim mstrNewPassword As String
@@ -41,6 +41,9 @@ Public Class EmployeeManageCustomers
     Protected Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         CustomerDB.GetAllCustomers()
         Session("CustomerNumberForSearch") = txtCustomerNumber.Text
+
+        DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumberForSearch").ToString)
+
         Dim intCurrentCustomerNumber As Integer
         intCurrentCustomerNumber = CInt(Session("CustomerNumberForSearch"))
 
@@ -49,7 +52,7 @@ Public Class EmployeeManageCustomers
             Exit Sub
         End If
 
-        DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumberForSearch").ToString)
+        'DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumberForSearch").ToString)
 
         ReloadDatasetAndDDL()
         FillTextboxes()
@@ -131,7 +134,7 @@ Public Class EmployeeManageCustomers
             Exit Sub
         End If
 
-        CustomerDB.ModifyCustomer2(txtEmail.Text, txtPassword.Text, txtLastName.Text, txtFirstName.Text, txtInitial.Text, txtAddress.Text, txtZip.Text, txtPhone.Text, CInt(Session("CustomerNumber")))
+        CustomerDB.ModifyCustomer2(txtEmail.Text, txtPassword.Text, txtLastName.Text, txtFirstName.Text, txtInitial.Text, txtAddress.Text, txtZip.Text, txtPhone.Text, CInt(Session("CustomerNumberForSearch")))
         CustomerDB.LinkZip(mCustomerID.ToString)
         FillTextboxes()
 
