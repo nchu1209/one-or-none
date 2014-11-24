@@ -135,7 +135,7 @@
                 txtDepositAmount.Text = decMaxIRADeposit.ToString
                 Exit Sub
             End If
-            decIRATotal += CDec(txtDepositDate.Text)
+            decIRATotal += CDec(txtDepositAmount.Text)
             DBAccounts.UpdateIRATotalDeposit(CInt(ddlDeposit.SelectedValue), decIRATotal)
         End If
 
@@ -205,8 +205,28 @@
         Dim decTransferToBalance As Decimal
         DBAccounts.GetBalanceByAccountNumber(ddlTransferTo.SelectedValue.ToString)
         decTransferToBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
+
+        DBAccounts.GetAccountTypeByAccountNumber(ddlTransferTo.SelectedValue.ToString)
+        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+            Dim decIRATotal As Decimal
+            DBAccounts.GetIRATotalDepositByAccountNumber(ddlTransferTo.SelectedValue.ToString)
+            decIRATotal = CDec(DBAccounts.AccountsDataset8.Tables("tblAccounts").Rows(0).Item("IRATotalDeposit"))
+            Dim decMaxIRADeposit As Decimal
+            decMaxIRADeposit = 5000 - decIRATotal
+            If CDec(txtAmoutTransfer.Text) > decMaxIRADeposit Then
+                lblErrorTransfer.Text = "You cannot contribute more than $5000 per year to your IRA. Would you like to transfer in the maximum amount, " + decMaxIRADeposit.ToString + " instead?"
+                txtAmoutTransfer.Text = decMaxIRADeposit.ToString
+                Exit Sub
+            End If
+            decIRATotal += CDec(txtAmoutTransfer.Text)
+            DBAccounts.UpdateIRATotalDeposit(CInt(ddlTransferTo.SelectedValue), decIRATotal)
+        End If
+
         decTransferToBalance += CDec(txtAmoutTransfer.Text)
         DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
+
+
+        'TRANSFER FROM
 
         Dim decTransferFromBalance As Decimal
         DBAccounts.GetBalanceByAccountNumber2(ddlFromAccount.SelectedValue.ToString)
@@ -218,6 +238,18 @@
             lblErrorTransfer.Text = "Please enter an amount to transfer less than or equal to the amount of money in the account you are transferring money from."
             Exit Sub
         End If
+
+        DB.GetDOBByCustmomerNumber(Session("CustomerNumber"))
+        DBDate.GetYear()
+
+        DBAccounts.GetAccountTypeByAccountNumber(ddlFromAccount.SelectedValue.ToString)
+        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+            If CInt(DBDate.DateDataset2.Tables("tblSystemDate").Rows(0).Item("Date")) - CInt(DB.CustDataset2.Tables("tblCustomers").Rows(0).Item("DOB")) < 65 Then
+
+            End If
+        End If
+
+
 
         decTransferFromBalance = decTransferFromBalance - CDec(txtAmoutTransfer.Text)
         DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance)
