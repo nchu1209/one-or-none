@@ -12,6 +12,7 @@ Public Class ClassDBAccounts
     Dim mDatasetAccounts5 As New DataSet
     Dim mDatasetAccounts6 As New DataSet
     Dim mDatasetAccounts7 As New DataSet
+    Dim mDatasetAccounts8 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
@@ -23,6 +24,7 @@ Public Class ClassDBAccounts
     Dim mMyView5 As New DataView
     Dim mMyView6 As New DataView
     Dim mMyView7 As New DataView
+    Dim mMyView8 As New DataView
 
     Public ReadOnly Property AccountsDataset() As DataSet
         Get
@@ -104,6 +106,17 @@ Public Class ClassDBAccounts
     Public ReadOnly Property MyView7() As DataView
         Get
             Return mMyView7
+        End Get
+    End Property
+    Public ReadOnly Property AccountsDataset8() As DataSet
+        Get
+            'Return dataset to user
+            Return mDatasetAccounts8
+        End Get
+    End Property
+    Public ReadOnly Property MyView8() As DataView
+        Get
+            Return mMyView8
         End Get
     End Property
 
@@ -338,6 +351,32 @@ Public Class ClassDBAccounts
             Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
         End Try
     End Sub
+
+    Public Sub RunProcedureOneParameterBeatMorgan(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
+        'Purpose: run any stored procedure with one parameter and fill dataset
+        'Arguments: 3 strings
+        'Returns: none (query results via property)
+        'Author: Nicole Chu (nc7997)
+        'Date: 10/21/14
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'add parameter to SPROC
+            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
+            'clear dataset
+            mDatasetAccounts8.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetAccounts8, "tblAccounts")
+            'copy dataset to dataview
+            mMyView8.Table = mDatasetAccounts8.Tables("tblAccounts")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
     Public Sub LinkZip(ByVal strCustomerID As String)
         RunProcedureOneParameter("usp_innerjoin_customer_city_by_zip", "@CustomerID", strCustomerID)
     End Sub
@@ -406,7 +445,13 @@ Public Class ClassDBAccounts
         RunProcedureOneParameter("usp_accounts_get_checking_and_savings_by_customer_number", "@CustomerNumber", strCustomerNumber)
     End Sub
 
+    Public Sub GetAccountTypeByAccountNumber(strAccountNumber As String)
+        RunProcedureOneParameterIRA("usp_accounts_get_account_type_by_account_number", "@AccountNumber", strAccountNumber)
+    End Sub
 
+    Public Sub GetIRATotalDepositByAccountNumber(strAccountNumber As String)
+        RunProcedureOneParameterBeatMorgan("usp_accounts_get_IRA_totaldeposit_by_account_number", "@AccountNumber", strAccountNumber)
+    End Sub
     Public Sub AddAccountChecking(intCustomerID As Integer, ByVal intAccountNumber As Integer, ByVal strAccountName As String, ByVal strAccountType As String, ByVal strActive As String, ByVal strManagerApprovedDeposit As String, ByVal intInitial As Integer, ByVal intBalance As Integer)
         'Purpose: adds a customer to database
         'Arguments: 11 strings
@@ -477,6 +522,11 @@ Public Class ClassDBAccounts
 
     Public Sub UpdateBalance(intAccountNumber As Integer, ByVal decBalance As Decimal)
         mstrQuery = "UPDATE tblAccounts SET Balance='" & decBalance & "' WHERE AccountNumber='" & intAccountNumber & "'"
+        UpdateDB(mstrQuery)
+    End Sub
+
+    Public Sub UpdateIRATotalDeposit(intAccountNumber As Integer, ByVal decIRATotalDeposit As Decimal)
+        mstrQuery = "UPDATE tblAccounts SET IRATotalDeposit='" & decIRATotalDeposit & "' WHERE AccountNumber='" & intAccountNumber & "'"
         UpdateDB(mstrQuery)
     End Sub
 

@@ -7,11 +7,13 @@ Public Class ClassDBDate
 
     'Declare module-level variables
     Dim mDatasetDate As New DataSet
+    Dim mDatasetDate2 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
     Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False; initial catalog=mis333k_msbck614; user id=msbck614; password=AmyEnrione1"
     Dim mMyView As New DataView
+    Dim mMyView2 As New DataView
 
     'Define a public read-only property so "outsiders" can access the dataset filled by this class
     Public ReadOnly Property DateDataset() As DataSet
@@ -23,6 +25,18 @@ Public Class ClassDBDate
     Public ReadOnly Property MyView() As DataView
         Get
             Return mMyView
+        End Get
+    End Property
+
+    Public ReadOnly Property DateDataset2() As DataSet
+        Get
+            'Return dataset to user
+            Return mDatasetDate2
+        End Get
+    End Property
+    Public ReadOnly Property MyView2() As DataView
+        Get
+            Return mMyView2
         End Get
     End Property
 
@@ -45,6 +59,30 @@ Public Class ClassDBDate
             mdbDataAdapter.Fill(mDatasetDate, "tblSystemDate")
             'copy dataset to dataview
             mMyView.Table = mDatasetDate.Tables("tblSystemDate")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
+    Public Sub RunProcedureNoParam2(ByVal strProcedureName As String)
+        'Purpose: run any stored procedure with no parameters and fill dataset
+        'Arguments: 1 string that contains procedure name
+        'Returns: none (query results via property)
+        'Author: Nicole Chu (nc7997)
+        'Date: 10/21/14
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'clear dataset
+            mDatasetDate2.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetDate2, "tblSystemDate")
+            'copy dataset to dataview
+            mMyView2.Table = mDatasetDate2.Tables("tblSystemDate")
         Catch ex As Exception
             Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
         End Try
@@ -90,6 +128,10 @@ Public Class ClassDBDate
 
         RunProcedureNoParam("usp_systemdate_getdate")
 
+    End Sub
+
+    Public Sub GetYear()
+        RunProcedureNoParam2("usp_systemdate_get_year")
     End Sub
 
     Public Function CheckSelectedDate(ByVal datSelected As Date) As Integer

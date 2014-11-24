@@ -4,15 +4,16 @@
     Dim DB As New ClassDBAccounts
     Dim Valid As New ClassValidate
     Dim DBCustomer As New ClassDBCustomer
+    Dim DBDate As New ClassDBDate
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         txtAccountName.Visible = True
         txtAccountNumber.Visible = True
         txtInitialDeposit.Visible = True
         btnApply.Visible = True
-        Label1.Visible = False
-        Label2.Visible = False
-        Label7.Visible = False
+        Label1.Visible = True
+        Label2.Visible = True
+        Label7.Visible = True
     End Sub
 
     Protected Sub ddlBankAccounts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlBankAccounts.SelectedIndexChanged
@@ -42,14 +43,24 @@
             Session("AccountType") = "Savings"
         End If
 
-        DBCustomer.GetDOBByCustomerNumber(Session("CustomerNumber"))
-
+        DBCustomer.GetDOBByCustmomerNumber(Session("CustomerNumber"))
+        DBDate.GetYear()
         If ddlBankAccounts.SelectedIndex = 3 Then
             DB.GetByCustomerNumberIRA(Session("CustomerNumber"))
             If DB.AccountsDataset3.Tables("tblAccounts").Rows.Count = 0 Then
-                If [Year]() - DBCustomer.CustDataset.Tables("tblCustomers").Rows(0).Item("DOB") < 70 Then
+                If CInt(DBDate.DateDataset2.Tables("tblSystemDate").Rows(0).Item("Date")) - CInt(DBCustomer.CustDataset2.Tables("tblCustomers").Rows(0).Item("DOB")) < 70 Then
                     txtAccountName.Text = ""
                     Session("AccountType") = "IRA"
+                Else
+                    lblError.Text = "You can only open an IRA if you are younger than 70"
+                    txtAccountName.Visible = False
+                    txtAccountNumber.Visible = False
+                    txtInitialDeposit.Visible = False
+                    btnApply.Visible = False
+                    Label1.Visible = False
+                    Label2.Visible = False
+                    Label7.Visible = False
+                    Exit Sub
                 End If
             Else
                 lblError.Text = "You cannot have more than one IRA. Please select another account type"

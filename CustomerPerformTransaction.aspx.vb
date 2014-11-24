@@ -3,6 +3,7 @@
     Dim DBAccounts As New ClassDBAccounts
     Dim DB As New ClassDBCustomer
     Dim DBTransactions As New ClassDBTransactions
+    Dim DBDate As New ClassDBDate
     Dim Format As New ClassFormat
     Dim mCustomerID As Integer
     Dim Valid As New ClassValidate
@@ -15,6 +16,11 @@
         DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumber").ToString)
         ''get the record id from the select
         mCustomerID = CInt(Session("CustomerNumber"))
+
+        'clear labels
+        lblErrorDeposit.Text = ""
+        lblErrorWithdrawal.Text = ""
+        lblErrorTransfer.Text = ""
 
         If IsPostBack = False Then
             SetFormNormal()
@@ -104,22 +110,48 @@
             Exit Sub
         End If
 
-        'add a validation here to make sure selected date is greater or equal to system date
+        'make sure selected date is greater or equal to system date
+        If DBDate.CheckSelectedDate(DepositCalendar.SelectedDate) = -1 Then
+            lblErrorDeposit.Text = "Please select a deposit date that has not already passed"
+            Exit Sub
+        End If
 
-        'update the balance
+        'if selected account is an IRA, make sure they haven't reached their maximum deposit for the year
+        'if they have, suggest the maximum contribution
+        'update IRATotalDeposit
         Dim decBalance As Decimal
         DBAccounts.GetBalanceByAccountNumber(ddlDeposit.SelectedValue.ToString)
         decBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
+
+        DBAccounts.GetAccountTypeByAccountNumber(ddlDeposit.SelectedValue.ToString)
+        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+            Dim decIRATotal As Decimal
+            DBAccounts.GetIRATotalDepositByAccountNumber(ddlDeposit.SelectedValue.ToString)
+            decIRATotal = CDec(DBAccounts.AccountsDataset8.Tables("tblAccounts").Rows(0).Item("IRATotalDeposit"))
+            Dim decMaxIRADeposit As Decimal
+            decMaxIRADeposit = 5000 - decIRATotal
+            If CDec(txtDepositAmount.Text) > decMaxIRADeposit Then
+                lblErrorDeposit.Text = "You cannot contribute more than $5000 per year to your IRA. Would you like to contribute the maximum deposit, " + decMaxIRADeposit.ToString + " instead?"
+                txtDepositAmount.Text = decMaxIRADeposit.ToString
+                Exit Sub
+            End If
+            decIRATotal += CDec(txtDepositDate.Text)
+            DBAccounts.UpdateIRATotalDeposit(CInt(ddlDeposit.SelectedValue), decIRATotal)
+        End If
+
+
+        'update the balance
         decBalance += CDec(txtDepositAmount.Text)
         DBAccounts.UpdateBalance(CInt(ddlDeposit.SelectedValue), decBalance)
-        lblErrorDeposit.Text = "Deposit Confirmed"
-        Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
 
         Dim strDepositMessage As String
         strDepositMessage = "Deposited " & txtDepositAmount.Text & " to account " & ddlDeposit.SelectedValue.ToString & " on " & txtDepositDate.Text
         GetTransactionNumber()
         'update the transactions table
         DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlDeposit.SelectedValue), "Deposit", txtDepositDate.Text, CDec(txtDepositAmount.Text), strDepositMessage, decBalance)
+
+        lblErrorDeposit.Text = "Deposit Confirmed"
+        Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
     End Sub
 
     Protected Sub btnWithdrawal_Click(sender As Object, e As EventArgs) Handles btnWithdrawal.Click
@@ -128,7 +160,11 @@
             Exit Sub
         End If
 
-        'add a validation here to make sure selected date is greater or equal to system date
+        'make sure selected date is greater or equal to system date
+        If DBDate.CheckSelectedDate(WithdrawalCalendar.SelectedDate) = -1 Then
+            lblErrorWithdrawal.Text = "Please select a withdrawal date that has not already passed"
+            Exit Sub
+        End If
 
         'update the balance
         Dim decBalance As Decimal
@@ -155,6 +191,17 @@
     End Sub
 
     Protected Sub btnTransfer_Click(sender As Object, e As EventArgs) Handles btnTransfer.Click
+        If ValidateAmount(txtAmoutTransfer.Text) = False Then
+            lblErrorTransfer.Text = "Please enter a positive, numeric amount"
+            Exit Sub
+        End If
+
+        'make sure selected date is greater or equal to system date
+        If DBDate.CheckSelectedDate(TransferCalendar.SelectedDate) = -1 Then
+            lblErrorTransfer.Text = "Please select a transfer date that has not already passed"
+            Exit Sub
+        End If
+
         Dim decTransferToBalance As Decimal
         DBAccounts.GetBalanceByAccountNumber(ddlTransferTo.SelectedValue.ToString)
         decTransferToBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
