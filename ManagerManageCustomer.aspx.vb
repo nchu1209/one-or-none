@@ -1,6 +1,6 @@
 ﻿Option Strict On
 
-Public Class EmployeeManageCustomers
+Public Class ManagerManageCustomer
     Inherits System.Web.UI.Page
 
     Dim EmpDB As New ClassDBEmployee
