@@ -14,21 +14,20 @@
             Response.Redirect("CustomerLogin.aspx")
         End If
 
-        dbpay.GetCustomerPayees(Session("CustomerNumber"))
-
-        ddlPayee.DataSource = dbpay.PayeeDataset.Tables("tblPayees")
-        ddlPayee.DataTextField = "PayeeName"
-        ddlPayee.DataValueField = "PayeeID"
-        ddlPayee.DataBind()
-
-        dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
-        ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
-        ddlAccount.DataTextField = "Details"
-        ddlAccount.DataValueField = "AccountNumber"
-        ddlAccount.DataBind()
-
-
         If IsPostBack = False Then
+            dbpay.GetCustomerPayees(Session("CustomerNumber"))
+
+            ddlPayee.DataSource = dbpay.PayeeDataset.Tables("tblPayees")
+            ddlPayee.DataTextField = "PayeeName"
+            ddlPayee.DataValueField = "PayeeID"
+            ddlPayee.DataBind()
+
+            dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
+            ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
+            ddlAccount.DataTextField = "Details"
+            ddlAccount.DataValueField = "AccountNumber"
+            ddlAccount.DataBind()
+
             mdecTotalToday = 0
             mdecTotalPending = 0
         End If
@@ -37,11 +36,11 @@
         lblMessageFee.Text = ""
         lblMessageSuccess.Text = ""
 
-        btnConfirm.Visible = False
 
     End Sub
 
     Protected Sub txtPay_Click(sender As Object, e As EventArgs) Handles btnPay.Click
+
         'validate selected account balance >= 0
 
 
@@ -66,20 +65,23 @@
                     Exit Sub
                 End If
             End If
-
         Next
 
         'build the two totals wooooo
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
 
-            If t.Text <> "" Then
+            If dbdate.CheckSelectedDate(c.SelectedDate) = 0 And t.Text <> "" Then
                 mdecTotalToday += CDec(t.Text)
             End If
-        Next
-        lblMessageTotal.Text = "Total Amount = " & mdecTotalToday.ToString("c2")
 
-        'if in future, schedule as pending payment
+            If dbdate.CheckSelectedDate(c.SelectedDate) = 1 And t.Text <> "" Then
+                mdecTotalPending += CDec(t.Text)
+            End If
+
+        Next
+        lblMessageTotal.Text = "Total Amount Today = " & mdecTotalToday.ToString("c2") & " and Total Amount Pending = " & mdecTotalPending.ToString("c2")
 
     End Sub
 
@@ -88,4 +90,5 @@
         lblTest.Text = dbdate.CheckSelectedDate(calTest.SelectedDate).ToString
 
     End Sub
+
 End Class

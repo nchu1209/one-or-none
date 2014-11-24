@@ -17,6 +17,7 @@
         <br />
         <br />
         <br />
+        <div id ="gridviewleft">
         <asp:GridView ID="gvMyPayees" runat="server" AutoGenerateColumns="False" DataKeyNames="PayeeID" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:BoundField DataField="PayeeID" HeaderText="PayeeID" ReadOnly="True" SortExpression="PayeeID" Visible="False" />
@@ -53,6 +54,8 @@
             </SelectParameters>
         </asp:SqlDataSource>
         <br />
+        </div>
+        <div id ="gridviewright">
             <asp:Button ID="btnPay" runat="server" Text="Pay" />
         <br />
         <br />
@@ -61,11 +64,12 @@
         <asp:Label ID="lblMessageFee" runat="server" Text="[]"></asp:Label>
         <br />
         <br />
-        <asp:Button ID="btnConfirm" runat="server" Text="Confirm Payment(s)" />
+            <asp:Button ID="btnConfirm" runat="server" Text="Confirm" />
         <br />
         <br />
         <asp:Label ID="lblMessageSuccess" runat="server" Text="[]"></asp:Label>
         <br />
+        </div>
     </div>
     <div id ="righthalf">
         <div id ="subtitle">View eBills</div>
