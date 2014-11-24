@@ -365,31 +365,13 @@ Partial Public Class EmployeeManageCustomers
     Protected WithEvents lblAccountStatus As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''radEnableDisable control.
+    '''btnChangeStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents radEnableDisable As Global.System.Web.UI.WebControls.RadioButtonList
-
-    '''<summary>
-    '''btnSaveStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSaveStatus As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnCancelStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancelStatus As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnChangeStatus As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''AccountNames control.

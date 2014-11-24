@@ -25,6 +25,8 @@
         <br />
         <asp:Label ID="lblCustomerNumberError" runat="server"></asp:Label>
 
+        <br />
+
     </div>
 
         
@@ -38,7 +40,7 @@
         <br />
         <br />
     </div>
-    <div id ="label">
+    <div id ="label2">
         <asp:Label ID="Label3" runat="server" Text="Last Name:"></asp:Label>
             <br />
             <asp:Label ID="Label4" runat="server" Text="First Name:"></asp:Label>
@@ -58,8 +60,6 @@
             <asp:Label ID="Label12" runat="server" Text="Email:"></asp:Label>
             <br />
             <asp:Label ID="Label13" runat="server" Text="Phone Number:"></asp:Label>
-            <br />
-        <br />
             <br />
     </div>
 
@@ -94,7 +94,9 @@
             <asp:TextBox ID="txtPhone" runat="server" MaxLength="10"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ClientIDMode="Static" ControlToValidate="txtPhone" ErrorMessage="ERROR: Phone Number">*</asp:RequiredFieldValidator>
             <br />
-        <br />
+            <br />
+       </div>
+        <div id="content">
         <br />
             <asp:Button ID="btnSaveProfile" runat="server" Text="Save" />
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,39 +110,49 @@
 
         <br/>
         <div id="content">
-        
-        
+        <div id="subtitle">
+            Customer Status
+        </div>
+
+        <div id="content">
             <asp:Label ID="lblAccountStatus" runat="server"></asp:Label>
             <br />
-
-            <div id="content">
+            </div>
+           <%-- <div id="content">
                 <div id="textbox">
+                    <br />
+                    <br />
                     <br />
                     <br/>
                     </div>
                 <div id="label2">
-            <asp:RadioButtonList ID="radEnableDisable" runat="server" AutoPostBack="True">
-                <asp:ListItem>Disable</asp:ListItem>
+            <asp:RadioButtonList ID="radEnableDisable" runat="server" AutoPostBack="True" Width="67px">
                 <asp:ListItem>Enable</asp:ListItem>
+                <asp:ListItem>Disable</asp:ListItem>
             </asp:RadioButtonList>
                     </div>
         
-                </div>
+                </div>--%>
             <br />
-            <asp:Button ID="btnSaveStatus" runat="server" Text="Save Status Change" />
-            <asp:Button ID="btnCancelStatus" runat="server" Text="Cancel" />
-        
+            <div id="content">
+            <asp:Button ID="btnChangeStatus" runat="server" Text="Change Status" />
+            </div>
         
         </div>
         <br/>
     </div>
+
+
+
+
+
 
     </asp:Panel>
 
     <asp:Panel ID="AccountNames" runat="server" Visible ="true">
 
     <div id ="righthalf">
-        <div id ="Div1">
+        <div id ="subtitle">
         Change Account Names<br />
         <br />
     </div>

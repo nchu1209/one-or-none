@@ -131,10 +131,6 @@ Public Class ClassDBCustomer
         RunProcedureOneParameter("usp_customers_get_by_customer_number", "@CustomerNumber", strCustomerNumber)
     End Sub
 
-    Public Sub GetDOBByCustomerNumber(strCustomerNumber As String)
-        RunProcedureOneParameter("usp_customers_get_DOB_by_customer_number", "@CustomerNumber", strCustomerNumber)
-    End Sub
-
     Public Sub SelectQuery(ByVal strQuery As String)
         'Purpose: run any select query and fill dataset
         'Arguments: 1 string that contains query
@@ -385,5 +381,17 @@ Public Class ClassDBCustomer
     End Sub
 
 
+    'Leah
+    'used in employee manage customers and manager manage customers
+    Public Sub ModifyStatus(intNotAccountStatus As Integer, ByVal intCustomerNumber As Integer)
+
+        mstrQuery = "UPDATE tblCustomers SET " & _
+            "Active = " & intNotAccountStatus & " " & _
+            "WHERE CustomerNumber = " & intCustomerNumber
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
 
 End Class

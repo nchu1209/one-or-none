@@ -35,6 +35,10 @@ Public Class EmployeeManageCustomers
             AccountNames.Visible = False
         End If
 
+
+
+
+
     End Sub
 
 
@@ -58,6 +62,8 @@ Public Class EmployeeManageCustomers
         FillTextboxes()
         ModifyProfile.Visible = True
         AccountNames.Visible = True
+
+
 
 
     End Sub
@@ -174,7 +180,41 @@ Public Class EmployeeManageCustomers
         txtEmail.Text = CustomerDB.CustDataset.Tables("tblCustomers").Rows(0).Item("emailaddr").ToString
         txtPhone.Text = CustomerDB.CustDataset.Tables("tblCustomers").Rows(0).Item("phone").ToString
 
+        Dim strAccountStatus As String
+        Dim strNotAccountStatus As String
+        strAccountStatus = CustomerDB.CustDataset.Tables("tblCustomers").Rows(0).Item("active").ToString
+
+        If CBool(strAccountStatus) = True Then
+            strAccountStatus = "active"
+            strNotAccountStatus = "inactive"
+        Else
+            strAccountStatus = "inactive"
+            strNotAccountStatus = "active"
+        End If
+        lblAccountStatus.Text = "This customer is currently " + strAccountStatus + ".  Would you like to make them " + strNotAccountStatus + "?"
     End Sub
+
+
+    Protected Sub btnChangeStatus_Click(sender As Object, e As EventArgs) Handles btnChangeStatus.Click
+        CustomerDB.GetByCustomerNumber(Session("CustomerNumberForSearch").ToString)
+        'Dim intAccountStatus As Integer
+        Dim intNotAccountStatus As Integer
+        Dim strAccountStatus As String
+        strAccountStatus = CustomerDB.CustDataset.Tables("tblCustomers").Rows(0).Item("active").ToString
+
+
+        If CBool(strAccountStatus) = True Then
+            intNotAccountStatus = 0
+        Else
+            intNotAccountStatus = 1
+        End If
+
+        CustomerDB.ModifyStatus(intNotAccountStatus, CInt(Session("CustomerNumberForSearch")))
+
+
+        FillTextboxes()
+    End Sub
+
 
 
 End Class
