@@ -169,16 +169,17 @@
         </asp:DropDownList>
         <br />
         <asp:TextBox ID="txtChangeName" runat="server"></asp:TextBox>
+            <br />
         <br />
         </div>
 
 
         <div id="center">
-        <br />
-            <br/>
                <br/>
         <asp:Button ID="btnSaveAccountName" runat="server" CausesValidation="False" Text="Save" />
         <asp:Button ID="btnCancelAccountName" runat="server" CausesValidation="False" Text="Cancel" />
+            <br />
+            <asp:Label ID="lblMessage" runat="server"></asp:Label>
         </div>
         <br />
         <br />

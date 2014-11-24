@@ -53,6 +53,8 @@ Public Class EmployeeManageCustomers
 
         If CustomerDB.SearchByCustomerNumber(CStr(intCurrentCustomerNumber)) = False Then
             lblCustomerNumberError.Text = "ERROR: Invalid Customer Number."
+            ModifyProfile.Visible = False
+            AccountNames.Visible = False
             Exit Sub
         End If
 
@@ -60,8 +62,11 @@ Public Class EmployeeManageCustomers
 
         ReloadDatasetAndDDL()
         FillTextboxes()
+        lblMessage.Text = ""
         ModifyProfile.Visible = True
         AccountNames.Visible = True
+        lblError.Text = ""
+        lblCustomerNumberError.Text = ""
 
 
 
@@ -82,6 +87,11 @@ Public Class EmployeeManageCustomers
         ddlAccounts.DataValueField = "AccountNumber"
         ddlAccounts.DataBind()
 
+        If ddlAccounts.Items.Count = 0 Then
+            AccountNames.Visible = False
+            lblMessage.Text = "count"
+        End If
+
     End Sub
 
 
@@ -91,11 +101,17 @@ Public Class EmployeeManageCustomers
         'Do not change anything.
         lblError.Text = ""
         FillTextboxes()
+        lblMessage.Text = ""
+        txtChangeName.Text = ""
+
     End Sub
 
     Protected Sub btnSaveAccountName_Click(sender As Object, e As EventArgs) Handles btnSaveAccountName.Click
         DBAccounts.ModifyAccountName(txtChangeName.Text, CInt(ddlAccounts.SelectedValue))
-        Response.AddHeader("Refresh", "0; URL=EmployeeManageCustomers.aspx")
+        ReloadDatasetAndDDL()
+        lblMessage.Text = "Account Name was successfully changed."
+        lblError.Text = ""
+        txtChangeName.Text = ""
     End Sub
 
     Protected Sub btnSaveProfile_Click(sender As Object, e As EventArgs) Handles btnSaveProfile.Click
@@ -143,7 +159,9 @@ Public Class EmployeeManageCustomers
         CustomerDB.ModifyCustomer2(txtEmail.Text, txtPassword.Text, txtLastName.Text, txtFirstName.Text, txtInitial.Text, txtAddress.Text, txtZip.Text, txtPhone.Text, CInt(Session("CustomerNumberForSearch")))
         CustomerDB.LinkZip(mCustomerID.ToString)
         FillTextboxes()
-
+        lblMessage.Text = ""
+        lblError.Text = "Profile successfully modified."
+        txtChangeName.Text = ""
         'mstrOldPassword = CustomerDB.CustDataset.Tables("tblCustomers").Rows(0).Item("Password").ToString
         'Session("OldPassword") = CustomerDB.CustDataset.Tables("tblCustomers").Rows(0).Item("Password").ToString
 
@@ -153,6 +171,10 @@ Public Class EmployeeManageCustomers
 
     Protected Sub btnCancelAccountName_Click(sender As Object, e As EventArgs) Handles btnCancelAccountName.Click
         txtChangeName.Text = ""
+        ReloadDatasetAndDDL()
+        lblMessage.Text = ""
+        txtChangeName.Text = ""
+        lblError.Text = ""
     End Sub
 
 
@@ -213,6 +235,9 @@ Public Class EmployeeManageCustomers
 
 
         FillTextboxes()
+        lblMessage.Text = ""
+        lblError.Text = ""
+        txtChangeName.Text = ""
     End Sub
 
 
