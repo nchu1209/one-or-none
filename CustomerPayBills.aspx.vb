@@ -6,9 +6,7 @@
     Dim dbact As New ClassDBAccounts
     Dim dbdate As New ClassDBDate
     Dim dbtrans As New ClassDBTransactions
-
-    'Dim mdecTotalToday As Decimal
-    'Dim mdecTotalPending As Decimal
+    Dim dbpending As New ClassDBPending
 
     Dim mdecTotalWithdrawal As Decimal
     Dim mdecBalance As Decimal
@@ -22,11 +20,6 @@
 
         If IsPostBack = False Then
             dbpay.GetCustomerPayees(Session("CustomerNumber"))
-
-            'ddlPayee.DataSource = dbpay.PayeeDataset.Tables("tblPayees")
-            'ddlPayee.DataTextField = "PayeeName"
-            'ddlPayee.DataValueField = "PayeeID"
-            'ddlPayee.DataBind()
 
             dbact.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
             ddlAccount.DataSource = dbact.AccountsDataset.Tables("tblAccounts")
@@ -116,12 +109,6 @@
         End If
     End Sub
 
-    Protected Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
-        Dim n As HyperLink = DirectCast(gvMyPayees.Rows(0).Cells(1).FindControl("lnkName"), HyperLink)
-
-        lblTest.Text = n.Text
-    End Sub
-
     Protected Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         dbact.GetBalanceByAccountNumber(ddlAccount.SelectedValue.ToString)
         mdecBalance = CDec(dbact.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
@@ -146,10 +133,17 @@
 
             If dbdate.CheckSelectedDate(c.SelectedDate) = 1 And t.Text <> "" Then
                 'schedule payments
+                Dim strPendingMessage As String
+                strPendingMessage = "Send payment of " & t.Text & " to " & n.Text & " from account " & ddlAccount.SelectedValue.ToString & " on " & c.SelectedDate.ToString
+                GetTransactionNumber()
+                'update pending transactions table
+                dbpending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPendingMessage)
             End If
         Next
 
         lblMessageSuccess.Text = "Payments successfully sent and/or scheduled."
+        btnConfirm.Visible = False
+        btnAbort.Visible = False
 
     End Sub
 
