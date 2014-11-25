@@ -41,8 +41,17 @@
                 any other transactions<br />
                 total value<br />
                 total fees<br />
+                - The bonus should be listed as a separate transaction with Type: “Bonus” and Description: “Balanced Portfolio Bonus.”<br />
                 <br />
-                o The portfolio should be updated as follows: • Each sale should be listed under the cash-value portion of the portfolio with the following fields: • Type: Deposit • Amount: current value of the shares of stock sold • Description: should include which stock was sold, the number of shares sold, initial stock price, current stock price, and total gains/losses • Transaction fees should be deducted from the cash-value portion of the portfolio and listed as “Type: “Fee” and Description: “Fee for sale of [stock name]”. </div>
+                o The portfolio should be updated as follows: 
+                <br />
+                • Each sale should be listed under the cash-value portion of the portfolio with the following fields:<br />
+&nbsp;• Type: Deposit 
+                <br />
+                • Amount: current value of the shares of stock sold 
+                <br />
+                • Description: should include which stock was sold, the number of shares sold, initial stock price, current stock price, and total gains/losses<br />
+&nbsp;• Transaction fees should be deducted from the cash-value portion of the portfolio and listed as “Type: “Fee” and Description: “Fee for sale of [stock name]”. </div>
         </div>
     </div>
 
@@ -53,8 +62,7 @@
             <br />
             <div id="content">
 
-              shows the number of shares and purchase price of stocks in a portfolio.
-                #of shares
+              &nbsp;#of shares of a certain stock<br />
                 purchase price of stocks
 
             </div>
