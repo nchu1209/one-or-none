@@ -9,7 +9,7 @@
 
     <br/>
 
-
+    <asp:Panel ID="AddStockMaterial" runat="server">
     <div id="label2">
 
         <asp:Label ID="Label3" runat="server" Text="Stock Type:"></asp:Label>
@@ -33,33 +33,42 @@
             <asp:ListItem>Mutual Funds</asp:ListItem>
             <asp:ListItem>Future Shares</asp:ListItem>
         </asp:DropDownList>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Stock Type Required.">*</asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Stock Type Required." ControlToValidate="ddlStockType">*</asp:RequiredFieldValidator>
         <br />
         <asp:TextBox ID="txtTicker" runat="server" MaxLength="5"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Ticker Symbol Required.">*</asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Ticker Symbol Required." ControlToValidate="txtTicker">*</asp:RequiredFieldValidator>
         <br />
         <asp:TextBox ID="txtStockName" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Name of Stock Required.">*</asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Name of Stock Required." ControlToValidate="txtStockName">*</asp:RequiredFieldValidator>
         <br />
         <asp:TextBox ID="txtSharePrice" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Share Price Required.">*</asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ClientIDMode="Static" ErrorMessage="ERROR: Share Price Required." ControlToValidate="txtSharePrice">*</asp:RequiredFieldValidator>
         <br />
         <asp:TextBox ID="txtTransactionFee" runat="server"></asp:TextBox>
 
+        <br />
+
+        <br />
+
      </div>
 
-
+        <div id="content">
     <div id="content">
         <asp:Button ID="btnAddStock" runat="server" Text="Add Stock" />
+        <br />
         <br />
         <asp:Label ID="lblError" runat="server"></asp:Label>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     </div>
+            </div>
+</asp:Panel>
+
+
 
     <br/>
     <asp:Panel ID="StockSuccessfullyAdded" runat="server">
 
-        <div id="content">
+        <div id="subtitle">
             Stock successfully added.
         </div>
 

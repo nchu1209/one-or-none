@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ManagerAddStocks
 
     '''<summary>
+    '''AddStockMaterial control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AddStockMaterial As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''Label3 control.
     '''</summary>
     '''<remarks>
