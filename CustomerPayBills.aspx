@@ -65,9 +65,11 @@
         <br />
         <br />
             <asp:Button ID="btnConfirm" runat="server" Text="Confirm" />
+&nbsp;
+            <asp:Button ID="btnAbort" runat="server" Text="Abort" />
         <br />
         <br />
-        <asp:Label ID="lblMessageSuccess" runat="server" Text="[]"></asp:Label>
+            <asp:Label ID="lblMessageSuccess" runat="server" Text="[]"></asp:Label>
         <br />
         </div>
     </div>

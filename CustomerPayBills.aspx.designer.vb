@@ -86,6 +86,15 @@ Partial Public Class CustomerPayBills
     Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Button1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAbort As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''lblMessageSuccess control.
     '''</summary>
     '''<remarks>
