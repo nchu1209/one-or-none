@@ -34,6 +34,7 @@
         WithdrawalPanel.Visible = False
         DepositPanel.Visible = False
         TransferPanel.Visible = False
+        IRAFeeChoicePanel.Visible = False
     End Sub
 
     Public Function ValidateAmount(strIn As String)
@@ -171,7 +172,7 @@
         DBAccounts.GetBalanceByAccountNumber(ddlWithdrawal.SelectedValue.ToString)
         decBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
 
-        'make sure that you are not withdrawing more than you have in the current account ***
+        'make sure that you are not withdrawing more than you have in the current account
         '****check to make sure you can't overdraw with overdraft fees
         If decBalance < CInt(txtWithdrawalAmount.Text) Then
             lblErrorWithdrawal.Text = "Please enter an amount to withdraw less than or equal to the amount of money in this account."
@@ -191,7 +192,7 @@
     End Sub
 
     Protected Sub btnTransfer_Click(sender As Object, e As EventArgs) Handles btnTransfer.Click
-        If ValidateAmount(txtAmoutTransfer.Text) = False Then
+        If ValidateAmount(txtAmountTransfer.Text) = False Then
             lblErrorTransfer.Text = "Please enter a positive, numeric amount"
             Exit Sub
         End If
@@ -202,6 +203,13 @@
             Exit Sub
         End If
 
+        'ensure the two accounts selected are not the same
+        If ddlFromAccount.SelectedValue = ddlTransferTo.SelectedValue Then
+            lblErrorTransfer.Text = "Please select two different accounts to transfer money between"
+            Exit Sub
+        End If
+
+        'TRANSFER TO
         Dim decTransferToBalance As Decimal
         DBAccounts.GetBalanceByAccountNumber(ddlTransferTo.SelectedValue.ToString)
         decTransferToBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
@@ -213,16 +221,16 @@
             decIRATotal = CDec(DBAccounts.AccountsDataset8.Tables("tblAccounts").Rows(0).Item("IRATotalDeposit"))
             Dim decMaxIRADeposit As Decimal
             decMaxIRADeposit = 5000 - decIRATotal
-            If CDec(txtAmoutTransfer.Text) > decMaxIRADeposit Then
+            If CDec(txtAmountTransfer.Text) > decMaxIRADeposit Then
                 lblErrorTransfer.Text = "You cannot contribute more than $5000 per year to your IRA. Would you like to transfer in the maximum amount, " + decMaxIRADeposit.ToString + " instead?"
-                txtAmoutTransfer.Text = decMaxIRADeposit.ToString
+                txtAmountTransfer.Text = decMaxIRADeposit.ToString
                 Exit Sub
             End If
-            decIRATotal += CDec(txtAmoutTransfer.Text)
+            decIRATotal += CDec(txtAmountTransfer.Text)
             DBAccounts.UpdateIRATotalDeposit(CInt(ddlTransferTo.SelectedValue), decIRATotal)
         End If
 
-        decTransferToBalance += CDec(txtAmoutTransfer.Text)
+        decTransferToBalance += CDec(txtAmountTransfer.Text)
         DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
 
 
@@ -234,36 +242,88 @@
 
         'make sure that you are not withdrawing more than you have in the current account ***
         '****check to make sure you can't overdraw with overdraft fees
-        If decTransferFromBalance < CInt(txtAmoutTransfer.Text) Then
+        If decTransferFromBalance < CInt(txtAmountTransfer.Text) Then
             lblErrorTransfer.Text = "Please enter an amount to transfer less than or equal to the amount of money in the account you are transferring money from."
             Exit Sub
         End If
 
         DB.GetDOBByCustmomerNumber(Session("CustomerNumber"))
         DBDate.GetYear()
+        Dim intMaxIRAWithdrawal As Integer
+        intMaxIRAWithdrawal = 3000
+        Dim intServiceFee As Integer
+        intServiceFee = 30
+        Dim decWithdrawalAmount As Decimal
+        decWithdrawalAmount = CDec(txtAmountTransfer.Text)
 
         DBAccounts.GetAccountTypeByAccountNumber(ddlFromAccount.SelectedValue.ToString)
         If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
             If CInt(DBDate.DateDataset2.Tables("tblSystemDate").Rows(0).Item("Date")) - CInt(DB.CustDataset2.Tables("tblCustomers").Rows(0).Item("DOB")) < 65 Then
-
+                If CDec(txtAmountTransfer.Text) > intMaxIRAWithdrawal Then
+                    lblErrorTransfer.Text = "You cannot withdraw more than $3000 from your IRA if you are younger than 65. Would you like to transfer in the maximum amount, $3000 instead?"
+                    txtAmountTransfer.Text = intMaxIRAWithdrawal.ToString
+                    Exit Sub
+                End If
+                'you will have to pay a service fee if you are making an unqualified distribution
+                'this service fee can either be included in the withdrawal or in addition to the withdrawal
+                'make sure that this service fee, if in addition, does not go over balance
+                'record the transaction for the withdrawal, include the transaction for the fee
+                Session("IRATransactionType") = "Transfer"
+                If Session("UnqualifiedDistributionFee") Is Nothing Then
+                    SetFormNormal()
+                    IRAFeeChoicePanel.Visible = True
+                End If
+                If Session("UnqualifiedDistributionFee") = "Include Fee" Then
+                    decWithdrawalAmount = decWithdrawalAmount - intServiceFee
+                End If
             End If
         End If
 
 
 
-        decTransferFromBalance = decTransferFromBalance - CDec(txtAmoutTransfer.Text)
+        decTransferFromBalance = decTransferFromBalance - decWithdrawalAmount
+        Dim decIRAFeeBalance As Decimal
+        decIRAFeeBalance = decTransferFromBalance - 30
         DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance)
 
         Dim strTransferMessage As String
         strTransferMessage = "Transfer from account " & ddlFromAccount.SelectedValue.ToString & " to account " & ddlTransferTo.SelectedValue.ToString
         GetTransactionNumber()
         'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlFromAccount.SelectedValue), "Transfer", txtTransferDate.Text, CDec(txtAmoutTransfer.Text), strTransferMessage, decTransferFromBalance)
+        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlFromAccount.SelectedValue), "Transfer", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, decTransferFromBalance)
         'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer", txtTransferDate.Text, CDec(txtAmoutTransfer.Text), strTransferMessage, decTransferToBalance)
+        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, decTransferToBalance)
+        'update the transactions table with fees if making an unqualified distribution from an IRA account
+        If Session("UnqualifiedDistributionFee") = "Add Fee" Or Session("UnqualifiedDistributionFee") = "Include Fee" Then
+            DBTransactions.AddTransaction(CInt(Session("TransactionNumber")) + 1, CInt(ddlFromAccount.SelectedValue), "Fee", txtTransferDate.Text, 30, "$30 service fee for an unqualified distribution from an IRA account", decIRAFeeBalance)
+        End If
 
         lblErrorTransfer.Text = "Transfer Confirmed"
         Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
+    End Sub
+
+    Protected Sub btnAddFee_Click(sender As Object, e As EventArgs) Handles btnAddFee.Click
+        Session("UnqualifiedDistributionFee") = "Add Fee"
+        SetFormNormal()
+        If Session("IRATransactionType") = "Transfer" Then
+            lblErrorTransfer.Text = "Your preferences for this transfer have been noted. Please confirm your transaction to execute the transaction"
+            TransferPanel.Visible = True
+        ElseIf Session("IRATransactionType") = "Withdrawal" Then
+            WithdrawalPanel.Visible = True
+            lblErrorWithdrawal.Text = "Your preferences for this withdrawal have been noted. Please confirm your transaction to execute the transaction"
+        End If
+    End Sub
+
+    Protected Sub btnIncludeFee_Click(sender As Object, e As EventArgs) Handles btnIncludeFee.Click
+        Session("UnqualifiedDistributionFee") = "Include Fee"
+        SetFormNormal()
+        If Session("IRATransactionType") = "Transfer" Then
+            lblErrorTransfer.Text = "Your preferences for this transfer have been noted. Please confirm your transaction to execute the transaction"
+            TransferPanel.Visible = True
+        ElseIf Session("IRATransactionType") = "Withdrawal" Then
+            WithdrawalPanel.Visible = True
+            lblErrorWithdrawal.Text = "Your preferences for this withdrawal have been noted. Please confirm your transaction to execute the transaction"
+        End If
     End Sub
 End Class
 

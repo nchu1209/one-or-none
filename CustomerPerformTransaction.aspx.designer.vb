@@ -68,13 +68,13 @@ Partial Public Class CustomerPerformTransaction
     Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtAmoutTransfer control.
+    '''txtAmountTransfer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtAmoutTransfer As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtAmountTransfer As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''ddlFromAccount control.
@@ -363,4 +363,40 @@ Partial Public Class CustomerPerformTransaction
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ValidationSummary2 As Global.System.Web.UI.WebControls.ValidationSummary
+
+    '''<summary>
+    '''IRAFeeChoicePanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents IRAFeeChoicePanel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnAddFee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddFee As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnIncludeFee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnIncludeFee As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblIRA control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblIRA As Global.System.Web.UI.WebControls.Label
 End Class

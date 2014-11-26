@@ -45,7 +45,7 @@
           </div>
         
              <div id="textbox">
-                 <asp:TextBox ID="txtAmoutTransfer" runat="server"></asp:TextBox>
+                 <asp:TextBox ID="txtAmountTransfer" runat="server"></asp:TextBox>
              <br />
                  <asp:DropDownList ID="ddlFromAccount" runat="server">
              </asp:DropDownList>
@@ -123,10 +123,6 @@
              
         </asp:Panel>
 
-
-
-
-
 <asp:Panel ID="WithdrawalPanel" runat="server" Visible =" false">
          <br />
          <div id="label">
@@ -182,6 +178,21 @@
 
         
         </asp:Panel>
+
+        <asp:Panel ID="IRAFeeChoicePanel" runat="server" Visible =" false">
+         <div id ="div2">
+             You are younger than 65, and are therefore attempting to make an unqualified distribution from your IRA acocunt.<br /> There is a $30 service fee associated with unqualified distributions.<br /> Would you like to add the fee to your withdrawal amount or have the total amount entered include the fee?<br />
+             <br />
+             <asp:Button ID="btnAddFee" runat="server" Text="Add Fee" />
+             <asp:Button ID="btnIncludeFee" runat="server" Text="Include Fee" />
+             <br />
+             <br />
+             <asp:Label ID="lblIRA" runat="server"></asp:Label>
+             <br />
+             
+          </div>       
+        </asp:Panel>
+
 
 
 
