@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <link rel="shortcut icon" href="/favicon-4.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="http://localhost:51539/CustomerManageAccount.aspx" />
+    <link rel="shortcut icon" href="http://localhost:51539/EmployeeManageCustomers.aspx" />
     <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
     
        
