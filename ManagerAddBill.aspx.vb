@@ -22,11 +22,12 @@ Public Class ManagerAddBill
             btnConfirm.Visible = False
 
             dbpayee.GetPayeeCustomers(ddlPayee.SelectedValue.ToString)
-            FillCustomers()
+
             
         End If
 
-       
+        FillCustomers()
+
     End Sub
 
     Private Sub FillCustomers()
@@ -38,7 +39,7 @@ Public Class ManagerAddBill
     End Sub
 
     Protected Sub ddlPayee_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlPayee.SelectedIndexChanged
-        dbpayee.GetPayeeCustomers(ddlPayee.SelectedIndex.ToString)
+        dbpayee.GetPayeeCustomers(ddlPayee.SelectedValue.ToString)
         FillCustomers()
     End Sub
 End Class

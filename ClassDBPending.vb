@@ -5,6 +5,7 @@ Imports System.Data.SqlClient
 
 Public Class ClassDBPending
     Dim mDatasetPending As New DataSet
+    Dim mDatasetPending2 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
@@ -18,6 +19,18 @@ Public Class ClassDBPending
         End Get
     End Property
     Public ReadOnly Property MyView() As DataView
+        Get
+            Return mMyView
+        End Get
+    End Property
+
+    Public ReadOnly Property PendingDataset2() As DataSet
+        Get
+            'Return dataset to user
+            Return mDatasetPending
+        End Get
+    End Property
+    Public ReadOnly Property MyView2() As DataView
         Get
             Return mMyView
         End Get
@@ -60,6 +73,27 @@ Public Class ClassDBPending
             mdbDataAdapter.Fill(mDatasetPending, "tblPending")
             'copy dataset to dataview
             mMyView.Table = mDatasetPending.Tables("tblPending")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
+    Public Sub RunProcedureGetAll(ByVal strProcedureName As String)
+        'Purpose: run any stored procedure with no parameters and fill dataset
+
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'clear dataset
+            mDatasetPending.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetPending2, "tblPending")
+            'copy dataset to dataview
+            mMyView.Table = mDatasetPending2.Tables("tblPending")
         Catch ex As Exception
             Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
         End Try
@@ -131,6 +165,16 @@ Public Class ClassDBPending
             "'" & strDescription & "')"
 
         'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+    End Sub
+
+    Public Sub GetAllPendingTransactions()
+        RunProcedureGetAll("usp_pending_get_all")
+    End Sub
+
+    Public Sub DeleteTransaction(intTransactionNumber As Integer)
+        mstrQuery = "DELETE FROM tblPendingTransactions WHERE TransactionNumber = " & intTransactionNumber
+
         UpdateDB(mstrQuery)
     End Sub
 
