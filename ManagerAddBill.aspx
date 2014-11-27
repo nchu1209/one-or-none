@@ -16,7 +16,7 @@
         <br />
 &nbsp;</div>
     <div id ="textbox">
-        <asp:DropDownList ID="ddlPayee" runat="server">
+        <asp:DropDownList ID="ddlPayee" runat="server" AutoPostBack="True">
         </asp:DropDownList>
         <br />
         <asp:DropDownList ID="ddlCustomer" runat="server">

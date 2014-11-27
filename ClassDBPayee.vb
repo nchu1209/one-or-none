@@ -137,11 +137,11 @@ Public Class ClassDBPayee
             'add parameter to SPROC
             mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
             'clear dataset
-            mDatasetPayee.Clear()
+            mDatasetPayee2.Clear()
             'open connection and fill dataset
             mdbDataAdapter.Fill(mDatasetPayee2, "tblPayees")
             'copy dataset to dataview
-            mMyView.Table = mDatasetPayee2.Tables("tblPayees")
+            mMyView2.Table = mDatasetPayee2.Tables("tblPayees")
         Catch ex As Exception
             Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
         End Try
