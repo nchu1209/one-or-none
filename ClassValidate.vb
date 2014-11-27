@@ -29,7 +29,7 @@ Public Class ClassValidate
 
         'Check for positive
         If decInput < 0 Then
-            'Return -1 if value is less than or equal to zero
+            'Return -1 if value is less than zero
             Return -1
         End If
 
