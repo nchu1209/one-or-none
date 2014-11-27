@@ -52,7 +52,17 @@
                     decAccountBalance = CDec(dbaccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance")) - decTransactionAmount
                 End If
 
+                If strTransactionType = "Transfer To" Then
+                    decAccountBalance = CDec(dbaccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance")) + decTransactionAmount
+                End If
+
+                If strTransactionType = "Transfer From" Then
+                    decAccountBalance = CDec(dbaccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance")) - decTransactionAmount
+                End If
                 'not sure how to handle transfers???
+                'perhaps i will go into the transfers, and make an if statement: if the day is not today, then, type is "Transfer Withdrawal" or "Transfer Deposit"
+                'then when we are here, we can check for strTransactionType = "Transfer Withdrawal" etc
+                'and when we plug it into the transaction table, change strTransactionName just to "Transfer"
 
                 dbtransaction.AddTransaction(intTransactionNumber, intAccountNumber, strTransactionType, strDate, decTransactionAmount, strDescription, decAccountBalance)
 
