@@ -230,10 +230,6 @@
             DBAccounts.UpdateIRATotalDeposit(CInt(ddlTransferTo.SelectedValue), decIRATotal)
         End If
 
-        decTransferToBalance += CDec(txtAmountTransfer.Text)
-        DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
-
-
         'TRANSFER FROM
 
         Dim decTransferFromBalance As Decimal
@@ -272,19 +268,27 @@
                 If Session("UnqualifiedDistributionFee") Is Nothing Then
                     SetFormNormal()
                     IRAFeeChoicePanel.Visible = True
+                    Exit Sub
                 End If
                 If Session("UnqualifiedDistributionFee") = "Include Fee" Then
+                    If CDec(txtAmountTransfer.Text) <= 30 Then
+                        lblErrorTransfer.Text = "Please enter an amount greater than $30 to transfer out of your account, since the $30 service charge will be deducted directly from this amount"
+                        Exit Sub
+                    End If
                     decWithdrawalAmount = decWithdrawalAmount - intServiceFee
                 End If
             End If
         End If
 
 
-
+        'EXECUTE: UPDATE ALL BALANCES
         decTransferFromBalance = decTransferFromBalance - decWithdrawalAmount
         Dim decIRAFeeBalance As Decimal
         decIRAFeeBalance = decTransferFromBalance - 30
         DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance)
+
+        decTransferToBalance += CDec(txtAmountTransfer.Text)
+        DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
 
         Dim strTransferMessage As String
         strTransferMessage = "Transfer from account " & ddlFromAccount.SelectedValue.ToString & " to account " & ddlTransferTo.SelectedValue.ToString
@@ -296,6 +300,8 @@
         'update the transactions table with fees if making an unqualified distribution from an IRA account
         If Session("UnqualifiedDistributionFee") = "Add Fee" Or Session("UnqualifiedDistributionFee") = "Include Fee" Then
             DBTransactions.AddTransaction(CInt(Session("TransactionNumber")) + 1, CInt(ddlFromAccount.SelectedValue), "Fee", txtTransferDate.Text, 30, "$30 service fee for an unqualified distribution from an IRA account", decIRAFeeBalance)
+            DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance - 30)
+            Session("UnqualifiedDistributionFee") = Nothing
         End If
 
         lblErrorTransfer.Text = "Transfer Confirmed"

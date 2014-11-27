@@ -19,6 +19,8 @@
     Protected Sub lnkLogout_Click(sender As Object, e As EventArgs) Handles lnkLogout.Click
         Session("CustomerNumber") = Nothing
         Session("CustomerFirstName") = Nothing
+        Session("UnqualifiedDistributionFee") = Nothing
+        'do we need to reset all the session variables?
         Response.Redirect("CustomerLogin.aspx")
     End Sub
 End Class

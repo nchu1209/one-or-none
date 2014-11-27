@@ -18,6 +18,15 @@
     font-weight: bold;
 }
 
+#title100 {
+    width: 99%;
+   float: left;
+    text-align: center;
+    color: #000000;
+    font-size: x-large;
+    font-weight: bold;
+}
+
 #icon {
     width: 19%;
 }
@@ -84,6 +93,31 @@
     text-align: center;
 }
 
+#a1 {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+#b1 {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+#c1 {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+#d1 {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+#e1 {
+    float: left;
+    width: 19.5%;
+    text-align: center;
+}
 #center {
     width: 99%;
     text-align: center;
