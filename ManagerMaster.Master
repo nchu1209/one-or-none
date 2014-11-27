@@ -54,8 +54,8 @@
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">eBills<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/ManagerAddBill.aspx">Add eBills</a></li>
-            <li><a href="/ManagerEditStocks.aspx">Edit Stocks</a></li>
+            <li><a href="/ManagerAddBills.aspx">Add eBills</a></li>
+            <li><a href="/ManagerViewBills.aspx">View eBills</a></li>
           </ul>
         </li>
 
