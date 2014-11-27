@@ -126,6 +126,27 @@ Public Class ClassDBPayee
         End Try
     End Sub
 
+    Public Sub RunProcedurePayeeCustomers(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
+
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'add parameter to SPROC
+            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
+            'clear dataset
+            mDatasetPayee.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetPayee2, "tblPayees")
+            'copy dataset to dataview
+            mMyView.Table = mDatasetPayee2.Tables("tblPayees")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
     Public Sub UpdateDB(ByVal mstrQuery As String)
        
         Try
@@ -205,6 +226,10 @@ Public Class ClassDBPayee
 
     Public Sub GetPayeeByID(ByVal strPayeeID As String)
         RunProcedureOneParameter("usp_payees_get_by_payeeID", "@payeeID", strPayeeID)
+    End Sub
+
+    Public Sub GetPayeeCustomers(ByVal strPayeeID As String)
+        RunProcedurePayeeCustomers("usp_innerjoin_customerspayees_customers_by_payeeID", "@PayeeID", strPayeeID)
     End Sub
 
 End Class

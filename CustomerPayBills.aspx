@@ -7,8 +7,8 @@
         Pay Bills<br />
         <br />
     </div>
-    <div id ="lefthalf">
-        <div id ="subtitle">Your Payees - Make a Payment</div>
+    <div id ="center">
+        <div id ="subtitle">Your Payees</div>
         <br />
         <asp:Label ID="Label4" runat="server" Text="Select Account:"></asp:Label>
 &nbsp;
@@ -73,38 +73,5 @@
         <br />
         </div>
     </div>
-    <div id ="righthalf">
-        <div id ="subtitle">View eBills</div>
-        <br />
-        <div id="label">
-            <asp:Label ID="Label1" runat="server" Text="Payee:"></asp:Label>
-            <br />
-            From Account:<br />
 
-            <asp:Label ID="Label2" runat="server" Text="Amount:"></asp:Label>
-            <br />
-            <asp:Label ID="Label3" runat="server" Text="Date:"></asp:Label>
-            <br />
-            <br />
-            <br />
-        </div>
-        <div id ="textbox">
-            <asp:DropDownList ID="ddlPayee" runat="server">
-            </asp:DropDownList>
-            <br />
-            <br />
-            <br />
-            <asp:Calendar ID="calTest" runat="server"></asp:Calendar>
-            <br />
-            <asp:Button ID="btnTest" runat="server" Text="Test" />
-            <br />
-            <br />
-            <asp:Label ID="lblTest" runat="server" Text="_"></asp:Label>
-            <br />
-            <br />
-        </div>
-        <br />
-      
-
-    </div>
 </asp:Content>
