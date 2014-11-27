@@ -25,8 +25,7 @@
           <%-- things that need to go on customer navbar: login, create profile, apply for account, customer portal, modify account  --%>
         <li class="active"><a href="/ManagerHome.aspx">Manager Home</a></li>
         <li><a href="/ManagerSetDate.aspx">Set Date</a></li>
-
-
+          
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modify Manager Account<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -40,8 +39,6 @@
           </ul>
         </li>
 
-
-
          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stocks<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -53,9 +50,17 @@
             <li><a href="#">One more separated link</a></li>--%>
           </ul>
         </li>
+
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">eBills<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/ManagerAddBill.aspx">Add eBills</a></li>
+            <li><a href="/ManagerEditStocks.aspx">Edit Stocks</a></li>
+          </ul>
+        </li>
+
         </ul>
-
-
+        
          <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Modify Employee Account</a></li>
         <li><a href="#">Manage Customers</a></li>
