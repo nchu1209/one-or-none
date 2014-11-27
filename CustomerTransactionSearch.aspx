@@ -19,16 +19,20 @@
         </div>
 
        
-        <div id="a1">
+        <div id="a">
             Search by Description:<br />
 &nbsp;<asp:TextBox ID="txtDescriptionSearch" runat="server"></asp:TextBox>
-            <asp:RadioButtonList ID="RadioButtonList1" runat="server">
+           <div id="content2">
+               <div id="radiobuttonfix">
+             <asp:RadioButtonList ID="RadioButtonList1" runat="server" style="text-align: left">
                 <asp:ListItem>Partial Search</asp:ListItem>
                 <asp:ListItem>Keyword Search</asp:ListItem>
             </asp:RadioButtonList>
+               </div>
+                </div>
         </div>
         
-        <div id="b1">
+        <div id="b">
             Search by Transaction Type:
             <br />
             <asp:DropDownList ID="ddlSearchByTransactionType" runat="server">
@@ -40,18 +44,22 @@
             </asp:DropDownList>
             <br />
         </div>
-        <div id="c1">
+        <div id="c">
             Search by Price:<br />
-            <asp:RadioButtonList ID="RadioButtonList2" runat="server">
+            <div id="content2">
+               <div id="radiobuttonfix2">
+            <asp:RadioButtonList ID="RadioButtonList2" runat="server" style="text-align: left">
                 <asp:ListItem>0-$100</asp:ListItem>
                 <asp:ListItem>101 - $200</asp:ListItem>
                 <asp:ListItem>201 - $300</asp:ListItem>
                 <asp:ListItem>$300+</asp:ListItem>
                 <asp:ListItem>Other</asp:ListItem>
             </asp:RadioButtonList>
+                   </div>
+                </div>
             <asp:TextBox ID="txtSearchByOtherPrice" runat="server"></asp:TextBox>
         </div>
-        <div id="d1">
+        <div id="d">
             Search by Transaction Number:<br />
 &nbsp;<asp:TextBox ID="txtSearchByTransactionNumber" runat="server"></asp:TextBox>
         </div>

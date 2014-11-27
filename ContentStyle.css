@@ -232,3 +232,21 @@
     float: left;
     width: 29%;
 }
+
+#radiobuttonfix {
+     text-align: left;
+     float: right;
+    width: 75%;
+}
+
+#radiobuttonfix2 {
+     text-align: left;
+     float: right;
+    width: 60%;
+}
+#content2 {
+     width: 99%;
+   text-align:center;
+   font-weight:400;
+   font-size:medium;
+}
