@@ -13,6 +13,7 @@ Public Class ClassDBAccounts
     Dim mDatasetAccounts6 As New DataSet
     Dim mDatasetAccounts7 As New DataSet
     Dim mDatasetAccounts8 As New DataSet
+    Dim mDatasetAccounts9 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
@@ -25,6 +26,7 @@ Public Class ClassDBAccounts
     Dim mMyView6 As New DataView
     Dim mMyView7 As New DataView
     Dim mMyView8 As New DataView
+    Dim mMyView9 As New DataView
 
     Public ReadOnly Property AccountsDataset() As DataSet
         Get
@@ -117,6 +119,17 @@ Public Class ClassDBAccounts
     Public ReadOnly Property MyView8() As DataView
         Get
             Return mMyView8
+        End Get
+    End Property
+    Public ReadOnly Property AccountsDataset9() As DataSet
+        Get
+            'Return dataset to user
+            Return mDatasetAccounts9
+        End Get
+    End Property
+    Public ReadOnly Property MyView9() As DataView
+        Get
+            Return mMyView9
         End Get
     End Property
 
@@ -377,6 +390,32 @@ Public Class ClassDBAccounts
             Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
         End Try
     End Sub
+    Public Sub RunProcedureOneParameter9(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
+        'Purpose: run any stored procedure with one parameter and fill dataset
+        'Arguments: 3 strings
+        'Returns: none (query results via property)
+        'Author: Nicole Chu (nc7997)
+        'Date: 10/21/14
+        'Creates instances of the connection and command object
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'add parameter to SPROC
+            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
+            'clear dataset
+            mDatasetAccounts9.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetAccounts9, "tblAccounts")
+            'copy dataset to dataview
+            mMyView9.Table = mDatasetAccounts9.Tables("tblAccounts")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
     Public Sub LinkZip(ByVal strCustomerID As String)
         RunProcedureOneParameter("usp_innerjoin_customer_city_by_zip", "@CustomerID", strCustomerID)
     End Sub
@@ -446,6 +485,10 @@ Public Class ClassDBAccounts
     End Sub
 
     Public Sub GetAccountTypeByAccountNumber(strAccountNumber As String)
+        RunProcedureOneParameter9("usp_accounts_get_account_type_by_account_number", "@AccountNumber", strAccountNumber)
+    End Sub
+
+    Public Sub GetAccountTypeByAccountNumber2(strAccountNumber As String)
         RunProcedureOneParameterIRA("usp_accounts_get_account_type_by_account_number", "@AccountNumber", strAccountNumber)
     End Sub
 

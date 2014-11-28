@@ -11,6 +11,7 @@ Public Class ClassDBPending
     Dim mdbConn As New SqlConnection
     Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False; initial catalog=mis333k_msbck614; user id=msbck614; password=AmyEnrione1"
     Dim mMyView As New DataView
+    Dim mMyView2 As New DataView
 
     Public ReadOnly Property PendingDataset() As DataSet
         Get
@@ -27,12 +28,12 @@ Public Class ClassDBPending
     Public ReadOnly Property PendingDataset2() As DataSet
         Get
             'Return dataset to user
-            Return mDatasetPending
+            Return mDatasetPending2
         End Get
     End Property
     Public ReadOnly Property MyView2() As DataView
         Get
-            Return mMyView
+            Return mMyView2
         End Get
     End Property
 
@@ -89,11 +90,11 @@ Public Class ClassDBPending
             'sets command type to "stored procedure"
             mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
             'clear dataset
-            mDatasetPending.Clear()
+            mDatasetPending2.Clear()
             'open connection and fill dataset
             mdbDataAdapter.Fill(mDatasetPending2, "tblPending")
             'copy dataset to dataview
-            mMyView.Table = mDatasetPending2.Tables("tblPending")
+            mMyView2.Table = mDatasetPending2.Tables("tblPending")
         Catch ex As Exception
             Throw New Exception("stored procedure is " & strProcedureName.ToString & " error is " & ex.Message)
         End Try
@@ -154,15 +155,16 @@ Public Class ClassDBPending
         RunProcedureNoParam("usp_transactions_get_max_transaction_number")
     End Sub
 
-    Public Sub AddTransaction(intTransactionNumber As Integer, ByVal intAccountNumber As Integer, strTransactionType As String, strDate As String, decTransactionAmount As Decimal, strDescription As String)
+    Public Sub AddTransaction(intTransactionNumber As Integer, ByVal intAccountNumber As Integer, strTransactionType As String, strDate As String, decTransactionAmount As Decimal, strDescription As String, strIRA As String)
 
-        mstrQuery = "INSERT INTO tblPendingTransactions (TransactionNumber, AccountNumber, TransactionType, Date, TransactionAmount, Description) VALUES (" & _
+        mstrQuery = "INSERT INTO tblPendingTransactions (TransactionNumber, AccountNumber, TransactionType, Date, TransactionAmount, Description, IRA) VALUES (" & _
             "'" & intTransactionNumber & "', " & _
             "'" & intAccountNumber & "', " & _
             "'" & strTransactionType & "', " & _
             "'" & strDate & "', " & _
             "'" & decTransactionAmount & "', " & _
-            "'" & strDescription & "')"
+            "'" & strDescription & "', " & _
+            "'" & strIRA & "')"
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)

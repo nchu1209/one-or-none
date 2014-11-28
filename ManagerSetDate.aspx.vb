@@ -7,6 +7,7 @@
     Dim dbaccounts As New ClassDBAccounts
     Dim mstrDate As String
 
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
@@ -20,8 +21,6 @@
 
     Protected Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         db.SetDate(txtDate.Text)
-
-        dbpending.GetAllPendingTransactions()
         db.GetDate()
 
         Dim intTransactionNumber As Integer
@@ -31,7 +30,9 @@
         Dim decTransactionAmount As Decimal
         Dim strDescription As String
         Dim decAccountBalance As Decimal
+        Dim strIRA As String
 
+        dbpending.GetAllPendingTransactions()
         For i = 0 To dbpending.PendingDataset2.Tables("tblPending").Rows.Count - 1
             If dbpending.PendingDataset2.Tables("tblPending").Rows(i).Item("Date") <= db.DateDataset.Tables("tblSystemDate").Rows(0).Item("Date") Then
                 'send information to transaction table and update balance
@@ -41,6 +42,7 @@
                 strDate = dbpending.PendingDataset2.Tables("tblPending").Rows(i).Item("Date").ToString
                 decTransactionAmount = CDec(dbpending.PendingDataset2.Tables("tblPending").Rows(i).Item("TransactionAmount"))
                 strDescription = dbpending.PendingDataset2.Tables("tblPending").Rows(i).Item("Description").ToString
+                strIRA = dbpending.PendingDataset2.Tables("tblPending").Rows(i).Item("IRA").ToString
 
                 dbaccounts.GetBalanceByAccountNumber(intAccountNumber.ToString)
 
@@ -59,18 +61,33 @@
                 If strTransactionType = "Transfer From" Then
                     decAccountBalance = CDec(dbaccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance")) - decTransactionAmount
                 End If
-                'not sure how to handle transfers???
-                'perhaps i will go into the transfers, and make an if statement: if the day is not today, then, type is "Transfer Withdrawal" or "Transfer Deposit"
-                'then when we are here, we can check for strTransactionType = "Transfer Withdrawal" etc
-                'and when we plug it into the transaction table, change strTransactionName just to "Transfer"
 
-                dbtransaction.AddTransaction(intTransactionNumber, intAccountNumber, strTransactionType, strDate, decTransactionAmount, strDescription, decAccountBalance)
+                If strIRA = "True" And (strTransactionType = "Deposit" Or strTransactionType = "Transfer To") Then
+                    dbaccounts.GetIRATotalDepositByAccountNumber(intAccountNumber)
+                    Dim decIRATotal As Decimal
+                    decIRATotal = CDec(dbaccounts.AccountsDataset8.Tables("tblAccounts").Rows(0).Item("IRATotalDeposit"))
+                    dbaccounts.UpdateIRATotalDeposit(intAccountNumber, decIRATotal + decTransactionAmount)
+                End If
+
+                If strTransactionType = "Transfer To" Then
+                    strTransactionType = "Transfer"
+                End If
+
+                If strTransactionType = "Transfer From" Then
+                    strTransactionType = "Transfer"
+                End If
+
+                'add transaction
+                'update balance
+                dbtransaction.AddTransaction(intTransactionNumber, intAccountNumber, strTransactionType, strDate, decTransactionAmount, strDescription, decAccountBalance, strIRA)
+                dbaccounts.UpdateBalance(intAccountNumber, decAccountBalance)
 
                 'delete row from tblPending
                 dbpending.DeleteTransaction(intTransactionNumber)
             End If
 
         Next
-
+        lblError.Text = "Date successfully changed"
+        Response.AddHeader("Refresh", "2; URL= ManagerHome.aspx")
     End Sub
 End Class

@@ -19,6 +19,7 @@
          <br />
 &nbsp;<asp:Button ID="btnConfirm" runat="server" Text="Confirm Date Change" />
         <br />
+         <asp:Label ID="lblError" runat="server"></asp:Label>
         <br />
     </div>
 </asp:Content>

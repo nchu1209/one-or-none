@@ -159,21 +159,22 @@ Public Class ClassDBTransactions
         RunProcedureNoParam("usp_transactions_get_max_transaction_number")
     End Sub
 
-    Public Sub AddTransaction(intTransactionNumber As Integer, ByVal intAccountNumber As Integer, strTransactionType As String, strDate As String, decTransactionAmount As Decimal, strDescription As String, decAccountBalance As Decimal)
+    Public Sub AddTransaction(intTransactionNumber As Integer, ByVal intAccountNumber As Integer, strTransactionType As String, strDate As String, decTransactionAmount As Decimal, strDescription As String, decAccountBalance As Decimal, strIRA As String)
         'Purpose: adds a customer to database
         'Arguments: 11 strings
         'Returns: nothing
         'Author: Nicole Chu (nc7997)
         'Date: 9/24/2014
 
-        mstrQuery = "INSERT INTO tblTransactions (TransactionNumber, AccountNumber, TransactionType, Date, TransactionAmount, Description, AccountBalance) VALUES (" & _
+        mstrQuery = "INSERT INTO tblTransactions (TransactionNumber, AccountNumber, TransactionType, Date, TransactionAmount, Description, AccountBalance, IRA) VALUES (" & _
             "'" & intTransactionNumber & "', " & _
             "'" & intAccountNumber & "', " & _
             "'" & strTransactionType & "', " & _
             "'" & strDate & "', " & _
             "'" & decTransactionAmount & "', " & _
             "'" & strDescription & "', " & _
-            "'" & decAccountBalance & "')"
+            "'" & decAccountBalance & "', " & _
+            "'" & strIRA & "')"
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)

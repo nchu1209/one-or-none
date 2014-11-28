@@ -4,6 +4,7 @@
     Dim DB As New ClassDBCustomer
     Dim DBTransactions As New ClassDBTransactions
     Dim DBDate As New ClassDBDate
+    Dim DBPending As New ClassDBPending
     Dim Format As New ClassFormat
     Dim mCustomerID As Integer
     Dim Valid As New ClassValidate
@@ -125,6 +126,13 @@
         decBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
 
         DBAccounts.GetAccountTypeByAccountNumber(ddlDeposit.SelectedValue.ToString)
+        Dim strIRA As String
+        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+            strIRA = "True"
+        Else
+            strIRA = "False"
+        End If
+
         If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
             Dim decIRATotal As Decimal
             DBAccounts.GetIRATotalDepositByAccountNumber(ddlDeposit.SelectedValue.ToString)
@@ -137,19 +145,26 @@
                 Exit Sub
             End If
             decIRATotal += CDec(txtDepositAmount.Text)
-            DBAccounts.UpdateIRATotalDeposit(CInt(ddlDeposit.SelectedValue), decIRATotal)
+
+            If DBDate.CheckSelectedDate(DepositCalendar.SelectedDate) = 0 Then
+                DBAccounts.UpdateIRATotalDeposit(CInt(ddlDeposit.SelectedValue), decIRATotal)
+            End If
         End If
 
 
-        'update the balance
         decBalance += CDec(txtDepositAmount.Text)
-        DBAccounts.UpdateBalance(CInt(ddlDeposit.SelectedValue), decBalance)
-
         Dim strDepositMessage As String
         strDepositMessage = "Deposited " & txtDepositAmount.Text & " to account " & ddlDeposit.SelectedValue.ToString & " on " & txtDepositDate.Text
         GetTransactionNumber()
-        'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlDeposit.SelectedValue), "Deposit", txtDepositDate.Text, CDec(txtDepositAmount.Text), strDepositMessage, decBalance)
+
+        If DBDate.CheckSelectedDate(DepositCalendar.SelectedDate) = 0 Then
+            'update the balance
+            DBAccounts.UpdateBalance(CInt(ddlDeposit.SelectedValue), decBalance)
+            'update the transactions table
+            DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlDeposit.SelectedValue), "Deposit", txtDepositDate.Text, CDec(txtDepositAmount.Text), strDepositMessage, decBalance, strIRA)
+        Else
+            DBPending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlDeposit.SelectedValue), "Deposit", txtDepositDate.Text, CDec(txtDepositAmount.Text), strDepositMessage, strIRA)
+        End If
 
         lblErrorDeposit.Text = "Deposit Confirmed"
         Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
@@ -180,15 +195,21 @@
         End If
 
         decBalance = decBalance - CDec(txtWithdrawalAmount.Text)
-        DBAccounts.UpdateBalance(CInt(ddlWithdrawal.SelectedValue), decBalance)
-        lblErrorWithdrawal.Text = "Withdrawal Confirmed"
-        Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
-
         Dim strWithdrawalMessage As String
         strWithdrawalMessage = "Withdrew " & txtWithdrawalAmount.Text & " from account " & ddlWithdrawal.SelectedValue.ToString & " on " & txtWithdrawalDate.Text
         GetTransactionNumber()
-        'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlWithdrawal.SelectedValue), "Withdrawal", txtWithdrawalDate.Text, CDec(txtWithdrawalAmount.Text), strWithdrawalMessage, decBalance)
+        If DBDate.CheckSelectedDate(WithdrawalCalendar.SelectedDate) = 0 Then
+            DBAccounts.UpdateBalance(CInt(ddlWithdrawal.SelectedValue), decBalance)
+            'update the transactions table
+            DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlWithdrawal.SelectedValue), "Withdrawal", txtWithdrawalDate.Text, CDec(txtWithdrawalAmount.Text), strWithdrawalMessage, decBalance, "NA")
+        Else
+            DBPending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlWithdrawal.SelectedValue), "Withdrawal", txtWithdrawalDate.Text, CDec(txtWithdrawalAmount.Text), strWithdrawalMessage, "NA")
+        End If
+
+        lblErrorWithdrawal.Text = "Withdrawal Confirmed"
+        Response.AddHeader("Refresh", "2; URL= CustomerPerformTransaction.aspx")
+
+
     End Sub
 
     Protected Sub btnTransfer_Click(sender As Object, e As EventArgs) Handles btnTransfer.Click
@@ -215,7 +236,14 @@
         decTransferToBalance = CDec(DBAccounts.AccountsDataset6.Tables("tblAccounts").Rows(0).Item("Balance"))
 
         DBAccounts.GetAccountTypeByAccountNumber(ddlTransferTo.SelectedValue.ToString)
-        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+        Dim strIRATo As String
+        If DBAccounts.AccountsDataset9.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+            strIRATo = "True"
+        Else
+            strIRATo = "False"
+        End If
+
+        If DBAccounts.AccountsDataset9.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
             Dim decIRATotal As Decimal
             DBAccounts.GetIRATotalDepositByAccountNumber(ddlTransferTo.SelectedValue.ToString)
             decIRATotal = CDec(DBAccounts.AccountsDataset8.Tables("tblAccounts").Rows(0).Item("IRATotalDeposit"))
@@ -227,8 +255,12 @@
                 Exit Sub
             End If
             decIRATotal += CDec(txtAmountTransfer.Text)
-            DBAccounts.UpdateIRATotalDeposit(CInt(ddlTransferTo.SelectedValue), decIRATotal)
+
+            If DBDate.CheckSelectedDate(TransferCalendar.SelectedDate) = 0 Then
+                DBAccounts.UpdateIRATotalDeposit(CInt(ddlTransferTo.SelectedValue), decIRATotal)
+            End If
         End If
+
 
         'TRANSFER FROM
 
@@ -243,6 +275,14 @@
             Exit Sub
         End If
 
+        DBAccounts.GetAccountTypeByAccountNumber2(ddlFromAccount.SelectedValue.ToString)
+        Dim strIRAFrom As String
+        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+            strIRAFrom = "True"
+        Else
+            strIRAFrom = "False"
+        End If
+
         DB.GetDOBByCustmomerNumber(Session("CustomerNumber"))
         DBDate.GetYear()
         Dim intMaxIRAWithdrawal As Integer
@@ -252,7 +292,7 @@
         Dim decWithdrawalAmount As Decimal
         decWithdrawalAmount = CDec(txtAmountTransfer.Text)
 
-        DBAccounts.GetAccountTypeByAccountNumber(ddlFromAccount.SelectedValue.ToString)
+        DBAccounts.GetAccountTypeByAccountNumber2(ddlFromAccount.SelectedValue.ToString)
         If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
             If CInt(DBDate.DateDataset2.Tables("tblSystemDate").Rows(0).Item("Date")) - CInt(DB.CustDataset2.Tables("tblCustomers").Rows(0).Item("DOB")) < 65 Then
                 If CDec(txtAmountTransfer.Text) > intMaxIRAWithdrawal Then
@@ -285,23 +325,33 @@
         decTransferFromBalance = decTransferFromBalance - decWithdrawalAmount
         Dim decIRAFeeBalance As Decimal
         decIRAFeeBalance = decTransferFromBalance - 30
-        DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance)
-
         decTransferToBalance += CDec(txtAmountTransfer.Text)
-        DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
-
         Dim strTransferMessage As String
         strTransferMessage = "Transfer from account " & ddlFromAccount.SelectedValue.ToString & " to account " & ddlTransferTo.SelectedValue.ToString
         GetTransactionNumber()
-        'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlFromAccount.SelectedValue), "Transfer", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, decTransferFromBalance)
-        'update the transactions table
-        DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, decTransferToBalance)
-        'update the transactions table with fees if making an unqualified distribution from an IRA account
-        If Session("UnqualifiedDistributionFee") = "Add Fee" Or Session("UnqualifiedDistributionFee") = "Include Fee" Then
-            DBTransactions.AddTransaction(CInt(Session("TransactionNumber")) + 1, CInt(ddlFromAccount.SelectedValue), "Fee", txtTransferDate.Text, 30, "$30 service fee for an unqualified distribution from an IRA account", decIRAFeeBalance)
-            DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance - 30)
-            Session("UnqualifiedDistributionFee") = Nothing
+
+        If DBDate.CheckSelectedDate(TransferCalendar.SelectedDate) = 0 Then
+            DBAccounts.UpdateBalance(CInt(ddlTransferTo.SelectedValue), decTransferToBalance)
+            DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance)
+            'update the transactions table
+            DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlFromAccount.SelectedValue), "Transfer", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, decTransferFromBalance, strIRAFrom)
+            'update the transactions table
+            DBTransactions.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, decTransferToBalance, strIRATo)
+            'update the transactions table with fees if making an unqualified distribution from an IRA account
+
+
+            If Session("UnqualifiedDistributionFee") = "Add Fee" Or Session("UnqualifiedDistributionFee") = "Include Fee" Then
+                DBTransactions.AddTransaction(CInt(Session("TransactionNumber")) + 1, CInt(ddlFromAccount.SelectedValue), "Fee", txtTransferDate.Text, 30, "$30 service fee for an unqualified distribution from an IRA account", decIRAFeeBalance, "NA")
+                DBAccounts.UpdateBalance(CInt(ddlFromAccount.SelectedValue), decTransferFromBalance - 30)
+                Session("UnqualifiedDistributionFee") = Nothing
+            End If
+        Else
+            DBPending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlFromAccount.SelectedValue), "Transfer From", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, strIRAFrom)
+            DBPending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlTransferTo.SelectedValue), "Transfer To", txtTransferDate.Text, decWithdrawalAmount, strTransferMessage, strIRATo)
+            If Session("UnqualifiedDistributionFee") = "Add Fee" Or Session("UnqualifiedDistributionFee") = "Include Fee" Then
+                DBPending.AddTransaction(CInt(Session("TransactionNumber")) + 1, CInt(ddlFromAccount.SelectedValue), "Fee", txtTransferDate.Text, 30, "$30 service fee for an unqualified distribution from an IRA account", "NA")
+                Session("UnqualifiedDistributionFee") = Nothing
+            End If
         End If
 
         lblErrorTransfer.Text = "Transfer Confirmed"
