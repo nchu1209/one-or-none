@@ -140,4 +140,8 @@ Public Class ClassDBBill
         RunProcedureNoParam("usp_bill_get_all")
     End Sub
 
+    Public Sub GetCustomerBills(strCustomerNumber As String)
+        RunProcedureOneParameter("usp_bill_get_by_customernumber", "@customernumber", strCustomerNumber)
+    End Sub
+
 End Class

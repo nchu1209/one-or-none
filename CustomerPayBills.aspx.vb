@@ -30,13 +30,26 @@
 
             btnConfirm.Visible = False
             btnAbort.Visible = False
+
+            dbbill.GetCustomerBills(Session("CustomerNumber"))
+            If dbbill.BillDataset.Tables("tblBill").Rows.Count <> 0 Then
+                For i = 0 To gvMyPayees.Rows.Count - 1
+                    For k = 0 To dbbill.BillDataset.Tables("tblBill").Rows.Count - 1
+                        Dim x As Label = DirectCast(gvMyPayees.Rows(i).Cells(1).FindControl("lblPayeeID"), Label)
+                        If CInt(x.Text) = dbbill.BillDataset.Tables("tblBill").Rows(k).Item("PayeeID") Then
+                            Dim b As ImageButton = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("btnBill"), ImageButton)
+                            b.ImageUrl = "~/eBill.jpg"
+                            b.Enabled = True
+                            b.CommandName = "GoToBill"
+                        End If
+                    Next
+                Next
+            End If
         End If
 
         lblMessageTotal.Text = ""
         lblMessageFee.Text = ""
         lblMessageSuccess.Text = ""
-
-        dbbill.GetAllBills()
 
     End Sub
 
@@ -154,4 +167,21 @@
         btnConfirm.Visible = False
         btnAbort.Visible = False
     End Sub
+
+    Protected Sub gvMyPayees_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs)
+        If (e.CommandName = "GoToBill") Then
+            ' Retrieve the row index stored in the CommandArgument property.
+            Dim intRow As Integer = Convert.ToInt32(e.CommandArgument)
+
+            ' Retrieve the row that contains the button 
+            ' from the Rows collection.
+            Dim row As GridViewRow = gvMyPayees.Rows(intRow)
+
+            '' Add code here to add the item to the shopping cart.
+            dbbill.GetCustomerBills(Session("CustomerNumber"))
+            Response.Redirect("CustomerBillDetail.aspx?ID=" & dbbill.BillDataset.Tables("tblBill").Rows(intRow).Item("BillID"))
+
+        End If
+    End Sub
+
 End Class

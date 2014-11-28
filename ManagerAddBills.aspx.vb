@@ -51,6 +51,8 @@ Public Class ManagerAddBills
             Exit Sub
         End If
 
+        'CHECK IF CUSTOMER ALREADY HAS A BILL FOR THIS PAYEE!!
+
         pnlAddBill.Visible = True
     End Sub
 
