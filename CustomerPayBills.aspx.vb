@@ -7,6 +7,7 @@
     Dim dbdate As New ClassDBDate
     Dim dbtrans As New ClassDBTransactions
     Dim dbpending As New ClassDBPending
+    Dim dbbill As New ClassDBBill
 
     Dim mdecTotalWithdrawal As Decimal
     Dim mdecBalance As Decimal
@@ -34,7 +35,9 @@
         lblMessageTotal.Text = ""
         lblMessageFee.Text = ""
         lblMessageSuccess.Text = ""
-        
+
+        dbbill.GetAllBills()
+
     End Sub
 
     Protected Sub txtPay_Click(sender As Object, e As EventArgs) Handles btnPay.Click
@@ -50,7 +53,7 @@
 
         'validate textbox fields
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
             If t.Text <> "" Then
                 If valid.CheckDecimal(t.Text) = -1 Then
                     lblMessageTotal.Text = "Please enter valid payment amounts."
@@ -61,8 +64,8 @@
 
         'validate date fields
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
-            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
             If t.Text <> "" Then
                 If dbdate.CheckSelectedDate(c.SelectedDate) = -1 Then
                     lblMessageTotal.Text = "Please do not enter a date prior to today's date."
@@ -73,8 +76,8 @@
 
         'find the total withdrawal amount wooooo
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
-            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
 
             If t.Text <> "" Then
                 mdecTotalWithdrawal += CDec(t.Text)
@@ -115,9 +118,9 @@
 
         'pay bills - now and pending
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
-            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
-            Dim n As HyperLink = DirectCast(gvMyPayees.Rows(i).Cells(1).FindControl("lnkName"), HyperLink)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
+            Dim n As HyperLink = DirectCast(gvMyPayees.Rows(i).Cells(2).FindControl("lnkName"), HyperLink)
 
             If dbdate.CheckSelectedDate(c.SelectedDate) = 0 And t.Text <> "" Then
                 'today

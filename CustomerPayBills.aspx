@@ -21,6 +21,14 @@
         <asp:GridView ID="gvMyPayees" runat="server" AutoGenerateColumns="False" DataKeyNames="PayeeID" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:BoundField DataField="PayeeID" HeaderText="PayeeID" ReadOnly="True" SortExpression="PayeeID" Visible="False" />
+                <asp:TemplateField HeaderText="eBill">
+                    <EditItemTemplate>
+                        <asp:ImageButton ID="btnBill" runat="server"></asp:ImageButton>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:ImageButton ID="btnBill" runat="server" ImageUrl="~/eBill.JPG" OnClick ="btnBill_Click"></asp:ImageButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="PayeeName" SortExpression="PayeeName">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("PayeeName") %>'></asp:TextBox>

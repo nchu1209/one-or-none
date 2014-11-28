@@ -136,4 +136,8 @@ Public Class ClassDBBill
         RunProcedureNoParam("usp_bill_get_max_billID")
     End Sub
 
+    Public Sub GetAllBills()
+        RunProcedureNoParam("usp_bill_get_all")
+    End Sub
+
 End Class
