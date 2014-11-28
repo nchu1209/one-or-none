@@ -13,7 +13,7 @@
 
 
 
-        <asp:GridView ID="gvStocks" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+        <asp:GridView ID="gvStocks" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
             <Columns>
                 <asp:BoundField DataField="TickerSymbol" HeaderText="TickerSymbol" SortExpression="TickerSymbol" />
                 <asp:BoundField DataField="StockType" HeaderText="StockType" SortExpression="StockType" />
@@ -26,17 +26,14 @@
                         <asp:TextBox ID="txtPrice" runat="server" Text='<%# Bind("SalesPrice") %>'></asp:TextBox>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Fee" SortExpression="Fee">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Fee") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:textbox ID="txtFee" runat="server" Text='<%# Bind("Fee") %>'></asp:textbox>
-                    </ItemTemplate>
-                </asp:TemplateField>
+            <asp:BoundField DataField="Fee" HeaderText="Fee" SortExpression="Fee" />
             </Columns>
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MIS333K_msbck614ConnectionString %>" SelectCommand="SELECT * FROM [tblStocks]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [tblStocks]" ProviderName="System.Data.SqlClient"></asp:SqlDataSource>
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+        <br />
+        <asp:Button ID="btnChangePrice" runat="server" Text="Submit Change" />
+        <br />
         <br />
         <br />
 
