@@ -20,7 +20,14 @@
         <div id ="gridviewleft">
         <asp:GridView ID="gvMyPayees" runat="server" AutoGenerateColumns="False" DataKeyNames="PayeeID" DataSourceID="SqlDataSource1">
             <Columns>
-                <asp:BoundField DataField="PayeeID" HeaderText="PayeeID" ReadOnly="True" SortExpression="PayeeID" Visible="False" />
+                <asp:TemplateField HeaderText="PayeeID" SortExpression="PayeeID" Visible="false">
+                    <EditItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("PayeeID") %>'></asp:Label>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lblPayeeID" runat="server" Text='<%# Bind("PayeeID") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="PayeeName" SortExpression="PayeeName">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("PayeeName") %>'></asp:TextBox>
@@ -30,6 +37,15 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="PayeeType" HeaderText="PayeeType" SortExpression="PayeeType" />
+                <asp:TemplateField HeaderText="eBill">
+                    <EditItemTemplate>
+                        <asp:Button ID="btnBill" runat="server"></asp:Button>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:ImageButton ID="btnBill" runat="server" CommandName="GoToBill" 
+      CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" ImageUrl="~/WhiteSpace.jpg" Enabled ="false" OnCommand="gvmypayees_rowcommand"></asp:ImageButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Payment Amount">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>

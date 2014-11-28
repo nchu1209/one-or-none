@@ -7,6 +7,7 @@
     Dim dbdate As New ClassDBDate
     Dim dbtrans As New ClassDBTransactions
     Dim dbpending As New ClassDBPending
+    Dim dbbill As New ClassDBBill
 
     Dim mdecTotalWithdrawal As Decimal
     Dim mdecBalance As Decimal
@@ -29,12 +30,27 @@
 
             btnConfirm.Visible = False
             btnAbort.Visible = False
+
+            dbbill.GetCustomerBills(Session("CustomerNumber"))
+            If dbbill.BillDataset.Tables("tblBill").Rows.Count <> 0 Then
+                For i = 0 To gvMyPayees.Rows.Count - 1
+                    For k = 0 To dbbill.BillDataset.Tables("tblBill").Rows.Count - 1
+                        Dim x As Label = DirectCast(gvMyPayees.Rows(i).Cells(1).FindControl("lblPayeeID"), Label)
+                        If CInt(x.Text) = dbbill.BillDataset.Tables("tblBill").Rows(k).Item("PayeeID") Then
+                            Dim b As ImageButton = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("btnBill"), ImageButton)
+                            b.ImageUrl = "~/eBill.jpg"
+                            b.Enabled = True
+                            b.CommandName = "GoToBill"
+                        End If
+                    Next
+                Next
+            End If
         End If
 
         lblMessageTotal.Text = ""
         lblMessageFee.Text = ""
         lblMessageSuccess.Text = ""
-        
+
     End Sub
 
     Protected Sub txtPay_Click(sender As Object, e As EventArgs) Handles btnPay.Click
@@ -50,7 +66,7 @@
 
         'validate textbox fields
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
             If t.Text <> "" Then
                 If valid.CheckDecimal(t.Text) = -1 Then
                     lblMessageTotal.Text = "Please enter valid payment amounts."
@@ -61,8 +77,8 @@
 
         'validate date fields
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
-            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
             If t.Text <> "" Then
                 If dbdate.CheckSelectedDate(c.SelectedDate) = -1 Then
                     lblMessageTotal.Text = "Please do not enter a date prior to today's date."
@@ -73,8 +89,8 @@
 
         'find the total withdrawal amount wooooo
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
-            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
 
             If t.Text <> "" Then
                 mdecTotalWithdrawal += CDec(t.Text)
@@ -115,9 +131,9 @@
 
         'pay bills - now and pending
         For i = 0 To gvMyPayees.Rows.Count - 1
-            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("txtAmount"), TextBox)
-            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("calDate"), Calendar)
-            Dim n As HyperLink = DirectCast(gvMyPayees.Rows(i).Cells(1).FindControl("lnkName"), HyperLink)
+            Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
+            Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
+            Dim n As HyperLink = DirectCast(gvMyPayees.Rows(i).Cells(2).FindControl("lnkName"), HyperLink)
 
             If dbdate.CheckSelectedDate(c.SelectedDate) = 0 And t.Text <> "" Then
                 'today
@@ -151,4 +167,21 @@
         btnConfirm.Visible = False
         btnAbort.Visible = False
     End Sub
+
+    Protected Sub gvMyPayees_RowCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs)
+        If (e.CommandName = "GoToBill") Then
+            ' Retrieve the row index stored in the CommandArgument property.
+            Dim intRow As Integer = Convert.ToInt32(e.CommandArgument)
+
+            ' Retrieve the row that contains the button 
+            ' from the Rows collection.
+            Dim row As GridViewRow = gvMyPayees.Rows(intRow)
+
+            '' Add code here to add the item to the shopping cart.
+            dbbill.GetCustomerBills(Session("CustomerNumber"))
+            Response.Redirect("CustomerBillDetail.aspx?ID=" & dbbill.BillDataset.Tables("tblBill").Rows(intRow).Item("BillID"))
+
+        End If
+    End Sub
+
 End Class
