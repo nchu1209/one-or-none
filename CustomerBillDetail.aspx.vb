@@ -24,14 +24,17 @@
         lblBillID.Text = Request.QueryString("ID")
         dbbill.GetBillDetails(Request.QueryString("ID"))
 
-        FillTextboxes()
+        If IsPostBack = False Then
+            FillTextboxes()
 
-        dbaccount.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
-        ddlAccount.DataSource = dbaccount.AccountsDataset.Tables("tblAccounts")
-        ddlAccount.DataTextField = "Details"
-        ddlAccount.DataValueField = "AccountNumber"
-        ddlAccount.DataBind()
+            dbaccount.GetCheckingandSavingsByCustomerNumber(Session("CustomerNumber"))
+            ddlAccount.DataSource = dbaccount.AccountsDataset.Tables("tblAccounts")
+            ddlAccount.DataTextField = "Details"
+            ddlAccount.DataValueField = "AccountNumber"
+            ddlAccount.DataBind()
 
+        End If
+        
         btnConfirm.Visible = False
         btnAbort.Visible = False
         lblMessage.Text = ""
@@ -82,6 +85,7 @@
         End If
 
         mdecPayment = CDec(txtAmount.Text)
+        mdecBillAmount = CDec(dbbill.BillDataset.Tables("tblBill").Rows(0).Item("BillAmount"))
 
         If mdecPayment > mdecBillAmount Then
             lblMessage.Text = "The payment amount you have entered exceeds the total bill amount."

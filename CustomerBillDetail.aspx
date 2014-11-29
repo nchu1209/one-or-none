@@ -88,7 +88,7 @@
             <br />
         </div>
         <div id ="textbox">
-            <asp:DropDownList ID="ddlAccount" runat="server">
+            <asp:DropDownList ID="ddlAccount" runat="server" AutoPostBack="True">
             </asp:DropDownList>
             <br />
             <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>

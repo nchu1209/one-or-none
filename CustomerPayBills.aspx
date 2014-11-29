@@ -12,7 +12,7 @@
         <br />
         <asp:Label ID="Label4" runat="server" Text="Select Account:"></asp:Label>
 &nbsp;
-        <asp:DropDownList ID="ddlAccount" runat="server">
+        <asp:DropDownList ID="ddlAccount" runat="server" AutoPostBack="True">
         </asp:DropDownList>
         <br />
         <br />
