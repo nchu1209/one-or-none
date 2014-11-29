@@ -6,11 +6,13 @@ Public Class ClassDBEmployee
 
     'Declare module-level variables
     Dim mDatasetEmployee As New DataSet
+    Dim mDatasetEmployee2 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
     Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False;initial catalog=mis333k_msbck614;user id=msbck614;password=AmyEnrione1"
     Dim mMyView As New DataView
+    Dim mMyView2 As New DataView
     Private _session As String
 
 
@@ -37,6 +39,27 @@ Public Class ClassDBEmployee
             Return Me.mMyView
         End Get
     End Property
+
+
+
+    Public ReadOnly Property EmpDataset2() As DataSet
+        Get
+            ' return dataset to user
+            Return mDatasetEmployee2
+        End Get
+    End Property
+
+    'Purpose:to set the propert of myview
+    'Arguments: none
+    'Returns: Me.mMyView
+    'Author: Leah Carroll
+    'Date: 10-19-2014
+    Public ReadOnly Property MyView2() As DataView
+        Get
+            Return Me.mMyView2
+        End Get
+    End Property
+
 
 
 
@@ -259,5 +282,41 @@ Public Class ClassDBEmployee
 
     Public Sub LinkZip(ByVal strEmployeeID As String)
         RunProcedureOneParameter("usp_innerjoin_employee_city_by_zip", "@EmpID", strEmployeeID)
+    End Sub
+
+
+
+    Public Sub ModifyEmployee(strEmpType As String, strPassword As String, strLast As String, strFirst As String, strMiddle As String, strAddress As String, strZip As String, strPhone As String, ByVal intEmpID As Integer)
+
+
+
+        mstrQuery = "UPDATE tblEmployees SET " & _
+            "EmpType = '" & strEmpType & "', " & _
+            "Password = '" & strPassword & "', " & _
+            "LastName = '" & strLast & "', " & _
+            "FirstName = '" & strFirst & "', " & _
+            "MI = '" & strMiddle & "', " & _
+            "Address = '" & strAddress & "', " & _
+            "ZipCode = '" & strZip & "', " & _
+            "Phone = '" & strPhone & "' " & _
+            "WHERE EmpID = " & intEmpID
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
+
+    'Leah
+    'used in manager manage employees
+    Public Sub ModifyStatus(strNotAccountStatus As String, ByVal intEmpID As Integer)
+
+        mstrQuery = "UPDATE tblEmployees SET " & _
+            "Active = '" & strNotAccountStatus & "' " & _
+            "WHERE EmpID = " & intEmpID
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
     End Sub
 End Class

@@ -51,6 +51,25 @@ Public Class EmployeeManageCustomers
         Dim intCurrentCustomerNumber As Integer
         intCurrentCustomerNumber = CInt(Session("CustomerNumberForSearch"))
 
+
+
+
+        If txtCustomerNumber.Text = "" Then
+            lblCustomerNumberError.Text = "ERROR: You did not enter a Customer Number."
+            ModifyProfile.Visible = False
+            AccountNames.Visible = False
+            Exit Sub
+        End If
+
+        If txtCustomerNumber.Text <> "" Then
+            If Valid.CheckDigits(txtCustomerNumber.Text) = False Then
+                lblCustomerNumberError.Text = "ERROR: You did not enter a proper Customer Number."
+                ModifyProfile.Visible = False
+                AccountNames.Visible = False
+                Exit Sub
+            End If
+        End If
+
         If CustomerDB.SearchByCustomerNumber(CStr(intCurrentCustomerNumber)) = False Then
             lblCustomerNumberError.Text = "ERROR: Invalid Customer Number."
             ModifyProfile.Visible = False
