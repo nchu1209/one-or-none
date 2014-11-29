@@ -79,7 +79,7 @@
 
                 'add transaction
                 'update balance
-                dbtransaction.AddTransaction(intTransactionNumber, intAccountNumber, strTransactionType, strDate, decTransactionAmount, strDescription, decAccountBalance, strIRA)
+                dbtransaction.AddTransaction(intTransactionNumber, intAccountNumber, strTransactionType, strDate, decTransactionAmount, strDescription, decAccountBalance, "NULL", strIRA)
                 dbaccounts.UpdateBalance(intAccountNumber, decAccountBalance)
 
                 'delete row from tblPending
