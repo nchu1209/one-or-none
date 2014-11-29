@@ -44,6 +44,14 @@
         'get that custoemrs record
         EmpDB.GetByEmpID(strEmployeeID)
 
+        Dim strActive As String
+        strActive = EmpDB.EmpDataset.Tables("tblEmployees").Rows(0).Item("active").ToString
+        If strActive = "F" Then
+            Fired.Visible = True
+            Login.Visible = False
+            Exit Sub
+        End If
+
         'IF THEY GET A CORRECT LOGIN
         'create session EMpType and store this employees emptype there for next form
         Session("EmpID") = EmpDB.EmpDataset.Tables("tblEmployees").Rows(0).Item("empID").ToString
@@ -67,7 +75,11 @@
         'so they can not access the search page without logging in
         If IsPostBack = False Then
             Session("Count") = 0
+
+            Fired.Visible = False
+            Login.Visible = True
         End If
+
     End Sub
 
 

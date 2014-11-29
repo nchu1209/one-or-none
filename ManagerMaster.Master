@@ -62,8 +62,8 @@
         </ul>
         
          <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Modify Employee Account</a></li>
-        <li><a href="#">Manage Customers</a></li>
+        <li><a href="/ManagerManageEmployee.aspx">Modify Employee Account</a></li>
+        <li><a href="/ManagerManageCustomer.aspx">Manage Customers</a></li>
         <li><a href="#">Transaction Search</a></li>
          </ul>
     </div><!-- /.navbar-collapse -->

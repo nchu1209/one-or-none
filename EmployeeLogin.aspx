@@ -19,7 +19,7 @@
 <body>
     <form id="form1" runat="server">
     
-    
+    <asp:Panel ID="Login" runat="server">
     
         <div id="lefttopcorner">
             <img class="auto-style1" src="Petunia2.jpg" /><br />
@@ -55,6 +55,20 @@
             <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
 
         </div>
+        </asp:Panel>
+
+<asp:Panel ID="Fired" runat="server">
+            <br />
+            <img alt="" class="auto-style1" src="Petunia2.jpg" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div id="contentBIG">
+            We are sorry, you no longer work for Longhorn Bank.  You're access has been denied.
+            </div>
+ 
+    </asp:Panel>
     </form>
 </body>
 </html>
