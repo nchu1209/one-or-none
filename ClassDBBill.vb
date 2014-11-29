@@ -144,4 +144,8 @@ Public Class ClassDBBill
         RunProcedureOneParameter("usp_bill_get_by_customernumber", "@customernumber", strCustomerNumber)
     End Sub
 
+    Public Sub GetBillDetails(strBillID As String)
+        RunProcedureOneParameter("usp_bill_get_by_billID", "@billID", strBillID)
+    End Sub
+
 End Class

@@ -38,9 +38,21 @@
                         Dim x As Label = DirectCast(gvMyPayees.Rows(i).Cells(1).FindControl("lblPayeeID"), Label)
                         If CInt(x.Text) = dbbill.BillDataset.Tables("tblBill").Rows(k).Item("PayeeID") Then
                             Dim b As ImageButton = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("btnBill"), ImageButton)
+                            Dim a As Label = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("lblBillAmount"), Label)
+                            Dim d As Label = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("lblDueDate"), Label)
+                            'set notification
                             b.ImageUrl = "~/eBill.jpg"
                             b.Enabled = True
                             b.CommandName = "GoToBill"
+                            'highlight payee
+                            gvMyPayees.Rows(i).BackColor = Drawing.Color.LightGray
+                            'populate bill due date and amount
+                            Dim decBill As Decimal
+                            decBill = CDec(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("BillAmount"))
+                            a.Text = decBill.ToString("c2")
+                            Dim datBill As Date
+                            datBill = CDate(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("DueDate")).Date
+                            d.Text = datBill.ToString
                         End If
                     Next
                 Next
@@ -144,7 +156,7 @@
                 strPaymentMessage = "Sent payment of " & t.Text & " to " & n.Text & " from account " & ddlAccount.SelectedValue.ToString & " on " & c.SelectedDate.ToString
                 GetTransactionNumber()
                 'update the transactions table
-                dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPaymentMessage, mdecBalance)
+                dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPaymentMessage, mdecBalance, "")
             End If
 
             If dbdate.CheckSelectedDate(c.SelectedDate) = 1 And t.Text <> "" Then
@@ -153,7 +165,7 @@
                 strPendingMessage = "Send payment of " & t.Text & " to " & n.Text & " from account " & ddlAccount.SelectedValue.ToString & " on " & c.SelectedDate.ToString
                 GetTransactionNumber()
                 'update pending transactions table
-                dbpending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPendingMessage)
+                dbpending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPendingMessage, "")
             End If
         Next
 

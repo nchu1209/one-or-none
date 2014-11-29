@@ -46,6 +46,22 @@
       CommandArgument="<%# CType(Container,GridViewRow).RowIndex %>" ImageUrl="~/WhiteSpace.jpg" Enabled ="false" OnCommand="gvmypayees_rowcommand"></asp:ImageButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Bill Amount">
+                    <EditItemTemplate>
+                        <asp:label ID="lblBillAmount" runat="server"></asp:label>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:label ID="lblBillAmount" runat="server"></asp:label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Due Date">
+                    <EditItemTemplate>
+                        <asp:label ID="lblDueDate" runat="server"></asp:label>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:label ID="lblDueDate" runat="server"></asp:label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Payment Amount">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtAmount" runat="server"></asp:TextBox>
@@ -72,8 +88,10 @@
         <br />
         </div>
         <div id ="gridviewright">
-            <asp:Button ID="btnPay" runat="server" Text="Pay" />
+            <asp:Button ID="btnPay" runat="server" Text="Make a Non-Bill Payment" />
         <br />
+            <br />
+            <br />
         <br />
             <asp:Label ID="lblMessageTotal" runat="server" Text="[]"></asp:Label>
             <br />
