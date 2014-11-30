@@ -23,59 +23,54 @@
         <br />
 
     </div>
-    <asp:Panel ID="Checking" runat="server">
-    <div id="accountsubtitle">
-        <asp:Label ID="Label1" runat="server" Text="Checking Account Number(s): "></asp:Label>
-        <asp:Label ID="lblCheckingAccount" runat="server"></asp:Label>
-    </div>
-     </asp:Panel>
+    
 
-
-    <asp:Panel ID="Savings" runat="server">
-    <div id="accountsubtitle">
-            <asp:Label ID="Label2" runat="server" Text="Savings Account Number(s): "></asp:Label>
-            <asp:Label ID="lblSavingsAccount" runat="server"></asp:Label>
-    </div>
-    </asp:Panel>
-
-
-    <asp:Panel ID="IRA" runat="server">
-    <div id="accountsubtitle">
-            <asp:Label ID="Label3" runat="server" Text="IRA Account Number: "></asp:Label>
-            <asp:Label ID="lblIRAAccount" runat="server"></asp:Label>
-    </div>
-    </asp:Panel>
-
-    <asp:Panel ID="Stock" runat="server">
-        <div id="accountsubtitle">
-
-            <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-
-            <asp:Label ID="lblStockAccount" runat="server"></asp:Label>
-
-    </div>
-    </asp:Panel>
-
-
-    <div id="accountsubtitleleft">
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-    </div>
+   
 
     <div id="accountsubtitle">
-        <asp:GridView runat="server" ID="gvAccounts" DataSourceID="SqlDataSource1">
+        <asp:GridView ID="gvAccounts" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center">
+            <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
+                <asp:BoundField DataField="Account Number" HeaderText="Account Number" ReadOnly="True" SortExpression="Account Number">
+                <HeaderStyle Width="150px" HorizontalAlign="Left" />
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:HyperLinkField HeaderText="Account Name" SortExpression="AccountName" DataNavigateUrlFields="AccountNumber" DataNavigateUrlFormatString="CustomerAccountDetails.aspx" DataTextField="AccountName">
+                    <%--<EditItemTemplate>--%>
+                  <%--      <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("AccountName") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("AccountName") %>'></asp:Label>
+                    </ItemTemplate>--%>
+                    <HeaderStyle HorizontalAlign="Center" Width="150px" />
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:HyperLinkField>
+                <asp:BoundField DataField="AccountType" HeaderText="Account Type" SortExpression="AccountType" >
+                <HeaderStyle Width="150px" HorizontalAlign="Center" />
+                <ItemStyle HorizontalAlign="Center" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Balance" HeaderText="Balance" SortExpression="Balance" DataFormatString="{0:$###,###.00}" >
+                <FooterStyle HorizontalAlign="Center" />
+                <HeaderStyle Width="90px" HorizontalAlign="Right" />
+                <ItemStyle HorizontalAlign="Right" />
+                </asp:BoundField>
             </Columns>
+            <EditRowStyle BackColor="#2461BF" HorizontalAlign="Center" />
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#EFF3FB" />
+            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+            <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MIS333K_msbck614ConnectionString %>" SelectCommand="usp_accounts_get_last_four" SelectCommandType="StoredProcedure">
+            <SelectParameters>
+                <asp:SessionParameter Name="CustomerNumber" SessionField="CustomerNumber" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
     </div>
 
 </asp:Content>
