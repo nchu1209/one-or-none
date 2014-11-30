@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="CustomerTransactionSearch.aspx.vb" Inherits="KProject.CustomerTransactionSearch" %>
-
+<%="" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,7 +57,7 @@
                 <asp:ListItem>101 - $200</asp:ListItem>
                 <asp:ListItem>201 - $300</asp:ListItem>
                 <asp:ListItem>$300+</asp:ListItem>
-                <asp:ListItem>Other</asp:ListItem>
+                <asp:ListItem>Custom Range</asp:ListItem>
             </asp:RadioButtonList>
                    </div>
                 </div>
@@ -72,7 +72,6 @@
             <asp:TextBox ID="txtSearchByOtherPriceMin" runat="server" Width="65px"></asp:TextBox>
             And
             <asp:TextBox ID="txtSearchByOtherPriceMax" runat="server" Width="65px"></asp:TextBox>
-            <br />
             <br />
             <br />
         </div>
@@ -103,9 +102,10 @@
             <br />
             <br />
             <br />
-            <br />
-            Last 
-            <asp:TextBox ID="txtCustomDateSearch" runat="server" Width="46px"></asp:TextBox>
+            Between&nbsp; 
+            <asp:TextBox ID="txtCustomDateMin" runat="server" Width="58px"></asp:TextBox>
+            &nbsp;And
+            <asp:TextBox ID="txtCustomDateMax" runat="server" Width="56px"></asp:TextBox>
             Days
             <br />
             <br />
@@ -114,71 +114,43 @@
 
 
         <div id ="footer">
-           <div id="a1">
-           <div id="radiobuttonfix">
-             <asp:RadioButtonList ID="rblDescriptionAO" runat="server" style="text-align: left">
-                <asp:ListItem>And</asp:ListItem>
-                <asp:ListItem>Or</asp:ListItem>
-                <asp:ListItem>Do not include description in this search</asp:ListItem>
-            </asp:RadioButtonList>
-               </div>
+            <div id ="a">
+                <div id ="radiobuttonfix">
+                Select which parameters you would like to search by:
+                <asp:CheckBoxList ID="cblParameters" runat="server">
+                <asp:ListItem>Description</asp:ListItem>
+                <asp:ListItem>Transaction Type</asp:ListItem>
+                <asp:ListItem>Price</asp:ListItem>
+                <asp:ListItem>Transaction Number</asp:ListItem>
+                <asp:ListItem>Date</asp:ListItem>
+            </asp:CheckBoxList>
+            </div>
                 </div>
-           <div id="b1">
-           <div id="radiobuttonfix">
-             <asp:RadioButtonList ID="rblTransactionTypeAO" runat="server" style="text-align: left">
-                <asp:ListItem>And</asp:ListItem>
-                <asp:ListItem>Or</asp:ListItem>
-                <asp:ListItem>Do not include transaction type in this search</asp:ListItem>
-            </asp:RadioButtonList>
-               </div>
-                </div>
-           <div id="c1">
-           <div id="radiobuttonfix">
-             <asp:RadioButtonList ID="rblPriceAO" runat="server" style="text-align: left">
-                <asp:ListItem>And</asp:ListItem>
-                <asp:ListItem>Or</asp:ListItem>
-                <asp:ListItem>Do not include price in this search</asp:ListItem>
-            </asp:RadioButtonList>
-               </div>
-                </div>
-           <div id="d1">
-           <div id="radiobuttonfix">
-             <asp:RadioButtonList ID="rblTransactionNumberAO" runat="server" style="text-align: left">
-                <asp:ListItem>And</asp:ListItem>
-                <asp:ListItem>Or</asp:ListItem>
-                <asp:ListItem>Do not include transaction number in this search</asp:ListItem>
-            </asp:RadioButtonList>
-               </div>
-                </div>
-           <div id="e1">
-           <div id="radiobuttonfix">
-             <asp:RadioButtonList ID="rblDateAO" runat="server" style="text-align: left">
-                <asp:ListItem>And</asp:ListItem>
-                <asp:ListItem>Or</asp:ListItem>
-                <asp:ListItem>Do not include date in this search</asp:ListItem>
-            </asp:RadioButtonList>
-               </div>
-                <br />
-               <br />
-                </div>
-        </div>
-        <div id="footer">
+            <div id ="b">
+              Select an order for your results:
             <asp:RadioButtonList ID="RadioButtonList1" runat="server">
                 <asp:ListItem>Ascending</asp:ListItem>
                 <asp:ListItem>Descending</asp:ListItem>
             </asp:RadioButtonList>
+            </div>
+        <div id="c">
             <br />
             <asp:Button ID="btnSearch" runat="server" Text="Search" />
             <asp:Button ID="btnClear" runat="server" Text="Clear Selections" />
             <br />
             <br />
+            </div>
+            <div id ="d">
 &nbsp;<asp:Label ID="lblNumberOfTransactions" runat="server"></asp:Label>
             <br />
+                <asp:Label ID="lblError" runat="server"></asp:Label>
             <br />
+                </div>        
+        </div>
+        <div id ="footer">
             <asp:GridView ID="gvTransactionSearch" runat="server">
             </asp:GridView>
         </div>
-
    </form>
   
 </body>
