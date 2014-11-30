@@ -148,4 +148,21 @@ Public Class ClassDBBill
         RunProcedureOneParameter("usp_bill_get_by_billID", "@billID", strBillID)
     End Sub
 
+    Public Sub ModifyBill(strBillAmount As String, strBillDate As String, strDueDate As String, strAmountPaid As String, strAmountRemaining As String, strStatus As String, strActive As String, ByVal strBillID As String)
+
+        mstrQuery = "UPDATE tblBill SET " & _
+            "BillAmount = '" & strBillAmount & "', " & _
+            "BillDate = '" & strBillDate & "', " & _
+            "DueDate = '" & strDueDate & "', " & _
+            "AmountPaid = '" & strAmountPaid & "', " & _
+            "AmountRemaining = '" & strAmountRemaining & "', " & _
+            "Status = '" & strStatus & "', " & _
+            "Active = '" & strActive & "', " & _
+            "WHERE BillID = " & strBillID
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
 End Class

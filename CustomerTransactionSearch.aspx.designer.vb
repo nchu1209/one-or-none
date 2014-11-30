@@ -113,58 +113,31 @@ Partial Public Class CustomerTransactionSearch
     Protected WithEvents rblDate As Global.System.Web.UI.WebControls.RadioButtonList
 
     '''<summary>
-    '''txtCustomDateSearch control.
+    '''txtCustomDateMin control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCustomDateSearch As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtCustomDateMin As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''rblDescriptionAO control.
+    '''txtCustomDateMax control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rblDescriptionAO As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents txtCustomDateMax As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''rblTransactionTypeAO control.
+    '''cblParameters control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rblTransactionTypeAO As Global.System.Web.UI.WebControls.RadioButtonList
-
-    '''<summary>
-    '''rblPriceAO control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rblPriceAO As Global.System.Web.UI.WebControls.RadioButtonList
-
-    '''<summary>
-    '''rblTransactionNumberAO control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rblTransactionNumberAO As Global.System.Web.UI.WebControls.RadioButtonList
-
-    '''<summary>
-    '''rblDateAO control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rblDateAO As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents cblParameters As Global.System.Web.UI.WebControls.CheckBoxList
 
     '''<summary>
     '''RadioButtonList1 control.
@@ -201,6 +174,15 @@ Partial Public Class CustomerTransactionSearch
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblNumberOfTransactions As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblError control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''gvTransactionSearch control.
