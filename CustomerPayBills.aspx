@@ -88,7 +88,7 @@
         <br />
         </div>
         <div id ="gridviewright">
-            <asp:Button ID="btnPay" runat="server" Text="Make a Non-Bill Payment" />
+            <asp:Button ID="btnPay" runat="server" Text="Pay" />
         <br />
             <br />
             <br />
