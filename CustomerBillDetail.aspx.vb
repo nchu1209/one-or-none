@@ -139,6 +139,16 @@
             GetTransactionNumber()
             'update the transactions table
             dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "eBill Payment", calDate.SelectedDate, CDec(txtAmount.Text), strPaymentMessage, mdecBalance, lblBillID.Text, "False")
+            'update the bills table
+            Dim decAmountRemaining As Decimal
+            decAmountRemaining = CDec(txtBillAmount.Text) - CDec(txtAmount.Text)
+            Dim strStatus As String
+            If CDec(txtBillAmount.Text) = CDec(txtAmount.Text) Then
+                strStatus = "Paid"
+            Else
+                strStatus = "Partially Paid"
+            End If
+            dbbill.ModifyBill(txtBillAmount.Text, txtBillDate.Text, txtDueDate.Text, txtAmount.Text, decAmountRemaining.ToString, strStatus, "Active", lblBillID.Text)
         End If
 
         If dbDate.CheckSelectedDate(calDate.SelectedDate) = 1 Then
