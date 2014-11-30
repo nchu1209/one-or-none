@@ -79,6 +79,52 @@
 
     End Function
 
+    Public Function CheckEmpType(strIn As String) As Boolean
+        'all digits and 10 digits long
+        ' check length
+        'check for the bad
+        If strIn.Length = 3 Then
+            Return True
+        Else
+            Return False
+        End If
+
+        'check all digits
+        'call check 
+        If CheckDigits(strIn) = True Then
+            Return True
+        Else
+            Return False
+        End If
+
+        If strIn = "101" Or strIn = "102" Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
+    Public Function CheckSSN(strIn As String) As Boolean
+        'all digits and 10 digits long
+        ' check length
+        'check for the bad
+        If strIn.Length = 9 Then
+            Return True
+        Else
+            Return False
+        End If
+
+        'check all digits
+        'call check 
+        If CheckDigits(strIn) = True Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+
 
 
 End Class

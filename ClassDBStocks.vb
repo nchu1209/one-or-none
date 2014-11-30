@@ -7,11 +7,13 @@ Public Class ClassDBStocks
 
     'Declare module-level variables
     Dim mDatasetStocks As New DataSet
+    Dim mDatasetStocks2 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
     Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False;initial catalog=mis333k_msbck614;user id=msbck614;password=AmyEnrione1"
     Dim mMyView As New DataView
+    Dim mMyView2 As New DataView
     Private _session As String
 
     Public ReadOnly Property StocksDataset() As DataSet
@@ -27,7 +29,18 @@ Public Class ClassDBStocks
         End Get
     End Property
 
+    Public ReadOnly Property StocksDataset2() As DataSet
+        Get
+            ' return dataset to user
+            Return mDatasetStocks2
+        End Get
+    End Property
 
+    Public ReadOnly Property MyView2() As DataView
+        Get
+            Return Me.mMyView2
+        End Get
+    End Property
 
     Public Sub SelectQuery(ByVal strQuery As String)
 
@@ -120,6 +133,28 @@ Public Class ClassDBStocks
     End Sub
 
 
+
+    Public Sub RunProcedureOneParameter2(ByVal strProcedureName As String, ByVal strParameterName As String, ByVal strParameterValue As String)
+
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim mdbDataAdapter As New SqlDataAdapter(strProcedureName, objConnection)
+        Try
+            'sets command type to "stored procedure"
+            mdbDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
+            'add parameter to SPROC
+            mdbDataAdapter.SelectCommand.Parameters.Add(New SqlParameter(strParameterName, strParameterValue))
+            'clear dataset
+            mDatasetStocks2.Clear()
+            'open connection and fill dataset
+            mdbDataAdapter.Fill(mDatasetStocks2, "tblStocks")
+            'copy dataset to dataview
+            mMyView2.Table = mDatasetStocks2.Tables("tblStocks")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strProcedureName.ToString & "parameters are " & strParameterName.ToString & strParameterValue.ToString & " error is " & ex.Message)
+        End Try
+    End Sub
+
     Public Sub GetAllStocks()
         RunProcedureNoParam("usp_stocks_get_all")
     End Sub
@@ -135,7 +170,9 @@ Public Class ClassDBStocks
         Return False
     End Function
 
-
+    Public Sub GetByStockTicker(strTicker As String)
+        RunProcedureOneParameter2("usp_stocks_get_by_ticker", "@Ticker", strTicker)
+    End Sub
 
     Public Sub AddStock(strStockType As String, strTicker As String, strStockName As String, strSharePrice As String, strTransactionFee As String)
         'Purpose: adds a stock to database

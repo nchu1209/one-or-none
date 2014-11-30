@@ -9,10 +9,13 @@
     Dim dbpending As New ClassDBPending
     Dim dbbill As New ClassDBBill
 
+    Dim mdecTotalToday As Decimal
+    Dim mdecTotalPending As Decimal
     Dim mdecTotalWithdrawal As Decimal
     Dim mdecBalance As Decimal
 
     Const OVERDRAFT_MAXIMUM As Decimal = 50D
+    Const OVERDRAFT_FEE As Decimal = 30D
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Session("CustomerFirstName") Is Nothing Then
@@ -38,13 +41,29 @@
                         Dim x As Label = DirectCast(gvMyPayees.Rows(i).Cells(1).FindControl("lblPayeeID"), Label)
                         If CInt(x.Text) = dbbill.BillDataset.Tables("tblBill").Rows(k).Item("PayeeID") Then
                             Dim b As ImageButton = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("btnBill"), ImageButton)
+                            Dim a As Label = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("lblBillAmount"), Label)
+                            Dim d As Label = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("lblDueDate"), Label)
+                            'set notification
                             b.ImageUrl = "~/eBill.jpg"
                             b.Enabled = True
                             b.CommandName = "GoToBill"
+                            'highlight payee
+                            gvMyPayees.Rows(i).BackColor = Drawing.Color.LightGray
+                            'populate bill due date and amount
+                            Dim decBill As Decimal
+                            decBill = CDec(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("BillAmount"))
+                            a.Text = decBill.ToString("c2")
+                            Dim datBill As Date
+                            datBill = CDate(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("DueDate")).Date
+                            d.Text = datBill.ToString
                         End If
                     Next
                 Next
             End If
+
+            mdecTotalToday = 0
+            mdecTotalPending = 0
+
         End If
 
         lblMessageTotal.Text = ""
@@ -80,6 +99,10 @@
             Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
             Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
             If t.Text <> "" Then
+                If c.SelectedDate = Nothing Then
+                    lblMessageTotal.Text = "Please enter a date for each payment."
+                    Exit Sub
+                End If
                 If dbdate.CheckSelectedDate(c.SelectedDate) = -1 Then
                     lblMessageTotal.Text = "Please do not enter a date prior to today's date."
                     Exit Sub
@@ -87,31 +110,36 @@
             End If
         Next
 
-        'find the total withdrawal amount wooooo
+        'find the total withdrawal amounts wooooo
         For i = 0 To gvMyPayees.Rows.Count - 1
             Dim t As TextBox = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("txtAmount"), TextBox)
             Dim c As Calendar = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("calDate"), Calendar)
-
-            If t.Text <> "" Then
-                mdecTotalWithdrawal += CDec(t.Text)
+            'total today
+            If dbdate.CheckSelectedDate(c.SelectedDate) = 0 And t.Text <> "" Then
+                mdecTotalToday += CDec(t.Text)
             End If
-
+            'total pending
+            If dbdate.CheckSelectedDate(c.SelectedDate) = 1 And t.Text <> "" Then
+                mdecTotalPending += CDec(t.Text)
+            End If
         Next
 
-        'validate that total amount is less than max withdrawal (overdraft stuff)
-        If mdecBalance + OVERDRAFT_MAXIMUM < mdecTotalWithdrawal Then
-            lblMessageTotal.Text = "Your payment total is " & mdecTotalWithdrawal.ToString("c2") & ", which exceeds your account balance by more than the maximum overdraft amount (" & OVERDRAFT_MAXIMUM.ToString("c2") & ")."
+        mdecTotalWithdrawal = mdecTotalToday + mdecTotalPending
+
+        'validate that total amount TODAY is less than balance (overdraft stuff)
+        If mdecBalance + OVERDRAFT_MAXIMUM < mdecTotalToday Then
+            lblMessageTotal.Text = "Your payment total for today (excluding scheduled future payments) is " & mdecTotalToday.ToString("c2") & ", which exceeds your account balance by more than the maximum overdraft amount (" & OVERDRAFT_MAXIMUM.ToString("c2") & ")."
             Exit Sub
         End If
 
         'whee confirmation stuff
-        lblMessageTotal.Text = "By clicking 'Confirm' below, you agree to send a total of " & mdecTotalWithdrawal.ToString("c2") & " to the specified payees."
+        lblMessageTotal.Text = "By clicking 'Confirm' below, you agree to send/schedule payment(s) totaling " & mdecTotalWithdrawal.ToString("c2") & " to the specified payee(s)."
         btnConfirm.Visible = True
         btnAbort.Visible = True
 
         'overdraft fee notice
-        If mdecBalance < mdecTotalWithdrawal Then
-            lblMessageFee.Text = "Note: You will be charged an overdraft fee of $30.00 in addition to your specified payment(s)."
+        If mdecBalance < mdecTotalToday Then
+            lblMessageFee.Text = "Note: Your payment total for today (excluding scheduled future payments) is " & mdecTotalToday.ToString("c2") & ", which exceeds your selected account's balance. You will be charged an overdraft fee of $30.00 in addition to your specified payment(s)."
         End If
 
     End Sub
@@ -144,7 +172,7 @@
                 strPaymentMessage = "Sent payment of " & t.Text & " to " & n.Text & " from account " & ddlAccount.SelectedValue.ToString & " on " & c.SelectedDate.ToString
                 GetTransactionNumber()
                 'update the transactions table
-                dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPaymentMessage, mdecBalance)
+                dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPaymentMessage, mdecBalance, "NULL", "False")
             End If
 
             If dbdate.CheckSelectedDate(c.SelectedDate) = 1 And t.Text <> "" Then
@@ -153,9 +181,25 @@
                 strPendingMessage = "Send payment of " & t.Text & " to " & n.Text & " from account " & ddlAccount.SelectedValue.ToString & " on " & c.SelectedDate.ToString
                 GetTransactionNumber()
                 'update pending transactions table
-                dbpending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPendingMessage)
+                dbpending.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Payment", c.SelectedDate, CDec(t.Text), strPendingMessage, "NULL", "False")
             End If
         Next
+
+        'overdraft fee if necessary
+        If mdecBalance < 0 Then
+            dbdate.GetDate()
+            Dim datDate As Date
+            datDate = dbdate.DateDataset.Tables("tblSystemDate").Rows(0).Item("Date").ToString()
+
+            mdecBalance = mdecBalance - OVERDRAFT_FEE
+            dbact.UpdateBalance(CInt(ddlAccount.SelectedValue), mdecBalance)
+
+            Dim strFeeMessage As String
+            strFeeMessage = "Overdraft fee of " & OVERDRAFT_FEE.ToString & " charged to account " & ddlAccount.SelectedValue.ToString & " on " & datDate.ToString
+            GetTransactionNumber()
+            'update the transactions table
+            dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Fee", datDate, OVERDRAFT_FEE, strFeeMessage, mdecBalance, "NULL", "False")
+        End If
 
         lblMessageSuccess.Text = "Payments successfully sent and/or scheduled."
         btnConfirm.Visible = False

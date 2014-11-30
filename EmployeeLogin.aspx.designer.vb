@@ -23,6 +23,15 @@ Partial Public Class EmployeeLogin
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
+    '''Login control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Login As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''txtEmployeeID control.
     '''</summary>
     '''<remarks>
@@ -93,4 +102,13 @@ Partial Public Class EmployeeLogin
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Fired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Fired As Global.System.Web.UI.WebControls.Panel
 End Class
