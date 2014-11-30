@@ -13,11 +13,14 @@
             width: 233px;
             height: 83px;
         }
+        .auto-style2 {
+            font-size: x-large;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    
+    <asp:Panel ID="pnlLogin" runat="server">
         <div id="lefttopcorner">
             <img class="auto-style1" src="Petunia2.jpg" /><br />
             <br />
@@ -142,18 +145,58 @@
         </div>
 
 
+             <br />
+
+
+             <br />
+
+
         </div>
-    
-        <br />
-        <br />
+
 
          <div id="footer">
         <br />
         <br />
+             <br />
         Website Created by One or None, Ltd.
         <br />
         Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
              </div>
+
+        </asp:Panel>
+
+
+        <asp:Panel ID="pnlNoLongerCustomer" runat="server">
+            <br />
+            <img alt="" class="auto-style1" src="Petunia2.jpg" />
+            <br/>
+            <br/>
+            <div id="contentBIG" class="auto-style2">
+                   Hello
+            <asp:Label ID="lblDisabled" runat="server" Text=""></asp:Label>
+                </div>
+
+             <div id="footer">
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                      <br />
+                 <br />
+                      <br />
+                 <br />
+                      <br />
+                 <br />
+        Website Created by One or None, Ltd.
+        <br />
+        Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
+             </div>
+        </asp:Panel>
+     
+        <br />
+        <br />
+
+        
     
 
     </form>
