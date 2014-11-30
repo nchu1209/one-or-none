@@ -6,14 +6,11 @@ Public Class ManagerManageEmployee
 
     Dim EmpDB As New ClassDBEmployee
     Dim EmpDB2 As New ClassDBEmployee
-    'Dim EmpDB3 As New ClassDBEmployee
-    Dim CustomerDB As New ClassDBCustomer
     Dim Format As New ClassFormat
     Dim DBAccounts As New ClassDBAccounts
     Dim Valid As New ClassValidate
     Dim valid2 As New ClassEmployeeValidation
     Dim mEmployeeID As Integer
-    Dim mCustomerID As Integer
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -26,7 +23,7 @@ Public Class ManagerManageEmployee
         strEmpID = Convert.ToString(Session("EmpID"))
 
 
-       
+
         EmpDB.GetAllEmployeesUsingSP()
         'get that custoemrs record
         'EmpDB.GetByEmpID(strEmpID)
@@ -103,14 +100,14 @@ Public Class ManagerManageEmployee
 
 
 
-            'DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumberForSearch").ToString)
-            ModifyProfile.Visible = True
-            ChangeStatus.Visible = True
-            FillTextboxes()
+        'DBAccounts.GetAccountByCustomerNumber(Session("CustomerNumberForSearch").ToString)
+        ModifyProfile.Visible = True
+        ChangeStatus.Visible = True
+        FillTextboxes()
 
 
-            lblError.Text = ""
-            lblEmpIDError.Text = ""
+        lblError.Text = ""
+        lblEmpIDError.Text = ""
 
 
 

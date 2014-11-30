@@ -137,6 +137,33 @@ Public Class ClassDBEmployee
 
 
 
+    'Purpose:to run a prcedure in the db that has no parameters
+    'Arguments: the strName
+    'Returns: none, just updates the view
+    'Author: Leah Carroll
+    'Date: 10-19-2014
+    Public Sub RunProcedureGetMax(strName As String)
+        'CREATES INSTANCES OF THE CONNECTION AND COMAND OBJECT
+        Dim objConnection As New SqlConnection(mstrConnection)
+        'Tell SQL server the name of the stored procedure you will be executing
+        Dim objCommand As New SqlDataAdapter(strName, objConnection)
+        Try
+            'SETS THE COMMAND TYPE TO "STORED PROCEDURE
+            objCommand.SelectCommand.CommandType = CommandType.StoredProcedure
+            'clear dataset
+            Me.mDatasetEmployee2.Clear()
+            'OPEN CONNECTION AND FILL DATASET
+            objCommand.Fill(mDatasetEmployee2, "tblEmployees")
+            'copy dataset to dataview
+            mMyView2.Table = mDatasetEmployee2.Tables("tblEmployees")
+        Catch ex As Exception
+            Throw New Exception("stored procedure is " & strName.ToString & " error is " & ex.Message)
+        End Try
+
+    End Sub
+
+
+
     'Purpose:to get all employees through a stored procedure
     'Arguments: none
     'Returns: none directly, but returns the employee information
@@ -319,4 +346,64 @@ Public Class ClassDBEmployee
         UpdateDB(mstrQuery)
 
     End Sub
+
+
+
+
+    Public Function CheckSSNSP(strSSN As String) As Boolean
+        RunProcedureOneParameter("usp_employee_get_ssn", "@ssn", strSSN)
+
+        If mDatasetEmployee.Tables("tblEmployees").Rows.Count <> 0 Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    'use on manager hire employee
+    Public Function GetBySSN(strSSN As String) As Boolean
+        Dim intSSN As Integer
+        intSSN = CInt(strSSN)
+        mstrQuery = "Select * from tblEmployees where SSN = " & intSSN
+        SelectQuery(mstrQuery)
+
+        If mDatasetEmployee.Tables("tblEmployees").Rows.Count <> 1 Then
+            Return True
+        End If
+        Return False
+    End Function
+
+
+    Public Sub GetMaxEmpIDUsingSP()
+        RunProcedureGetMax("usp_employees_get_max_empID")
+    End Sub
+
+    Public Sub GetMaxEmpID()
+        mstrQuery = "Select max(empID) from tblEmployees"
+        SelectQuery(mstrQuery)
+    End Sub
+
+
+
+    Public Sub AddEmployee(strEmpType As String, strPassword As String, strLastName As String, strFirstName As String, strInitial As String, strSSN As String, strAddress As String, strZip As String, strPhone As String, strEmpID As String)
+        Dim strActive As String
+        strActive = "T"
+        mstrQuery = "INSERT INTO tblEmployees (EmpType, Password, LastName, FirstName, MI, SSN, Address, ZipCode, Phone, Active, EmpID) VALUES (" & _
+            "" & strEmpType & ", " & _
+            "'" & strPassword & "', " & _
+            "'" & strLastName & "', " & _
+            "'" & strFirstName & "', " & _
+            "'" & strInitial & "', " & _
+            "" & strSSN & ", " & _
+            "'" & strAddress & "', " & _
+            "" & strZip & ", " & _
+            "" & strPhone & ", " & _
+             "'" & strActive & "', " & _
+            "" & strEmpID & ")"
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
 End Class
