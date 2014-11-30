@@ -50,13 +50,13 @@ Partial Public Class CustomerTransactionSearch
     Protected WithEvents txtDescriptionSearch As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''RadioButtonList1 control.
+    '''rblDescription control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadioButtonList1 As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents rblDescription As Global.System.Web.UI.WebControls.RadioButtonList
 
     '''<summary>
     '''ddlSearchByTransactionType control.
@@ -68,22 +68,31 @@ Partial Public Class CustomerTransactionSearch
     Protected WithEvents ddlSearchByTransactionType As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''RadioButtonList2 control.
+    '''rblPrice control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadioButtonList2 As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents rblPrice As Global.System.Web.UI.WebControls.RadioButtonList
 
     '''<summary>
-    '''txtSearchByOtherPrice control.
+    '''txtSearchByOtherPriceMin control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSearchByOtherPrice As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtSearchByOtherPriceMin As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtSearchByOtherPriceMax control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSearchByOtherPriceMax As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''txtSearchByTransactionNumber control.
@@ -93,4 +102,112 @@ Partial Public Class CustomerTransactionSearch
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearchByTransactionNumber As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''rblDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rblDate As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''txtCustomDateSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCustomDateSearch As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''rblDescriptionAO control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rblDescriptionAO As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''rblTransactionTypeAO control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rblTransactionTypeAO As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''rblPriceAO control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rblPriceAO As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''rblTransactionNumberAO control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rblTransactionNumberAO As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''rblDateAO control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rblDateAO As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''RadioButtonList1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadioButtonList1 As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
+    '''btnSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnClear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnClear As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblNumberOfTransactions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNumberOfTransactions As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''gvTransactionSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gvTransactionSearch As Global.System.Web.UI.WebControls.GridView
 End Class

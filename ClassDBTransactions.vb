@@ -5,15 +5,11 @@ Imports System.Data.SqlClient
 
 Public Class ClassDBTransactions
     Dim mDatasetTransactions As New DataSet
-    Dim mDatasetTransactions2 As New DataSet
-    Dim mDatasetTransactions3 As New DataSet
     Dim mstrQuery As String
     Dim mdbDataAdapter As New SqlDataAdapter
     Dim mdbConn As New SqlConnection
     Dim mstrConnection As String = "workstation id=COMPUTER;packet size =4096;data source=MISSQL.mccombs.utexas.edu;integrated security=False; initial catalog=mis333k_msbck614; user id=msbck614; password=AmyEnrione1"
     Dim mMyView As New DataView
-    Dim mMyView2 As New DataView
-    Dim mMyView3 As New DataView
 
     Public ReadOnly Property TransactionsDataset() As DataSet
         Get
@@ -24,31 +20,6 @@ Public Class ClassDBTransactions
     Public ReadOnly Property MyView() As DataView
         Get
             Return mMyView
-        End Get
-    End Property
-
-
-    Public ReadOnly Property TransactionsDataset2() As DataSet
-        Get
-            'Return dataset to user
-            Return mDatasetTransactions2
-        End Get
-    End Property
-    Public ReadOnly Property MyView2() As DataView
-        Get
-            Return mMyView2
-        End Get
-    End Property
-
-    Public ReadOnly Property TransactionsDataset3() As DataSet
-        Get
-            'Return dataset to user
-            Return mDatasetTransactions3
-        End Get
-    End Property
-    Public ReadOnly Property MyView3() As DataView
-        Get
-            Return mMyView3
         End Get
     End Property
 
@@ -178,5 +149,23 @@ Public Class ClassDBTransactions
 
         'use UpdateDB sub to update database
         UpdateDB(mstrQuery)
+    End Sub
+    Public Sub DoSort()
+        MyView.Sort = "[Transaction Number], [Transaction Type], Description, Amount, Date"
+    End Sub
+
+    Public Sub GetAllTransactions(strAccountNumber As String)
+        RunProcedureOneParameter("usp_transactions_get_all", "@AccountNumber", strAccountNumber)
+    End Sub
+    Public Sub Search2Param(strCode1 As String, strValue1 As String, strCode2 As String, strAndOR As String, str3 As String, strValue2 As String, str4 As String)
+        MyView.RowFilter = strCode1 & strValue1 & strCode2 & strAndOR & str3 & strValue2 & str4
+    End Sub
+
+    Public Sub SearchByDescriptionKeyword(strKeyword As String)
+        MyView.RowFilter = "Description like '%" & strKeyword & "%'"
+    End Sub
+
+    Public Sub SearchByTransactionType(strIn As String)
+        MyView.RowFilter = "[Transaction Type] like '" & strIn & "'"
     End Sub
 End Class

@@ -480,6 +480,10 @@ Public Class ClassDBAccounts
         RunProcedureOneParameterTransfer("usp_accounts_get_balance_by_account_number", "@AccountNumber", strAccountNumber)
     End Sub
 
+    Public Sub GetAccountNameByAccountNumber(strAccountNumber As String)
+        RunProcedureOneParameterTransfer("usp_accounts_get_account_name_by_account_number", "@AccountNumber", strAccountNumber)
+    End Sub
+
     Public Sub GetCheckingandSavingsByCustomerNumber(strCustomerNumber As String)
         RunProcedureOneParameter("usp_accounts_get_checking_and_savings_by_customer_number", "@CustomerNumber", strCustomerNumber)
     End Sub
