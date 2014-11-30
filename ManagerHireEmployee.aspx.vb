@@ -123,7 +123,6 @@
 
     Private Sub ClearTextboxes()
         txtAddress.Text = ""
-        txtCity.Text = ""
         txtEmpType.Text = ""
         txtFirstName.Text = ""
         txtInitial.Text = ""
@@ -131,7 +130,6 @@
         txtPassword.Text = ""
         txtPhone.Text = ""
         txtSSN.Text = ""
-        txtState.Text = ""
         txtZip.Text = ""
     End Sub
 End Class

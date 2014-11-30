@@ -166,9 +166,17 @@
      position: relative;
 }
 
-#footer {
+#footer{
     text-align: center;
     clear: both;
+     position: relative;
+    float: left;
+    width: 100%;
+    padding: 5px;
+    bottom: 0%;
+    vertical-align: bottom;
+
+
 }
 
 #employeeloginright {
