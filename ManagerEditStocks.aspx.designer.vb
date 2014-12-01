@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ManagerEditStocks
 
     '''<summary>
+    '''pnlEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlEdit As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''gvStocks control.
     '''</summary>
     '''<remarks>
@@ -32,6 +41,15 @@ Partial Public Class ManagerEditStocks
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''btnChangePrice control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnChangePrice As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''lblMessage control.
     '''</summary>
     '''<remarks>
@@ -41,11 +59,20 @@ Partial Public Class ManagerEditStocks
     Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnChangePrice control.
+    '''pnlDescriptiveMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnChangePrice As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents pnlDescriptiveMessage As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblDescriptiveMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDescriptiveMessage As Global.System.Web.UI.WebControls.Label
 End Class
