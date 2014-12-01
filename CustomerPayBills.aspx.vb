@@ -43,19 +43,23 @@
                             Dim b As ImageButton = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("btnBill"), ImageButton)
                             Dim a As Label = DirectCast(gvMyPayees.Rows(i).Cells(3).FindControl("lblBillAmount"), Label)
                             Dim d As Label = DirectCast(gvMyPayees.Rows(i).Cells(4).FindControl("lblDueDate"), Label)
+                            Dim f As Label = DirectCast(gvMyPayees.Rows(i).Cells(5).FindControl("lblOutstandingBalance"), Label)
                             'set notification
                             b.ImageUrl = "~/eBill.jpg"
                             b.Enabled = True
                             b.CommandName = "GoToBill"
                             'highlight payee
                             gvMyPayees.Rows(i).BackColor = Drawing.Color.LightGray
-                            'populate bill due date and amount
+                            'populate bill due date, amount, and outstanding balance
                             Dim decBill As Decimal
                             decBill = CDec(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("BillAmount"))
                             a.Text = decBill.ToString("c2")
                             Dim datBill As Date
                             datBill = CDate(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("DueDate")).Date
                             d.Text = datBill.ToString
+                            Dim decOutstandingBalance As Decimal
+                            decOutstandingBalance = CDec(dbbill.BillDataset.Tables("tblBill").Rows(k).Item("AmountRemaining"))
+                            f.Text = decOutstandingBalance.ToString("c2")
                         End If
                     Next
                 Next

@@ -77,6 +77,15 @@ Partial Public Class CustomerBillDetail
     Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Label15 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label15 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''txtCustomerName control.
     '''</summary>
     '''<remarks>
@@ -129,6 +138,15 @@ Partial Public Class CustomerBillDetail
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDueDate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtStatus As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Label5 control.
@@ -309,6 +327,15 @@ Partial Public Class CustomerBillDetail
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMessageFee As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblMessageFee2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMessageFee2 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''ValidationSummary1 control.
