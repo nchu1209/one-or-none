@@ -63,6 +63,7 @@ Public Class CustomerUpdatePayee
     End Sub
 
     Protected Sub btnAbort_Click(sender As Object, e As EventArgs) Handles btnAbort.Click
+        db.GetPayeeByID(mintPayeeID.ToString)
         FillTextboxes()
     End Sub
 End Class

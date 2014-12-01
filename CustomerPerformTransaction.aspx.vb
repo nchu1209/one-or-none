@@ -127,13 +127,13 @@
 
         DBAccounts.GetAccountTypeByAccountNumber(ddlDeposit.SelectedValue.ToString)
         Dim strIRA As String
-        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+        If DBAccounts.AccountsDataset9.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
             strIRA = "True"
         Else
             strIRA = "False"
         End If
 
-        If DBAccounts.AccountsDataset3.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
+        If DBAccounts.AccountsDataset9.Tables("tblAccounts").Rows(0).Item("AccountType") = "IRA" Then
             Dim decIRATotal As Decimal
             DBAccounts.GetIRATotalDepositByAccountNumber(ddlDeposit.SelectedValue.ToString)
             decIRATotal = CDec(DBAccounts.AccountsDataset8.Tables("tblAccounts").Rows(0).Item("IRATotalDeposit"))

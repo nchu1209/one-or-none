@@ -88,11 +88,19 @@
         Dim strDateCode30 As String
         Dim strDateCode60 As String
         Dim strDateCodeAll As String
+<<<<<<< HEAD
         Dim datBlank As New Date(1500, 1, 1, 1, 1, 1)
         strDateCode15 = "Date >= #" & datSystemDate.AddDays(-2) & "#"
         strDateCode30 = "Date >= #" & datSystemDate.AddDays(-30) & "#"
         strDateCode60 = "Date >= #" & datSystemDate.AddDays(-60) & "#"
         strDateCodeAll = "Date <> '" & datBlank & "'"
+=======
+        Dim strDateCode As String
+        strDateCode15 = "Date >= #" & datSystemDate.AddDays(-2) & "#"
+        strDateCode30 = "Date >= #" & datSystemDate.AddDays(-30) & "#"
+        strDateCode60 = "Date >= #" & datSystemDate.AddDays(-60) & "#"
+        strDateCodeAll = "Date <> '" & 0.0 & "'"
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
         
         Dim strIn1 As String
         Dim strIn2 As String
@@ -253,11 +261,19 @@
     Protected Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         Clear()
         'reload gv to original
+<<<<<<< HEAD
         Search()
+=======
+        DBTransactions.GetAllTransactions(Session("AccountNumber").ToString)
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
     End Sub
 
     Protected Sub gvTransactionSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvTransactionSearch.SelectedIndexChanged
         Session("TransactionID") = gvTransactionSearch.SelectedRow.Cells(1).Text
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
         Response.Redirect("CustomerAccountDetails.aspx")
     End Sub
 End Class

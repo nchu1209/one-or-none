@@ -14,26 +14,17 @@
             height: 83px;
         }
         .auto-style2 {
-            width: 128px;
-            height: 128px;
-        }
-        .auto-style3 {
-            width: 168px;
-            height: 130px;
-        }
-        .auto-style4 {
-            width: 149px;
-            height: 127px;
-        }
-        .auto-style5 {
-            width: 196px;
-            height: 127px;
+            font-size: x-large;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+<<<<<<< HEAD
         <asp:Panel ID="pnlLogin" runat="server">
+=======
+    <asp:Panel ID="pnlLogin" runat="server">
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
         <div id="lefttopcorner">
             <img class="auto-style1" src="Petunia2.jpg" /><br />
             <br />
@@ -65,6 +56,7 @@
         <div id="rightcornertitle">
             <div id="title">
                 <br />
+<<<<<<< HEAD
                 Welcome to Longhorn Bank&nbsp;
                 <br />
             </div>
@@ -72,40 +64,52 @@
                 <br />
                 Choose the Account that works best for you!
             <br />
+=======
+                Welcome to Longhorn Bank!
+                <br />
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
             </div>
         </div>
-
-
 
         <div id="rightcornercontent">
              <div id="a">
                  <br />
-                 <br />
-                 <b>Checking Accounts</b><br />
-                 <br />
-                 <img alt="" class="auto-style3" src="checkingaccounts.png" /><br />
+                 Checking Accounts<br />
+            <br />
                  <br />
                  <br />
-                 A single, simple checking account<br />
                  <br />
-                 Transfer money between accounts for free<br />
+            <br />
                  <br />
-                 Free access to thousands of Longhorn Bank ATMs<br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
                  <br />
             <br />
         </div>
 
          <div id="b">
              <br />
-             <br />
-             <b>Savings Accounts</b><br />
+             Savings Accounts<br />
             <br />
-             <img alt="" class="auto-style4" src="Piggy%20bank.png" /><br />
              <br />
              <br />
-             Savings accounts to fit your individual and family goals<br />
              <br />
-             Whether you&#39;re just starting out or saving for a child&#39;s college, feel confident in Longhorn Bank savings
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
              <br />
              <br />
              <br />
@@ -113,39 +117,56 @@
         </div>
              <div id="c">
                  <br />
-                 <br />
-                 <b>IRAs</b><br />
-                 <br />
-                 <img alt="" class="auto-style5" src="ira.png" /><br />
-                 <br />
-                 <br />
-                 IRAs give you tax advantages for long-term individual retirement savings<br />
-                 <br />
-                 Deposit up to $5,000 a year until age 70 for maximum savings<br />
+                 IRAs<br />
                  <br />
                  <br />
                  <br />
                  <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+            <br />
         </div>
              <div id="d">
                  <br />
-                 <br />
-                 <b>Stock Portfolios</b><br />
-                 <br />
-                 <img alt="" class="auto-style2" src="app-stock-icon.png" /><br />
-                 <br />
-                 <br />
-                 Buy and sell stocks offered through Longhorn Bank<br />
-                 <br />
-                 Now including: Ordinary Stocks, Index Funds, Mutual Funds, ETFs, and Futures Shares<br />
+                 Stock Portfolios<br />
                  <br />
                  <br />
                  <br />
                  <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+            <br />
         </div>
 
 
+             <br />
+
+
+             <br />
+
+
         </div>
+<<<<<<< HEAD
     </asp:Panel>
         
         
@@ -160,16 +181,55 @@
                    Hello
             <asp:Label ID="lblDisabled" runat="server" Text=""></asp:Label>
                 </div>
+=======
+
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
 
             
         </asp:Panel>
          <div id="footer">
         <br />
         <br />
+             <br />
         Website Created by One or None, Ltd.
         <br />
         Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
              </div>
+
+        </asp:Panel>
+
+
+        <asp:Panel ID="pnlNoLongerCustomer" runat="server">
+            <br />
+            <img alt="" class="auto-style1" src="Petunia2.jpg" />
+            <br/>
+            <br/>
+            <div id="contentBIG" class="auto-style2">
+                   Hello
+            <asp:Label ID="lblDisabled" runat="server" Text=""></asp:Label>
+                </div>
+
+             <div id="footer">
+                 <br />
+                 <br />
+                 <br />
+                 <br />
+                      <br />
+                 <br />
+                      <br />
+                 <br />
+                      <br />
+                 <br />
+        Website Created by One or None, Ltd.
+        <br />
+        Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
+             </div>
+        </asp:Panel>
+     
+        <br />
+        <br />
+
+        
     
 
     </form>

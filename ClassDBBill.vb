@@ -176,4 +176,15 @@ Public Class ClassDBBill
 
     End Sub
 
+    Public Sub ModifyBillActive(strActive As String, ByVal strBillID As String)
+
+        mstrQuery = "UPDATE tblBill SET " & _
+            "Active = '" & strActive & "' " & _
+            "WHERE BillID = " & strBillID
+
+        'use UpdateDB sub to update database
+        UpdateDB(mstrQuery)
+
+    End Sub
+
 End Class

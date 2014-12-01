@@ -14,6 +14,10 @@ Option Explicit On
 Partial Public Class ManagerViewBills
 
     '''<summary>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
     '''btnViewAll control.
     '''</summary>
     '''<remarks>
@@ -50,6 +54,11 @@ Partial Public Class ManagerViewBills
     Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 00eade333c4b1691248609a383a1a0559c823919
+>>>>>>> 7e3b5189504043e320a4feb0fbe178e5b951312e
     '''gvBills control.
     '''</summary>
     '''<remarks>
