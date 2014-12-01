@@ -8,7 +8,9 @@
         <br />
     </div>
     <div id ="center">
-
+        <asp:Button ID="btnViewAll" runat="server" Text="View All eBills" />
+        <br />
+        <br />
         <asp:GridView ID="gvBills" runat="server" AutoGenerateColumns="False" DataKeyNames="BillID" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
