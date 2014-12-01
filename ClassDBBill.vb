@@ -157,7 +157,7 @@ Public Class ClassDBBill
             "AmountPaid = '" & strAmountPaid & "', " & _
             "AmountRemaining = '" & strAmountRemaining & "', " & _
             "Status = '" & strStatus & "', " & _
-            "Active = '" & strActive & "' " & _
+            "Active = '" & strActive & "', " & _
             "WHERE BillID = " & strBillID
 
         'use UpdateDB sub to update database

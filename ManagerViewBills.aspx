@@ -8,6 +8,7 @@
         <br />
     </div>
     <div id ="center">
+<<<<<<< HEAD
         <asp:Button ID="btnViewAll" runat="server" Text="View All eBills" />
         &nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnFilter" runat="server" Text="View Unpaid Active eBills Only" />
@@ -18,6 +19,9 @@
         <asp:Label ID="lblMessage" runat="server" Text="[]"></asp:Label>
         <br />
         <br />
+=======
+
+>>>>>>> 00eade333c4b1691248609a383a1a0559c823919
         <asp:GridView ID="gvBills" runat="server" AutoGenerateColumns="False" DataKeyNames="BillID" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />

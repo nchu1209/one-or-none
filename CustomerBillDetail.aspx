@@ -17,13 +17,11 @@
            <br />
            <asp:Label ID="Label10" runat="server" Text="Bill Amount Paid to Date:"></asp:Label>
            <br />
-           <asp:Label ID="Label11" runat="server" Text="Bill Outstanding Balance:"></asp:Label>
+           <asp:Label ID="Label11" runat="server" Text="Bill Amount Remaining"></asp:Label>
            <br />
            <asp:Label ID="Label3" runat="server" Text="Bill Date:"></asp:Label>
            <br />
            <asp:Label ID="Label4" runat="server" Text="Due Date:"></asp:Label>
-           <br />
-           <asp:Label ID="Label15" runat="server" Text="Payment Status:"></asp:Label>
            <br />
         </div>
         <div id ="textbox">
@@ -38,8 +36,6 @@
              <asp:TextBox ID="txtBillDate" runat="server" ReadOnly="True"></asp:TextBox>
             <br />
              <asp:TextBox ID="txtDueDate" runat="server" ReadOnly="True"></asp:TextBox>
-            <br />
-            <asp:TextBox ID="txtStatus" runat="server" ReadOnly="True"></asp:TextBox>
             <br />
             <br />
             <br />
@@ -106,8 +102,6 @@
             <asp:Label ID="lblMessage" runat="server" Text="[]"></asp:Label>
             <br />
             <asp:Label ID="lblMessageFee" runat="server" Text="[]"></asp:Label>
-            <br />
-            <asp:Label ID="lblMessageFee2" runat="server" Text="[]"></asp:Label>
             <br />
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
             <asp:Button ID="btnConfirm" runat="server" Text="Confirm" />

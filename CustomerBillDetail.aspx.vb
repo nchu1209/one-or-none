@@ -12,11 +12,9 @@
     Dim mdecBalance As Decimal
     Dim mdecBillAmount As Decimal
     Dim mdecPayment As Decimal
-    Dim mdecAmountRemaining As Decimal
 
     Const OVERDRAFT_MAXIMUM As Decimal = 50D
     Const OVERDRAFT_FEE As Decimal = 30D
-    Const LATE_FEE As Decimal = 5D
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Session("CustomerNumber") Is Nothing Then
@@ -45,7 +43,6 @@
         btnAbort.Visible = False
         lblMessage.Text = ""
         lblMessageFee.Text = ""
-        lblMessageFee2.Text = ""
     End Sub
 
     Private Sub FillTextboxes()
@@ -61,7 +58,6 @@
         txtAmountRemaining.Text = decAmountRemaining.ToString("c2")
         txtBillDate.Text = dbbill.BillDataset.Tables("tblBill").Rows(0).Item("BillDate").ToString
         txtDueDate.Text = dbbill.BillDataset.Tables("tblBill").Rows(0).Item("DueDate").ToString
-        txtStatus.Text = dbbill.BillDataset.Tables("tblBill").Rows(0).Item("Status").ToString
         txtPayeeName.Text = dbbill.BillDataset.Tables("tblBill").Rows(0).Item("PayeeName").ToString
         txtType.Text = dbbill.BillDataset.Tables("tblBill").Rows(0).Item("PayeeType").ToString
         txtPayeeAddress.Text = dbbill.BillDataset.Tables("tblBill").Rows(0).Item("Address").ToString
@@ -87,16 +83,16 @@
             Exit Sub
         End If
 
-        If valid.CheckDecimal(txtAmount.Text) = -1 Or CDec(txtAmount.Text) = 0 Then
+        If valid.CheckDecimal(txtAmount.Text) = -1 Then
             lblMessage.Text = "Please enter a valid payment amount."
             Exit Sub
         End If
 
         mdecPayment = CDec(txtAmount.Text)
-        mdecAmountRemaining = CDec(dbbill.BillDataset.Tables("tblBill").Rows(0).Item("AmountRemaining"))
+        mdecBillAmount = CDec(dbbill.BillDataset.Tables("tblBill").Rows(0).Item("BillAmount"))
 
-        If mdecPayment > mdecAmountRemaining Then
-            lblMessage.Text = "The payment amount you have entered exceeds the outstanding balance."
+        If mdecPayment > mdecBillAmount Then
+            lblMessage.Text = "The payment amount you have entered exceeds the total bill amount."
             Exit Sub
         End If
 
@@ -122,12 +118,6 @@
             lblMessageFee.Text = "Note: The payment amount entered exceeds your selected account's balance. You will be charged an overdraft fee of $30.00 in addition to your specified payment."
         End If
 
-        'late fee notice
-        dbDate.GetDate()
-        If CDate(txtDueDate.Text) < calDate.SelectedDate.Date And txtStatus.Text = "Unpaid" Then
-            lblMessageFee2.Text = "Note: You have selected a date past this bill's due date. You will be charged a late fee of $5.00 in addition to your specified payment."
-        End If
-
     End Sub
 
     Protected Sub btnAbort_Click(sender As Object, e As EventArgs) Handles btnAbort.Click
@@ -150,17 +140,15 @@
             'update the transactions table
             dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "eBill Payment", calDate.SelectedDate, CDec(txtAmount.Text), strPaymentMessage, mdecBalance, lblBillID.Text, "False")
             'update the bills table
-            Dim decAmountPaid
-            decAmountPaid = CDec(dbbill.BillDataset.Tables("tblBill").Rows(0).Item("AmountPaid")) + CDec(txtAmount.Text)
             Dim decAmountRemaining As Decimal
-            decAmountRemaining = CDec(txtBillAmount.Text) - decAmountPaid
+            decAmountRemaining = CDec(txtBillAmount.Text) - CDec(txtAmount.Text)
             Dim strStatus As String
-            If decAmountRemaining = 0 Then
+            If CDec(txtBillAmount.Text) = CDec(txtAmount.Text) Then
                 strStatus = "Paid"
             Else
                 strStatus = "Partially Paid"
             End If
-            dbbill.ModifyBill(CDec(txtBillAmount.Text).ToString("n2"), txtBillDate.Text, txtDueDate.Text, decAmountPaid.ToString, decAmountRemaining.ToString, strStatus, "TRUE", lblBillID.Text)
+            dbbill.ModifyBill(txtBillAmount.Text, txtBillDate.Text, txtDueDate.Text, txtAmount.Text, decAmountRemaining.ToString, strStatus, "Active", lblBillID.Text)
         End If
 
         If dbDate.CheckSelectedDate(calDate.SelectedDate) = 1 Then
@@ -174,7 +162,6 @@
 
         'overdraft fee if necessary
         If mdecBalance < 0 Then
-            'only happens if the payment went through today
             dbDate.GetDate()
             Dim datDate As Date
             datDate = dbDate.DateDataset.Tables("tblSystemDate").Rows(0).Item("Date").ToString()
@@ -185,36 +172,15 @@
             Dim strFeeMessage As String
             strFeeMessage = "Overdraft fee of " & OVERDRAFT_FEE.ToString & " charged to account " & ddlAccount.SelectedValue.ToString & " on " & datDate.ToString
             GetTransactionNumber()
-
-            'update the transactions table
+            'update the transactions table "
             dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Fee", datDate, OVERDRAFT_FEE, strFeeMessage, mdecBalance, "NULL", "False")
-        End If
-
-        'late fee if necessary
-        dbDate.GetDate()
-        If CDate(txtDueDate.Text) < calDate.SelectedDate.Date And dbDate.CheckSelectedDate(calDate.SelectedDate) = 0 And txtStatus.Text = "Unpaid" Then
-            Dim datDate As Date
-            datDate = dbDate.DateDataset.Tables("tblSystemDate").Rows(0).Item("Date").ToString()
-
-            mdecBalance = mdecBalance - LATE_FEE
-            dbaccount.UpdateBalance(CInt(ddlAccount.SelectedValue), mdecBalance)
-
-            Dim strFeeMessage As String
-            strFeeMessage = "Late fee of " & LATE_FEE.ToString & " charged to account " & ddlAccount.SelectedValue.ToString & " on " & datDate.ToString
-            GetTransactionNumber()
-
-            'update the transactions table
-            dbtrans.AddTransaction(CInt(Session("TransactionNumber")), CInt(ddlAccount.SelectedValue), "Fee", datDate, LATE_FEE, strFeeMessage, mdecBalance, "NULL", "False")
         End If
 
         lblMessage.Text = "Payments successfully sent and/or scheduled."
         btnConfirm.Visible = False
         btnAbort.Visible = False
 
-        dbbill.GetBillDetails(Request.QueryString("ID"))
         FillTextboxes()
-        txtAmount.Text = ""
-        calDate.SelectedDate = Nothing
 
     End Sub
 

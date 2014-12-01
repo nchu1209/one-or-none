@@ -54,14 +54,6 @@
                         <asp:label ID="lblBillAmount" runat="server"></asp:label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Outstanding Balance">
-                    <EditItemTemplate>
-                        <asp:label ID="lblOutstandingBalance" runat="server"></asp:label>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:label ID="lblOutstandingBalance" runat="server"></asp:label>
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Due Date">
                     <EditItemTemplate>
                         <asp:label ID="lblDueDate" runat="server"></asp:label>
