@@ -13,7 +13,7 @@
 
 
 
-        <asp:GridView ID="gvStocks" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
+        <asp:GridView ID="gvStocks" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowSorting="True">
             <Columns>
                 <asp:BoundField DataField="TickerSymbol" HeaderText="TickerSymbol" SortExpression="TickerSymbol" />
                 <asp:BoundField DataField="StockType" HeaderText="StockType" SortExpression="StockType" />

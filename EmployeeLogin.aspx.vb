@@ -66,8 +66,8 @@
             Response.Redirect("EmployeeHome.aspx")
         End If
 
-        'call next page(view customers)
-        Response.Redirect("EmployeeHome.aspx")
+        ''call next page(view customers)
+        'Response.Redirect("EmployeeHome.aspx")
 
     End Sub
 

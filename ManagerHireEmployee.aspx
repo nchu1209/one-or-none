@@ -28,10 +28,6 @@
                 <br />
                 <asp:Label ID="Label8" runat="server" Text="Address:"></asp:Label>
                 <br />
-                <asp:Label ID="Label9" runat="server" Text="City:"></asp:Label>
-                <br />
-                <asp:Label ID="Label10" runat="server" Text="State:"></asp:Label>
-                <br />
                 <asp:Label ID="Label11" runat="server" Text="Zip Code:"></asp:Label>
                 <br />
                 <asp:Label ID="Label13" runat="server" Text="Phone Number:"></asp:Label>
@@ -57,10 +53,6 @@
                 <br />
                 <asp:TextBox ID="txtAddress" runat="server" Height="26px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ClientIDMode="Static" ControlToValidate="txtAddress" ErrorMessage="ERROR: Address Required">*</asp:RequiredFieldValidator>
-                <br />
-                <asp:TextBox ID="txtCity" runat="server" ReadOnly="True" Height="26px"></asp:TextBox>
-                <br />
-                <asp:TextBox ID="txtState" runat="server" MaxLength="2" ReadOnly="True" Height="26px"></asp:TextBox>
                 <br />
                 <asp:TextBox ID="txtZip" runat="server" MaxLength="5" Height="26px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ClientIDMode="Static" ControlToValidate="txtZip" ErrorMessage="RequiredFieldValidator">*</asp:RequiredFieldValidator>
