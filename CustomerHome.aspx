@@ -35,7 +35,7 @@
                 <HeaderStyle Width="150px" HorizontalAlign="Left" />
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
-                <asp:HyperLinkField HeaderText="Account Name" SortExpression="AccountName" DataNavigateUrlFields="AccountNumber" DataNavigateUrlFormatString="CustomerAccountDetails.aspx" DataTextField="AccountName">
+                <asp:HyperLinkField HeaderText="Account Name" SortExpression="AccountName" DataNavigateUrlFields="AccountNumber" DataNavigateUrlFormatString="CustomerTransactionSearch.aspx" DataTextField="AccountName">
                     <%--<EditItemTemplate>--%>
                   <%--      <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("AccountName") %>'></asp:TextBox>
                     </EditItemTemplate>
