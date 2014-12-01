@@ -136,7 +136,7 @@
         <div id="c">
             <br />
             <asp:Button ID="btnSearch" runat="server" Text="Search" />
-            <asp:Button ID="btnClear" runat="server" Text="Clear Selections" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear Selections / Show All" Width="295px" />
             <br />
             <br />
             </div>
@@ -149,6 +149,9 @@
         </div>
         <div id ="footer">
             <asp:GridView ID="gvTransactionSearch" runat="server">
+                <Columns>
+                    <asp:CommandField HeaderText="View Details" ShowSelectButton="True" />
+                </Columns>
             </asp:GridView>
         </div>
    </form>

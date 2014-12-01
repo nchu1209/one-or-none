@@ -14,7 +14,6 @@
             Search()
         End If
         DBTransactions.GetAllTransactions(Session("AccountNumber").ToString)
-
     End Sub
 
     Public Sub Search()
@@ -89,11 +88,11 @@
         Dim strDateCode30 As String
         Dim strDateCode60 As String
         Dim strDateCodeAll As String
-        Dim strDateCode As String
+        Dim datBlank As New Date(1500, 1, 1, 1, 1, 1)
         strDateCode15 = "Date >= #" & datSystemDate.AddDays(-2) & "#"
         strDateCode30 = "Date >= #" & datSystemDate.AddDays(-30) & "#"
         strDateCode60 = "Date >= #" & datSystemDate.AddDays(-60) & "#"
-        strDateCodeAll = "Date <> '" & 0.0 & "'"
+        strDateCodeAll = "Date <> '" & datBlank & "'"
         
         Dim strIn1 As String
         Dim strIn2 As String
@@ -254,7 +253,7 @@
     Protected Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         Clear()
         'reload gv to original
-        DBTransactions.GetAllTransactions(Session("AccountNumber").ToString)
+        Search()
     End Sub
 
     Protected Sub gvTransactionSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvTransactionSearch.SelectedIndexChanged

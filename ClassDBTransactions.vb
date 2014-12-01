@@ -200,8 +200,4 @@ Public Class ClassDBTransactions
     Public Sub Go(strIn1 As String, strIn2 As String, strIn3 As String, strIn4 As String, strIn5 As String)
         MyView.RowFilter = strIn1 & strIn2 & strIn3 & strIn4 & strIn5
     End Sub
-
-    Public Sub gotest(strIn1 As String, strIn2 As String, strIn3 As String)
-        MyView.RowFilter = strIn1 & strIn2 & strIn3
-    End Sub
 End Class
