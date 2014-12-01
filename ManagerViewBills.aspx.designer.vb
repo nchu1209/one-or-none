@@ -14,6 +14,45 @@ Option Explicit On
 Partial Public Class ManagerViewBills
 
     '''<summary>
+<<<<<<< HEAD
+    '''btnViewAll control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnViewAll As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnFilter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFilter As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnActive control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnActive As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+=======
+>>>>>>> 00eade333c4b1691248609a383a1a0559c823919
     '''gvBills control.
     '''</summary>
     '''<remarks>
