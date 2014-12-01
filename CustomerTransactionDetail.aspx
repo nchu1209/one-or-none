@@ -8,7 +8,6 @@
         <br />
     </div>
     <div id ="center">
-       <div id ="subtitle">Account Details</div>
        <div id ="label2">
            <asp:Label ID="lblCustomerID" runat="server" Text="Description:"></asp:Label>
            <br />
@@ -18,23 +17,47 @@
            <br />
            <asp:Label ID="Label11" runat="server" Text="Transaction Number:"></asp:Label>
            <br />
+           Employee Comments<br />
            
         </div>
         <div id ="textbox">
-            <asp:TextBox ID="txtDescription" runat="server" ReadOnly="True"></asp:TextBox>
+            <asp:Label ID="lblDescription" runat="server"></asp:Label>
             <br />
-             <asp:TextBox ID="txtTransactionType" runat="server" ReadOnly="True"></asp:TextBox>
+             <asp:Label ID="lblTransactionType" runat="server"></asp:Label>
             <br />
-             <asp:TextBox ID="txtAmount" runat="server" ReadOnly="True"></asp:TextBox>
+             <asp:Label ID="lblAmount" runat="server"></asp:Label>
             <br />
-            <asp:TextBox ID="txtTransactionNumber" runat="server" ReadOnly="True"></asp:TextBox>
-
+            <asp:Label ID="lblTransactionNumber" runat="server"></asp:Label>
             <br />
-            <br />
-            <br />
-            <br />
+            <asp:Label ID="lblEmployeeComments" runat="server"></asp:Label>
             <br />
         </div>
-       
+      </div>
+    <div id="center">
+        <div id="subtitle">Similar Transactions</div>
+        <asp:GridView ID="gvSimilar" runat="server"></asp:GridView>
     </div>
+     <div id ="center">
+       <div id ="subtitle">Create Dispute</div>
+       <div id ="label2">
+           <asp:Label ID="Label3" runat="server" Text="Description:"></asp:Label>
+           <br />
+           <asp:Label ID="Label4" runat="server" Text="Transaction Type:"></asp:Label>
+           <br />
+           <asp:Label ID="Label5" runat="server" Text="Amount:"></asp:Label>
+           <br />
+           <asp:Label ID="Label6" runat="server" Text="Transaction Number:"></asp:Label>
+           <br />
+           
+        </div>
+        <div id ="textbox">
+            <asp:TextBox ID="TextBox1" runat="server" ReadOnly="True"></asp:TextBox>
+            <br />
+             <asp:TextBox ID="TextBox2" runat="server" ReadOnly="True"></asp:TextBox>
+            <br />
+             <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
+            <br />
+            <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+        </div>
+      </div>
 </asp:Content>

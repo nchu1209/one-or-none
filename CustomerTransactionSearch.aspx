@@ -1,18 +1,12 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="CustomerTransactionSearch.aspx.vb" Inherits="KProject.CustomerTransactionSearch" %>
-<%="" %>
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-    <title></title>
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/CustomerMaster.Master" CodeBehind="CustomerTransactionSearch.aspx.vb" Inherits="KProject.CustomerTransactionSearch" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <link rel="shortcut icon" href="/favicon-4.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://localhost:51539/CustomerCreateBankAccount.aspx" />
     <link href="ContentStyle.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <form id="form1" runat="server">
         <div id="title">
-            <br />
             Transaction Search<br />
-            <br />
             <asp:Label ID="lblAccountName" runat="server" Text=""></asp:Label>
             <br />
             <br />
@@ -136,7 +130,7 @@
         <div id="c">
             <br />
             <asp:Button ID="btnSearch" runat="server" Text="Search" />
-            <asp:Button ID="btnClear" runat="server" Text="Clear Selections" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear Selections / Show All" Width="295px" />
             <br />
             <br />
             </div>
@@ -149,9 +143,9 @@
         </div>
         <div id ="footer">
             <asp:GridView ID="gvTransactionSearch" runat="server">
+                <Columns>
+                    <asp:CommandField HeaderText="View Details" ShowSelectButton="True" />
+                </Columns>
             </asp:GridView>
         </div>
-   </form>
-  
-</body>
-</html>
+    </asp:Content>

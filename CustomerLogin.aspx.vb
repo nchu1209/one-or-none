@@ -5,7 +5,9 @@
     Dim DB As New ClassDBCustomer
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        If IsPostBack = False Then
+            pnlNoLongerCustomer.Visible = False
+        End If
     End Sub
 
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
@@ -22,6 +24,19 @@
             lblError.Text = "ERROR: Invalid password."
             Exit Sub
         End If
+
+        Dim bolActive As Boolean
+        bolActive = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("active").ToString
+        If bolActive = False Then
+            pnlNoLongerCustomer.Visible = True
+            pnlLogin.Visible = False
+
+            lblDisabled.Text = DB.CustDataset.Tables("tblCustomers").Rows(0).Item("FirstName") & ", your account is currently disabled."
+            Exit Sub
+        End If
+
+
+
 
         lblError.Text = "YA"
 

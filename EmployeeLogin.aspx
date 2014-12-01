@@ -27,11 +27,11 @@
             <br />
         </div>
        
-   <div id ="title">
+  
+        <div id="employeeloginright">
+             <div id ="title">
         Welcome Employees!
     </div>
-
-        <div id="employeeloginright">
 
             <br />
             <br />
@@ -69,6 +69,22 @@
             </div>
  
     </asp:Panel>
+
+
+        <div id="footer">
+        <br />
+            <br />
+            <br />
+            <br />
+             <br />
+        Website Created by One or None, Ltd.
+        <br />
+        Group 3: Leah Carroll, Nicole Chu, Amy Enrione, Catherine King
+             </div>
+
+
+
     </form>
+
 </body>
 </html>

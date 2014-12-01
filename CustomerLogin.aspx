@@ -33,7 +33,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    
+        <asp:Panel ID="pnlLogin" runat="server">
         <div id="lefttopcorner">
             <img class="auto-style1" src="Petunia2.jpg" /><br />
             <br />
@@ -65,13 +65,13 @@
         <div id="rightcornertitle">
             <div id="title">
                 <br />
-                Welcome to Longhorn Bank
+                Welcome to Longhorn Bank&nbsp;
                 <br />
             </div>
             <div id="title100">
                 <br />
                 Choose the Account that works best for you!
-                <br />
+            <br />
             </div>
         </div>
 
@@ -146,10 +146,23 @@
 
 
         </div>
-    
+    </asp:Panel>
+        
+        
         <br />
         <br />
+        <asp:Panel ID="pnlNoLongerCustomer" runat="server">
+            <br />
+            <img alt="" class="auto-style1" src="Petunia2.jpg" />
+            <br/>
+            <br/>
+            <div id="contentBIG" class="auto-style2">
+                   Hello
+            <asp:Label ID="lblDisabled" runat="server" Text=""></asp:Label>
+                </div>
 
+            
+        </asp:Panel>
          <div id="footer">
         <br />
         <br />
