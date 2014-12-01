@@ -13,6 +13,22 @@
             width: 233px;
             height: 83px;
         }
+        .auto-style2 {
+            width: 128px;
+            height: 128px;
+        }
+        .auto-style3 {
+            width: 168px;
+            height: 130px;
+        }
+        .auto-style4 {
+            width: 149px;
+            height: 127px;
+        }
+        .auto-style5 {
+            width: 196px;
+            height: 127px;
+        }
     </style>
 </head>
 <body>
@@ -49,50 +65,47 @@
         <div id="rightcornertitle">
             <div id="title">
                 <br />
-                Welcome to Longhorn Bank!
+                Welcome to Longhorn Bank
+                <br />
+            </div>
+            <div id="title100">
+                <br />
+                Choose the Account that works best for you!
                 <br />
             </div>
         </div>
 
+
+
         <div id="rightcornercontent">
              <div id="a">
                  <br />
-                 Checking Accounts<br />
-            <br />
+                 <br />
+                 <b>Checking Accounts</b><br />
+                 <br />
+                 <img alt="" class="auto-style3" src="checkingaccounts.png" /><br />
                  <br />
                  <br />
+                 A single, simple checking account<br />
                  <br />
-            <br />
+                 Transfer money between accounts for free<br />
                  <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
+                 Free access to thousands of Longhorn Bank ATMs<br />
                  <br />
             <br />
         </div>
 
          <div id="b">
              <br />
-             Savings Accounts<br />
+             <br />
+             <b>Savings Accounts</b><br />
             <br />
+             <img alt="" class="auto-style4" src="Piggy%20bank.png" /><br />
              <br />
              <br />
+             Savings accounts to fit your individual and family goals<br />
              <br />
-             <br />
-             <br />
-             <br />
-             <br />
-             <br />
-             <br />
-             <br />
-             <br />
-             <br />
+             Whether you&#39;re just starting out or saving for a child&#39;s college, feel confident in Longhorn Bank savings
              <br />
              <br />
              <br />
@@ -100,45 +113,35 @@
         </div>
              <div id="c">
                  <br />
-                 IRAs<br />
+                 <br />
+                 <b>IRAs</b><br />
+                 <br />
+                 <img alt="" class="auto-style5" src="ira.png" /><br />
+                 <br />
+                 <br />
+                 IRAs give you tax advantages for long-term individual retirement savings<br />
+                 <br />
+                 Deposit up to $5,000 a year until age 70 for maximum savings<br />
                  <br />
                  <br />
                  <br />
                  <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-            <br />
         </div>
              <div id="d">
                  <br />
-                 Stock Portfolios<br />
+                 <br />
+                 <b>Stock Portfolios</b><br />
+                 <br />
+                 <img alt="" class="auto-style2" src="app-stock-icon.png" /><br />
+                 <br />
+                 <br />
+                 Buy and sell stocks offered through Longhorn Bank<br />
+                 <br />
+                 Now including: Ordinary Stocks, Index Funds, Mutual Funds, ETFs, and Futures Shares<br />
                  <br />
                  <br />
                  <br />
                  <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-                 <br />
-            <br />
         </div>
 
 

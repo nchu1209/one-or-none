@@ -5,13 +5,13 @@
 #title {
     text-align: center;
     color: #000000;
-    font-size: x-large;
+    font-size: xx-large;
     font-weight: bold;
 }
 
 #title80 {
     width: 69%;
-   float: left;
+    float: left;
     text-align: center;
     color: #000000;
     font-size: x-large;
@@ -61,6 +61,7 @@
 #rightcornercontent {
     float: left;
     width:79%;
+    border-style: double;
 }
 
 #righthalf {
@@ -70,26 +71,30 @@
 }
 
 #a {
+    /*border-style: double;*/
     float: left;
-    width: 25%;
+    width: 24%;
     text-align: center;
 }
 
 #b {
+    /*border-style: double;*/
     float: left;
-    width: 25%;
+    width: 24.5%;
     text-align: center;
 }
 
 #c {
+     /*border-style: dashed;*/
     float: left;
-    width: 25%;
+    width: 24.5%;
     text-align: center;
 }
 
 #d {
+     /*border-style: dashed;*/
     float: left;
-    width: 24.5%;
+    width: 24%;
     text-align: center;
 }
 
